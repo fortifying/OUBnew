@@ -53,7 +53,7 @@ async def mention_afk(mention):
         if ISAFK:
             if mention.sender_id not in USERS:
                 if AFKREASON:
-                    await mention.reply(f"I'm AFK right now.\
+                    await mention.reply(f"I need to take a rest. AFK right now.\
                         \nBecause I'm `{AFKREASON}`")
                 else:
                     await mention.reply(str(choice(AFKSTR)))
@@ -121,10 +121,10 @@ async def set_afk(afk_e):
     global AFKREASON
     if string:
         AFKREASON = string
-        await afk_e.edit(f"Going AFK!\
+        await afk_e.edit(f"AFK dulu slur!\
         \nReason: `{string}`")
     else:
-        await afk_e.edit("Going AFK!")
+        await afk_e.edit("AFK dulu slur!")
     if BOTLOG:
         await afk_e.client.send_message(BOTLOG_CHATID, "#AFK\nYou went AFK!")
     ISAFK = True
