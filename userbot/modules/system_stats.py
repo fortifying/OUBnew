@@ -133,7 +133,7 @@ async def amireallyalive(on):
                      f"User: {DEFAULTUSER} \n\n"
        "Watch your step!😙"
        "~~~~~~~~~~~~~~~~~~~~~~ \n"
-                     "좋은 하루 되세요"
+                     "Don't forget to breath."
                      " \n"
                  "")
 
