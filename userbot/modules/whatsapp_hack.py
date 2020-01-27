@@ -19,7 +19,7 @@ import asyncio
 
 
 
-@borg.on(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
+response = conv.wait_event(events.NewMessage(pattern=r"\.(.*)", outgoing=True))
 
 
 
