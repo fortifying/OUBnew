@@ -5,7 +5,7 @@
 <p align="center"><a href="#how-to-host">How To Host</a> | <a href="#updates-and-support">Updates and Support</a> | <a href="#credits">Credits</a> | <a href="#license">License</a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">How To Host</h2>
-<h5 align="center">The easiest way to deploy this derpfest! is click on the image below</h5>
+<h5 align="center">The easiest way to deploy your own bot! is click on the image below</h5>
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended"> <img src="https://i.imgur.com/c8D5GRD_d.jpg?maxwidth=640&shape=thumb&fidelity=medium" alt="Deploy to Heroku" /></a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
