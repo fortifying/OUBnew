@@ -6,7 +6,7 @@
 <p align="center">&nbsp;</p>
 <h2 align="center">How To Host</h2>
 <h5 align="center">Bapakmu pernah deploy disini! ayo buruan deploy punya lu! Klik gambar dibawah</h5>
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended"> <img src="https://i.imgur.com/8KvTnbh_d.jpg?maxwidth=640&shape=thumb&fidelity=medium" alt="Deploy to Heroku" /></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended"> <img src="https://pasteboard.co/ISf4xzl.png" alt="Deploy to Heroku" /></a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
 <p align="center">Huge thanks to <a href="https://github.com/mkaraniya/OpenUserBot/graphs/contributors">everyone</a> who have helped make this userbot awesome!!</p>
