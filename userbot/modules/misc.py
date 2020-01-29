@@ -78,9 +78,9 @@ async def killdabot(event):
 async def bot_community(community):
     """ For .community command, just returns OG Paperplane's group link. """
     await community.edit(
-        "Join RaphielGang's awesome userbot community: @userbot_support"
-        "\nDo note that Paperplane Extended is an unoficial fork of their "
-        "Paperplane project and it may get limited or no support for bugs.")
+        "Jangan lupa join komunitas Ubot Indo @userbotindo"
+        "\nHarap ingat PPex hasil fork dari bot asli jadi ga bakal ada apdet "
+        "Segala bug dan error plugin silahkan tambah sendiri akwoakwk.")
 
 
 @register(outgoing=True, pattern="^.support$")
@@ -182,7 +182,7 @@ CMD_HELP.update(
 CMD_HELP.update({
     'community':
     ".community\
-\nUsage: Join the awesome Paperplane userbot community !!"
+\nUsage: Buat info komunitas UBot Indo. jangan lupa gabung cok!!"
 })
 
 CMD_HELP.update({
