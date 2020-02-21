@@ -5,7 +5,7 @@
 <p align="center"><a href="#how-to-host">How To Host</a> | <a href="#updates-and-support">Updates and Support</a> | <a href="#credits">Credits</a> | <a href="#license">License</a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Meluncuuurrr</h2>
-<h5 align="center">Bapakmu pernah deploy disini! ayo buruan deploy punya lu! Klik gambar dibawah</h5>
+<h5 align="center">Easy way to deploy, Click below</h5>
 <p align="center"><a href="https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended"> <img src="https://i.ibb.co/DtMH414/1580320255-picsay.png" alt="Deploy to Heroku" /></a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
