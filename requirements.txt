@@ -42,3 +42,4 @@ coffeehouse
 telegraph
 pyfiglet
 wget
+python-dateutil
