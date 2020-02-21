@@ -854,12 +854,12 @@ async def zal(zgfy):
             continue
 
         for _ in range(0, 3):
-            randint = randint(0, 2)
+            textz = randint(0, 2)
 
-            if randint == 0:
+            if textz == 0:
                 charac = charac.strip() + \
                     choice(ZALG_LIST[0]).strip()
-            elif randint == 1:
+            elif textz == 1:
                 charac = charac.strip() + \
                     choice(ZALG_LIST[1]).strip()
             else:
@@ -941,6 +941,11 @@ async def Oof(e):
 @register(outgoing=True, pattern="^.10iq$")
 async def iqless(e):
     await e.edit("♿")
+
+
+@register(outgoing=True, pattern="^.fuck$")
+async def iqless(e):
+    await e.edit("🖕🖕🖕🖕🖕🖕🖕🖕\n🖕🖕🖕🖕🖕🖕🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕🖕🖕🖕🖕\n🖕🖕🖕🖕🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕")
 
 
 @register(outgoing=True, pattern="^.moon$")
@@ -1206,11 +1211,11 @@ async def gtfo(e):
 async def nih(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("`\n(\_/)`"
-                     "`\n( •_•)`"
-                     "\n >🌹  *ini buat kamu"
+                     "`\n(●_●)`"
+                     "`\n />🌹 *ini buat kamu`"
                      "`\n                    `"
                      "`\n(\_/)`"
-                     "`\n( •_•)`"
+                     "`\n(●_●)`"
                      "`\n🌹<\  *tapi boong`")
 
 
@@ -1353,5 +1358,9 @@ CMD_HELP.update({
 \n\n.scam <action> <time>\
 \n[Available Actions: (typing, contact, game, location, voice, round, video, photo, document, cancel)]\
 \nUsage: Create fake chat actions, for fun. (Default action: typing)\
+\n\nAnd many more\
+\n.nou ; .bot ; .gey ; .gey ; .tf ; .paw ; .taco ; .nih ;\
+\n.fag ; .gtfo ; .stfu ; .lol ; .lool ; .fail ; .leave\
+\n.love ; .rain ; .earth ; .fuck\
 \n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."
 })
