@@ -13,8 +13,8 @@
 <p align="center">A BIG thanks to <a href="https://github.com/Devp73">Dev Patel</a> who have helped make this userbot ON AGAIN with his HUGE FIX!!</p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Updates and Support</h2>
-<p align="center">Join our <a href="https://t.me/urbotindocloud">Telegram Channel</a> for update notifications!</p>
-<p align="center">Also join <a href="https://t.me/userbotindo"></a> Userbot INDO🇮🇩 for help and support!</p>
+<p align="center">Join our <a href="https://t.me/userbotindocloud">Telegram Channel</a> for update notifications!</p>
+<p align="center">Also join Userbot INDO🇮🇩<a href="https://t.me/userbotindo"></a> for help and support!</p>
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
-<p align="center"><a href="https://github.com/mkaraniya/OpenUserBot/blob/sql-extended/LICENSE">Raphielscape Public License</a> - Version 1.c, June 2019</p>
+<p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Fortizer@HeinzDF Public License</a> - Version 1.c, February 2020</p>
