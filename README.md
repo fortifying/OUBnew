@@ -13,8 +13,8 @@
 <p align="center">A BIG thanks to <a href="https://github.com/Devp73">Dev Patel</a> who have helped make this userbot ON AGAIN with his HUGE FIX!!</p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Updates and Support</h2>
-<p align="center">Join <a href="https://t.me/userbotindocloud">Userbot Indo Cloud</a> for update notifications!</p>
-<p align="center">Also join <a href="https://t.me/userbotindo">Userbot INDO🇮🇩</a> for help and support!</p>
+<p align="center">Join <a href="https://t.me/userbotindocloud">Userbot Indo Cloud</a> Channel for update notifications!</p>
+<p align="center">Also join <a href="https://t.me/userbotindo">Userbot INDO🇮🇩</a> Telegram Group for help and support!</p>
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
 <p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Fortizer@HeinzDF Public License</a> - Version 1.c, February 2020</p>
