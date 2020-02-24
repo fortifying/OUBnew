@@ -1,5 +1,5 @@
 #this module original created by @spechide
-#port to useebot by @afdulfauzan
+#port to userbot by @afdulfauzan
 
 from telethon.tl import functions, types
 from userbot.events import register
@@ -17,7 +17,7 @@ async def telegraphs(grop):
         if type_of_group == "b":
             try:
                 result = await grop.client(functions.messages.CreateChatRequest(  # pylint:disable=E0602
-                    users=["@MissRose_bot"],
+                    users=["@EmiliaHikariBot"],
                     # Not enough users (to create a chat, for example)
                     # Telegram, no longer allows creating a chat with ourselves
                     title=group_name
@@ -25,12 +25,12 @@ async def telegraphs(grop):
                 created_chat_id = result.chats[0].id
                 await grop.client(functions.messages.DeleteChatUserRequest(
                     chat_id=created_chat_id,
-                    user_id="@MissRose_bot"
+                    user_id="@EmiliaHikariBot"
                 ))
                 result = await grop.client(functions.messages.ExportChatInviteRequest(
                     peer=created_chat_id,
                 ))
-                await grop.edit("Your `{}` Group Created Successfully. Join [{}]({})".format(group_name, group_name, result.link))
+                await grop.edit("Your `{}` Group Created Successfully. Click [{}]({}) to join".format(group_name, group_name, result.link))
             except Exception as e:  # pylint:disable=C0103,W0703
                 await grop.edit(str(e))
         elif type_of_group == "g" or type_of_group == "c":
@@ -44,18 +44,18 @@ async def telegraphs(grop):
                 result = await grop.client(functions.messages.ExportChatInviteRequest(
                     peer=created_chat_id,
                 ))
-                await grop.edit("Your `{}` Group/Channel Created Successfully. Join [{}]({})".format(group_name, group_name, result.link))
-             except Exception as e:  # pylint:disable=C0103,W0703
+                await grop.edit("Your `{}` Group/Channel Created Successfully. Click [{}]({}) to join".format(group_name, group_name, result.link))
+            except Exception as e:  # pylint:disable=C0103,W0703
                 await grop.edit(str(e))
 
 CMD_HELP.update({
     "create": "\
 Create\
 \nUsage: Create Channel, Group & Group With Bot.\
-\n\n.create g\
+\n\n.create g <group name>\
 \nUsage: Create a Private Group.\
-\n\n.create b\
+\n\n.create b <group name>\
 \nUsage: Create a Group with Bot.\
-\n\n.create c\
+\n\n.create c <channel name>\
 \nUsage: Create a Channel.\
 "})
