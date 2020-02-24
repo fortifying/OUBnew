@@ -605,6 +605,23 @@ HIT = [
 
 WHERE = ["in the chest", "on the head", "on the butt", "on the crotch"]
 
+GAMBAR_TITIT = """
+🍆🍆
+🍆🍆🍆
+  🍆🍆🍆
+    🍆🍆🍆
+     🍆🍆🍆
+       🍆🍆🍆
+        🍆🍆🍆
+         🍆🍆🍆
+          🍆🍆🍆
+          🍆🍆🍆
+      🍆🍆🍆🍆
+ 🍆🍆🍆🍆🍆🍆
+ 🍆🍆🍆  🍆🍆🍆
+    🍆🍆       🍆🍆
+"""
+
 # ===========================================
 
 
@@ -743,7 +760,7 @@ async def facepalm(e):
 
 @register(outgoing=True, pattern="^.cry$")
 async def cry(e):
-    """ nangis aja """
+    """ y u du dis, i cry everytime !! """
     await e.edit(choice(CRI))
 
 
@@ -942,11 +959,16 @@ async def Oof(e):
 async def iqless(e):
     await e.edit("♿")
 
-
+                      
 @register(outgoing=True, pattern="^.fuck$")
 async def iqless(e):
-    await e.edit("🖕🖕🖕🖕🖕🖕🖕🖕\n🖕🖕🖕🖕🖕🖕🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕🖕🖕🖕🖕\n🖕🖕🖕🖕🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕")
+    await e.edit("🖕🖕🖕🖕🖕🖕🖕🖕\n🖕🖕🖕🖕🖕🖕🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕🖕🖕🖕🖕\n🖕🖕🖕🖕🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕\n🖕🖕")  
 
+                     
+@register(outgoing=True, pattern="^.bye$")
+async def iqless(e):
+    await e.edit("Kek thx bye")       
+                      
 
 @register(outgoing=True, pattern="^.moon$")
 async def moon(event):
@@ -1211,12 +1233,12 @@ async def gtfo(e):
 async def nih(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
         await e.edit("`\n(\_/)`"
-                     "`\n(●_●)`"
-                     "`\n />🌹 *ini buat kamu`"
+                     "`\n(•_•)`"
+                     "`\n >🌹 *ini buat kamu`"
                      "`\n                    `"
                      "`\n(\_/)`"
-                     "`\n(●_●)`"
-                     "`\n🌹<\  *tapi boong`")
+                     "`\n(•_•)`"
+                     "`\n🌹<\ *tapi boong`")
 
 
 @register(outgoing=True, pattern="^.fag$")  
@@ -1290,9 +1312,18 @@ async def nou(e):
         await e.edit("`\n┈╭╮╭╮\n┈┃┃┃┃\n╭┻┗┻┗╮`"
                      "`\n┃┈▋┈▋┃\n┃┈╭▋━╮━╮\n┃┈┈╭╰╯╰╯╮`"
                      "`\n┫┈┈  NoU\n┃┈╰╰━━━━╯`"
-"`\n┗━━┻━┛`")                   
+                     "`\n┗━━┻━┛`")
 
-                                                                                    
+
+@register(outgoing=True, pattern=r"^\.(?:penis|dick)\s?(.)?")
+async def emoji_penis(e):
+    emoji = e.pattern_match.group(1)
+    titid = GAMBAR_TITIT
+    if emoji:
+        titid = titid.replace('🍆', emoji)
+    await e.edit(titid)  
+              
+ 
 CMD_HELP.update({
     "memes":
     ".cowsay\
@@ -1351,6 +1382,8 @@ CMD_HELP.update({
 \nUsage: Believe me, you will find this useful.\
 \n\n.type\
 \nUsage: Just a small command to make your keyboard become a typewriter!\
+\n\n.penis <emoji> | .dick <emoji>\
+\nUsage: Creates a penis using the provided emoji, or 🍆 if no emoji is provided.\
 \n\n.lfy <query>\
 \nUsage: Let me Google that for you real quick !!\
 \n\n.decide [Alternates: (.yes, .no, .maybe)]\
