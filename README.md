@@ -9,12 +9,10 @@
 <p align="center"><a href="https://github.com/fortifying/OUBnew"> <img src="https://i.ibb.co/DtMH414/1580320255-picsay.png" alt="Deploy to Heroku" /></a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
-<p align="center">Huge thanks to <a href="https://github.com/mkaraniya/OpenUserBot/graphs/contributors">everyone</a> who have helped make this userbot awesome!!</p>
-<p align="center">A BIG thanks to <a href="https://github.com/Devp73">Dev Patel</a> who have helped make this userbot ON AGAIN with his HUGE FIX!!</p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Updates and Support</h2>
-<p align="center">Join <a href="https://t.me/userbotindocloud">Userbot Indo Cloud</a> Channel for update notifications!</p>
-<p align="center">Also join <a href="https://t.me/userbotindo">Userbot INDO🇮🇩</a> Telegram Group for help and support!</p>
+<h2 align="center">Join <a href="https://t.me/userbotindocloud">Userbot Indo Cloud</a> Channel for update notifications!</h2>
+<h2 align="center">Also join <a href="https://t.me/userbotindo">Userbot INDO🇮🇩</a> Telegram Group for help and support!</h2>
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
 <p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Fortizer@HeinzDF Public License</a> - Version 1.c, February 2020</p>
