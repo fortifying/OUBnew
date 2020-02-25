@@ -18,34 +18,32 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+from humanize import naturalsize
 from subprocess import PIPE, Popen
 
 import re
 import json
+import wget
 import os
-import time
 
-from pySmartDL import SmartDL
 from os.path import exists
-from urllib.error import HTTPError
 
-from userbot import CMD_HELP, LOGS
+from userbot import CMD_HELP
 from userbot.events import register
-from userbot.modules.upload_download import humanbytes
 
 
-async def subprocess_run(cmd, megadl):
+def subprocess_run(cmd):
+    reply = ''
     subproc = Popen(cmd, stdout=PIPE, stderr=PIPE,
                     shell=True, universal_newlines=True)
     talk = subproc.communicate()
     exitCode = subproc.returncode
     if exitCode != 0:
-        await megadl.edit(
-            '```An error was detected while running the subprocess:\n'
-            f'exit code: {exitCode}\n'
-            f'stdout: {talk[0]}\n'
-            f'stderr: {talk[1]}```')
-        return
+        reply += ('An error was detected while running the subprocess:\n'
+                  f'exit code: {exitCode}\n'
+                  f'stdout: {talk[0]}\n'
+                  f'stderr: {talk[1]}')
+        return reply
     return talk
 
 
@@ -72,78 +70,42 @@ async def mega_download(url, megadl):
     except IndexError:
         await megadl.edit("`No MEGA.nz link found`\n")
         return
-    cmd = f'bin/megadown -q -m {link}'
-    result = await subprocess_run(cmd, megadl)
+    cmd = f'bin/megadirect {link}'
+    result = subprocess_run(cmd)
     try:
         data = json.loads(result[0])
     except json.JSONDecodeError:
         await megadl.edit("`Error: Can't extract the link`\n")
         return
-    except TypeError as e:  # in case file exists log to heroku then return
-        LOGS.info(str(e))
-        return
-    file_name = data["file_name"]
-    file_url = data["url"]
-    hex_key = data["hex_key"]
-    hex_raw_key = data["hex_raw_key"]
-    temp_file_name = file_name + ".temp"
-    downloaded_file_name = "./" + "" + temp_file_name
-    downloader = SmartDL(
-        file_url, downloaded_file_name, progress_bar=False)
-    display_message = None
-    try:
-        downloader.start(blocking=False)
-    except HTTPError as e:
-        await megadl.edit("`" + str(e) + "`")
-        LOGS.info(str(e))
-        return
-    while not downloader.isFinished():
-        status = downloader.get_status().capitalize()
-        total_length = downloader.filesize if downloader.filesize else None
-        downloaded = downloader.get_dl_size()
-        percentage = int(downloader.get_progress() * 100)
-        progress = downloader.get_progress_bar()
-        speed = downloader.get_speed(human=True)
-        estimated_total_time = downloader.get_eta(human=True)
-        try:
-            current_message = (
-                f"**{status}**..."
-                f"\nFile Name: `{file_name}`\n"
-                f"\n{progress} `{percentage}%`"
-                f"\n{humanbytes(downloaded)} of {humanbytes(total_length)}"
-                f" @ {speed}"
-                f"\nETA: {estimated_total_time}"
-            )
-            if status == "Downloading":
-                await megadl.edit(current_message)
-                time.sleep(0.2)
-            elif status == "Combining":
-                if display_message != current_message:
-                    await megadl.edit(current_message)
-                    display_message = current_message
-        except Exception as e:
-            LOGS.info(str(e))
-    if downloader.isSuccessful():
-        download_time = downloader.get_dl_time(human=True)
-        if exists(temp_file_name):
-            await decrypt_file(
-                file_name, temp_file_name, hex_key, hex_raw_key, megadl)
+    file_name = data['file_name']
+    file_size = naturalsize(int(data['file_size']))
+    file_url = data['url']
+    file_hex = data['hex']
+    file_raw_hex = data['raw_hex']
+    if exists(file_name):
+        os.remove(file_name)
+    if not exists(file_name):
+        await megadl.edit('Downloading...\n\n'
+                          f'File: `{file_name}`\n'
+                          f'Size: {file_size}\n'
+                          '...')
+        wget.download(file_url, out=file_name)
+        if exists(file_name):
+            await megadl.edit('Encrypting file...')
+            encrypt_file(file_name, file_hex, file_raw_hex)
             await megadl.edit(f"`{file_name}`\n\n"
-                              "Successfully downloaded\n"
-                              f"Download took: {download_time}")
-    else:
-        await megadl.edit("Failed to download...")
-        for e in downloader.get_errors():
-            LOGS.info(str(e))
+                              "Successfully downloaded...")
+        else:
+            await megadl.edit("Failed to download...")
     return
 
 
-async def decrypt_file(file_name, temp_file_name, hex_key, hex_raw_key, megadl):
-    await megadl.edit("Decrypting file...")
-    cmd = ("cat '{}' | openssl enc -d -aes-128-ctr -K {} -iv {} > '{}'"
-           .format(temp_file_name, hex_key, hex_raw_key, file_name))
-    await subprocess_run(cmd, megadl)
-    os.remove(temp_file_name)
+def encrypt_file(file_name, file_hex, file_raw_hex):
+    os.rename(file_name, r"old_{}".format(file_name))
+    cmd = ("cat 'old_{}' | openssl enc -d -aes-128-ctr -K {} -iv {} > '{}'"
+           .format(file_name, file_hex, file_raw_hex, file_name))
+    subprocess_run(cmd)
+    os.remove(r"old_{}".format(file_name))
     return
 
 
