@@ -183,7 +183,7 @@ async def upstream(ups):
         if BOTLOG:
             await ups.client.send_message(
                 BOTLOG_CHATID, "#UPDATE \n"
-                "Your One4uBot was successfully updated")
+                "`Fortizer` was successfully updated")
 
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
