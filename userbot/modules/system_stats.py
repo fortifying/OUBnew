@@ -119,18 +119,18 @@ async def pipcheck(pip):
         await pip.edit("`Use .help pip to see an example`")
 
 
-@register(outgoing=True, pattern="^.on$")
+@register(outgoing=True, pattern=r"^\.(?:live|on)\s?(.)?")
 async def amireallyalive(on):
     """ For .on command, check if the bot is running.  """
     await on.edit(" Mind if I break your rules? \n"
                      " ---------------------------------------- \n"
-                     " Version info \n"    
-                  f"~ Telethon : v{version.__version__} \n"
-                  f"~ Python  : v{python_version()} \n"
+                     " __Version info__ \n"    
+                  f"~ Telethon : ``v{version.__version__}`` \n"
+                  f"~ Python  : ``v{python_version()}`` \n"
                      " ---------------------------------------- \n"
                   f"User : {DEFAULTUSER}  \n"
                      " ---------------------------------------- \n"
-                     "Fortizer is now Alive! \n")
+                     "**Fortizer is now Alive! \n**")
 
 
 @register(outgoing=True, pattern="^.aliveu")
@@ -164,7 +164,7 @@ CMD_HELP.update(
     \nUsage: Does a search of pip modules(s)."})
 CMD_HELP.update({
     "on":
-    ".on\
+    ".live | .on\
     \nUsage: Type .on to see wether your bot is working or not.\
     \n\n.aliveu <text>\
     \nUsage: Changes the 'user' in alive to the text you want.\
