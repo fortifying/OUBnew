@@ -211,3 +211,4 @@ CMD_HELP = {}
 ZALG_LIST = {}
 ISAFK = False
 AFKREASON = None
+VERSION = 6.3.8
