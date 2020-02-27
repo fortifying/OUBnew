@@ -15,7 +15,7 @@ async def _(event):
        await event.edit("```Reply to any user message.```")
        return
     reply_message = await event.get_reply_message() 
-    if not reply_message.media:
+    if not reply_message.text:
        await event.edit("```Reply to text message```")
        return
     chat = "@image_deepfrybot"
@@ -23,10 +23,10 @@ async def _(event):
     if reply_message.sender.bot:
        await event.edit("```Reply to actual users message.```")
        return
-    await event.edit("```Making a Quote```")
+    await event.edit("```Processing```")
     async with bot.conversation(chat) as conv:
           try:     
-              response = conv.wait_event(events.NewMessage(incoming=True,from_users=1031952739))
+              response = conv.wait_event(events.NewMessage(incoming=True,from_users=432858024))
               await bot.forward_messages(chat, reply_message)
               response = await response 
           except YouBlockedUserError: 
