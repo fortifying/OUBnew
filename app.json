@@ -1,7 +1,7 @@
 {
-  "name": "Telegram Open User Bot",
-  "description": "[OpenUserBot] A modular Telegram userbot running on Python 3.7+ with an sqlalchemy database.",
-  "logo": "https://telegra.ph/file/d04a1724c6dd8a957bd0e.png",
+  "name": "Project OUBnew-Fortizer bot Telegram",
+  "description": "OUB fortizer running on Python 3.8+ with an sqlalchemy database.",
+  "logo": "https://telegra.ph/file/2d629aa7377e9129c18c2.jpg",
   "keywords": [
     "telegram",
     "userbot",
@@ -9,7 +9,7 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/mkaraniya/OpenUserBot",
+  "repository": "https://github.com/fortifying/OUBnew",
   "website": "https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02",
   "success_url": "https://t.me/PPE_Support",
   "stack": "container",
