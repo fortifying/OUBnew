@@ -21,7 +21,7 @@
 <p align="center">&nbsp;</p>
 <h2 align="center">NOT THE BEST ONE, BUT HERE YOU GO</h2>
 <h5 align="center">Easy way to deploy</h5>
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended"> <img src="https://i.ibb.co/DtMH414/1580320255-picsay.png" alt="Deploy to Heroku" /></a></p>
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended"> <img src="https://telegra.ph/file/23345502c528b8b3d063d.png" alt="Deploy to Heroku" /></a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
 <p align="center">&nbsp;</p>
