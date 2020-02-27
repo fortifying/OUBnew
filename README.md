@@ -1,7 +1,8 @@
 # Project OUBnew-Fortizer
 
-
-## A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.
+`
+ A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.
+`
 
 ```
 #include <std/disclaimer.h>
@@ -28,6 +29,7 @@
 
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
+<p align="center"><a href="https://github.com/fortifying/OUBnew/graphs/contributors">Big thanks for Everyone who helped me</a></p>
 <p align="center">&nbsp;</p>
 
 
