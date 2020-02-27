@@ -1,5 +1,7 @@
-<h1 align="center">Project OUBnew-Fortizer</h1>
-<h3 align="center">A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.</h3>
+# Project OUBnew-Fortizer
+
+
+## A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.
 
 ```
 #include <std/disclaimer.h>
@@ -17,17 +19,24 @@
 /**
 ```
 
-<p align="center"><a href="#how-to-host">How To Host</a> | <a href="#updates-and-support">Updates and Support</a> | <a href="#credits">Credits</a> | <a href="#license">License</a></p>
 <p align="center">&nbsp;</p>
-<h2 align="center">NOT THE BEST ONE, BUT HERE YOU GO</h2>
-<h5 align="center">Easy way to deploy</h5>
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended"> <img src="https://telegra.ph/file/23345502c528b8b3d063d.png" alt="Deploy to Heroku" /></a></p>
+
+## NOT THE BEST ONE, BUT HERE YOU GO
+
+## Easy way to deploy
+[![Deploy](https://telegra.ph/file/008d8a88e29bd8ed9ece9.png)](https://heroku.com/deploy?template=https://github.com/TG-UBotX/TG-UBotX)
+
 <p align="center">&nbsp;</p>
 <h2 align="center">Credits</h2>
 <p align="center">&nbsp;</p>
-<h2 align="center">Updates and Support</h2>
-<h2 align="center">Join <a href="https://t.me/userbotindocloud">Userbot Indo Cloud</a> Channel for update notifications!</h2>
-<h2 align="center">Also join <a href="https://t.me/userbotindo">Userbot INDO🇮🇩</a> Telegram Group for help and support!</h2>
+
+
+
+# Updates and Support
+
+Join <a href="https://t.me/userbotindocloud">Userbot Indo Cloud</a> Channel for update notifications!
+
+Also join <a href="https://t.me/userbotindo">Userbot INDO🇮🇩</a> Telegram Group for help and support!
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
 <p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Fortizer@HeinzDF Public License</a> - Version 1.c, February 2020</p>
