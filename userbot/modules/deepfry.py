@@ -15,7 +15,7 @@ async def _(event):
        await event.edit("`Reply to any user message.`")
        return
     reply_message = await event.get_reply_message() 
-    if not reply_message.text:
+    if not reply_message.media:
        await event.edit("```reply to text message```")
        return
     chat = "@image_deepfrybot"
