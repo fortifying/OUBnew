@@ -114,6 +114,10 @@
       "description": "Enter Your Client ID for Google Drive.",
       "required": false
     },
+    "TELEGRAPH_SHORT_NAME": {
+      "description": "Enter anything in here. your name or else.",
+      "required": true
+    }
     "LASTFM_API": {
       "description": "API Key for Last.FM module. [Get one from - https://www.last.fm/api/account/create]",
       "required": false
