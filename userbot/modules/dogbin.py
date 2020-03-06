@@ -121,11 +121,18 @@ async def get_dogbin_content(dog_url):
             "Get dogbin content query was executed successfully",
         )
 
-
 CMD_HELP.update({
-    "dogbin":
-    ".paste <text/reply>\
-\nUsage: Create a paste or a shortened url using dogbin (https://del.dog/)\
-\n\n.getpaste\
-\nUsage: Gets the content of a paste or shortened url from dogbin (https://del.dog/)"
+    ".paste":
+    "Create a paste or a shortened url using "
+    "dogbin (https://del.dog/)"
+})
+CMD_HELP.update({
+    ".getpaste":
+    "Get the content of a paste or "
+    "shortened url from dogbin (https://del.dog/)"
+})
+CMD_HELP.update({
+    ".pastestats":
+    "Get stats of a paste or shortened "
+    "url from dogbin (https://del.dog/)"
 })
