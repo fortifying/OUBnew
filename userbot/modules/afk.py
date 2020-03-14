@@ -61,7 +61,7 @@ async def mention_afk(mention):
                 USERS.update({mention.sender_id: 1})
                 COUNT_MSG = COUNT_MSG + 1
             elif mention.sender_id in USERS:
-                if USERS[mention.sender_id] % randint(2, 4) == 0:
+                if USERS[mention.sender_id] % randint(1, 4) == 0:
                     if AFKREASON:
                         await mention.reply(f"I'm still AFK.\
                             \nReason: `{AFKREASON}`")
@@ -100,7 +100,7 @@ async def afk_on_pm(sender):
                 USERS.update({sender.sender_id: 1})
                 COUNT_MSG = COUNT_MSG + 1
             elif apprv and sender.sender_id in USERS:
-                if USERS[sender.sender_id] % randint(2, 4) == 0:
+                if USERS[sender.sender_id] % randint(1, 4) == 0:
                     if AFKREASON:
                         await sender.reply(f"I'm still AFK.\
                         \nReason: `{AFKREASON}`")
@@ -122,10 +122,10 @@ async def set_afk(afk_e):
     global AFKREASON
     if string:
         AFKREASON = string
-        await afk_e.edit(f"__AFK dulu slur!__\
+        await afk_e.edit(f"__Going AFK!__\
         \nReason: `{string}`")
     else:
-        await afk_e.edit("__AFK dulu slur!__")
+        await afk_e.edit("__Going AFK!__")
     if BOTLOG:
         await afk_e.client.send_message(BOTLOG_CHATID, "#AFK\nYou went AFK!")
     ISAFK = True
@@ -142,7 +142,7 @@ async def type_afk_is_not_true(notafk):
     if ISAFK:
         ISAFK = False
         msg = await notafk.respond("I'm no longer AFK..")
-        await sleep(5)
+        await sleep(1)
         await msg.delete()
         if BOTLOG:
             await notafk.client.send_message(
