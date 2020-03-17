@@ -19,13 +19,13 @@ from telethon.tl.types import InputStickerSetID
 from telethon.tl.types import DocumentAttributeSticker
 
 KANGING_STR = [
-    "....",
+    "`packing this sticker..",
 ]
 
 
-@register(outgoing=True, pattern="^.get")
+@register(outgoing=True, pattern=r"^\.(?:get|kang)\s?(.)?")
 async def kang(args):
-    """ For .get command, kangs stickers or creates new ones. """
+    """ For .get or .kang command, kangs stickers or creates new ones. """
     user = await bot.get_me()
     if not user.username:
         user.username = user.first_name
@@ -87,7 +87,7 @@ async def kang(args):
                 emoji = splat[1]
 
         packname = f"{user.username}{pack}"
-        packnick = f"@{user.username} fortizers {pack}"
+        packnick = f"@{user.username} dankpack {pack}"
         cmd = '/newpack'
         file = io.BytesIO()
 
@@ -302,12 +302,12 @@ async def get_pack_info(event):
 CMD_HELP.update({
     "stickers":
     ".get\
-\nUsage: Reply .get to a sticker or an image to kang it to your userbot pack.\
-\n\n.get [emoji('s)]\
+\nUsage: Reply .get or .kang to a sticker or an image to kang it to your userbot pack.\
+\n\n.get/.kang [emoji('s)]\
 \nUsage: Works just like .get but uses the emoji('s) you picked.\
-\n\n.get [number]\
+\n\n.get/.kang [number]\
 \nUsage: Kang's the sticker/image to the specified pack but uses 🤔 as emoji.\
-\n\n.get [emoji('s)] [number]\
+\n\n.get/.kang [emoji('s)] [number]\
 \nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
 \n\n.stkrinfo\
 \nUsage: Gets info about the sticker pack."

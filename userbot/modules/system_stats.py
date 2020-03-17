@@ -121,7 +121,7 @@ async def pipcheck(pip):
 
 @register(outgoing=True, pattern=r"^\.(?:live|on)\s?(.)?")
 async def amireallyalive(on):
-    """ For .on command, check if the bot is running.  """
+    """ For .on or .alive command, check if the bot is running.  """
     await on.edit(" Mind if I break your rules? \n"
                      " ---------------------------------------- \n"
                      " __Version info__ \n"    
@@ -165,7 +165,7 @@ CMD_HELP.update(
 CMD_HELP.update({
     "on":
     ".live | .on\
-    \nUsage: Type .on to see wether your bot is working or not.\
+    \nUsage: Type .on or .alive to see wether your bot is working or not.\
     \n\n.aliveu <text>\
     \nUsage: Changes the 'user' in alive to the text you want.\
     \n\n.resetalive\
