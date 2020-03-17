@@ -1,11 +1,15 @@
-# We're using Alpine Edge
-FROM alpine:edge
+# We're using Ubuntu
+FROM ubuntu:18.04
+
+ENTRYPOINT ["mysql"]
 
 #
 # We have to uncomment Community repo for some packages
 #
-RUN sed -e 's;^#http\(.*\)/edge/community;http\1/edge/community;g' -i /etc/apk/repositories
+RUN apt-get update \
 
+ && apt-get install -y --no-install-recommends mysql-client \
+ && rm -rf /var/lib/apt/lists/*
 #
 # Installing Packages
 #
