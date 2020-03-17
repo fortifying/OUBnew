@@ -12,19 +12,13 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 #
 #
-RUN python3 -m ensurepip \
-    && pip3 install --upgrade pip setuptools \
-    && rm -r /usr/lib/python*/ensurepip && \
-    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
-    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
-    rm -r /root/.cache
-
-#
 # Clone repo and prepare working directory
 #
-RUN git clone -b sql-extended https://github.com/fortifying/OUBnew/ /root/userbot
+
+RUN git clone 'https://github.com/fortifying/OUBnew' /root/userbot
 RUN mkdir /root/userbot/bin/
-WORKDIR /root/userbot/
+RUN chmod 777 /root/userbot/
+RUN chmod 777 /root/userbot/bin/
 
 #
 # Copies session and config (if it exists)
