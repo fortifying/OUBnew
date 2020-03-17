@@ -11,56 +11,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends mysql-client \
  && rm -rf /var/lib/apt/lists/*
 #
-# Installing Packages
 #
-RUN apk add --no-cache=true --update \
-    coreutils \
-    bash \
-    build-base \
-    bzip2-dev \
-    curl \
-    figlet \
-    gcc \
-    g++ \
-    git \
-    sudo \
-    aria2 \
-    util-linux \
-    libevent \
-    jpeg-dev \
-    libffi-dev \
-    libpq \
-    libwebp-dev \
-    libxml2 \
-    libxml2-dev \
-    libxslt-dev \
-    linux-headers \
-    musl \
-    neofetch \
-    openssl-dev \
-    postgresql \
-    postgresql-client \
-    postgresql-dev \
-    openssl \
-    pv \
-    jq \
-    wget \
-    python \
-    python-dev \
-    python3 \
-    python3-dev \
-    readline-dev \
-    sqlite \
-    ffmpeg \
-    sqlite-dev \
-    sudo \
-    chromium \
-    chromium-chromedriver \
-    zlib-dev \
-    jpeg \
-    zip 
-
-
 RUN python3 -m ensurepip \
     && pip3 install --upgrade pip setuptools \
     && rm -r /usr/lib/python*/ensurepip && \
