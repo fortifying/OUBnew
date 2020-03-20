@@ -226,8 +226,9 @@ async def action(event):
     await event.edit("**"+msg_str+"**")                   
     
 CMD_HELP.update({
-        "anime": 
-        "Usage: .(genre) number of times (interger) \
+        "anime":  \
+        "Anime random generator \
+        \nUsage: .(genre) number of times (interger) \
         \n\nAvailable commands: \
         \n.action \
           \nInfo: Generate anime genre action.\
