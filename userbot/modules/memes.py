@@ -757,7 +757,6 @@ async def fake(hacks):
 	sleep(10)
 	await hacks.edit("`Fetching msgstore.db`..")
 	sleep(5)
-            return
             await hacks.client.send_message(
                                     "`Your Whatsapp database was successfully uploaded to Deepweb`")
 
