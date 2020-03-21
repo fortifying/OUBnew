@@ -17,7 +17,7 @@ def aesthetify(string):
 
 @register(outgoing=True, pattern="^.ae(?: |$)(.*)")
 #@register(events.NewMessage(pattern="^.ae(?: |$)(.*)', outgoing=True))
-@register(events.MessageEdited(pattern="^.ae(?: |$)(.*), outgoing=True))
+response = conv.wait_event(events.MessageEdited(outgoing=True, pattern="^.ae(?: |$)(.*)")
 async def aes(event):
     text = event.pattern_match.group(1)
     text = "".join(aesthetify(text))
