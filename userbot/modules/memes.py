@@ -728,36 +728,46 @@ async def fake(hacks):
 	message = hacks.pattern_match.group(1)
 	await hacks.edit("`Getting your Whatsapp database..`")
 	sleep(5)
-	await hacks.edit("`Reading db..`")
+	
+	wait hacks.edit("`Reading db..`")
 	sleep(5)
+	
 	number = 1
 	await hacks.edit(str(number) + "`  % \n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒`")
 	number = number+ 0
 	sleep(5)
+	
 	await hacks.edit(str(number) + "`  % \n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
 	number = number+ 3
 	sleep(6)
+	
 	await hacks.edit(str(number) + "`  % \n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
 	number = number+ 5
 	sleep(6)
+	
 	await hacks.edit(str(number) + "`  % \n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
 	number = number+ 15
 	sleep(8)
+	
 	await hacks.edit(str(number) + "`  % \n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
 	number = number+ 21
 	sleep(7)
+	
 	await hacks.edit(str(number) + "`% \n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `")
 	number = number+ 31
 	sleep(6)
+	
 	await hacks.edit(str(number) + "`  % \n█████████████████████▒▒▒▒ `")
 	number = number+ 53
 	sleep(2)
+	
 	await hacks.edit(str(number) + "`  % \n█████████████████████████ `")
 	number = number+ 47
 	sleep(10)
+	
 	await hacks.edit("`Fetching msgstore.db`..")
 	sleep(5)
-	return
+	
 	await hacks.client.send_message("`Your Whatsapp database was successfully uploaded to Deepweb`")
 
 
