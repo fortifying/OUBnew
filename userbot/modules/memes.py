@@ -8,6 +8,8 @@ from asyncio import sleep
 from random import choice, getrandbits, randint
 from re import sub
 import time
+from telethon import events
+import asyncio
 
 from collections import deque
 
@@ -605,32 +607,6 @@ HIT = [
 
 WHERE = ["in the chest", "on the head", "on the butt", "on the crotch"]
 
-HILIH = [
-    "┐(´д｀)┌",
-    "┐(´～｀)┌",
-    "┐(´ー｀)┌",
-    "┐(￣ヘ￣)┌",
-    "╮(╯∀╰)╭",
-    "╮(╯_╰)╭",
-    "┐(´д`)┌",
-    "┐(´∀｀)┌",
-    "ʅ(́◡◝)ʃ",
-    "┐(ﾟ～ﾟ)┌",
-    "┐('д')┌",
-    "┐(‘～`;)┌",
-    "ヘ(´－｀;)ヘ",
-    "┐( -“-)┌",
-    "ʅ（´◔౪◔）ʃ",
-    "ヽ(゜～゜o)ノ",
-    "ヽ(~～~ )ノ",
-    "┐(~ー~;)┌",
-    "┐(-。ー;)┌",
-    r"¯\_(ツ)_/¯",
-    r"¯\_(⊙_ʖ⊙)_/¯",
-    r"¯\_༼ ಥ ‿ ಥ ༽_/¯",
-    "乁( ⁰͡  Ĺ̯ ⁰͡ ) ㄏ",
-]
-
 GAMBAR_TITIT = """
 🍆🍆
 🍆🍆🍆
@@ -744,7 +720,46 @@ async def slap(replied_user, event):
         victim=slapped, item=item, hits=hit, throws=throw, where=where)
 
     return caption
+    
+# ported to OUB by fortifying
+@register(outgoing=True, pattern="^.(?: |$)(.*)")
 
+async def _(event):
+
+    if event.fwd_from:
+
+        return
+
+    animation_interval = 2
+
+    animation_ttl = range(0, 11)
+
+    input_str = event.pattern_match.group(1)
+
+    if input_str == "hack":
+
+        await event.edit(input_str)
+
+        animation_chars = [
+        
+            "`Connecting to your Whatsapp database..`",
+            "`Target Selected.`",
+            "`Hacking... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
+            "`Hacking... 4%\n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
+            "`Hacking... 8%\n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",    
+            "`Hacking... 20%\n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
+            "`Hacking... 36%\n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
+            "`Hacking... 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `",
+            "`Hacking... 84%\n█████████████████████▒▒▒▒ `",
+            "`Hacking... 100%\n█████████HACKED███████████ `",
+            "`Your Whatsapp database was succesfully uploaded to Deepweb`"
+        ]
+
+        for i in animation_ttl:
+
+            await asyncio.sleep(animation_interval)
+
+            await event.edit(animation_chars[i % 11])
 
 @register(outgoing=True, pattern="^-_-$", ignore_unsafe=True)
 async def lol(lel):
@@ -942,24 +957,6 @@ async def faces(owo):
     reply_text += " " + choice(UWUS)
     await owo.edit(reply_text)
 
-@register(outgoing=True, pattern="^.ii(?: |$)(.*)")
-async def faces(ii):
-    """ Hilih """
-    textx = await ii.get_reply_message()
-    message = ii.pattern_match.group(1)
-    if message:
-        pass
-    elif textx:
-        message = textx.text
-    else:
-        await ii.edit("` Hilih no text given! `")
-        return
-
-    reply_text = sub(r"(a|i|u|e|o)", "i", message)
-    reply_text = sub(r"(A|I|U|E|O)", "I", reply_text)
-    reply_text = sub(r"\!+", " " + choice(HILIH), reply_text)
-    reply_text += " " + choice(HILIH)
-    await ii.edit(reply_text)
 
 @register(outgoing=True, pattern="^.react$")
 async def react_meme(react):
@@ -1248,7 +1245,7 @@ async def lool(e):
 @register(outgoing=True, pattern="^.stfu$")
 async def stfu(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        await e.edit("`\n█████████████████████████████████`"
+        await e.edit("`\n██████████████████████████████`"
                      "`\n██▀▀▀▀████▀▀▀▀████▀▀▀▀▀███▀▀██▀▀█`"
                      "`\n█──────██──────██───────██──██──█`"
                      "`\n█──██▄▄████──████──███▄▄██──██──█`"
@@ -1418,6 +1415,8 @@ CMD_HELP.update({
 \nUsage: Haha yes\
 \n\n.mock\
 \nUsage: Do it and find the real fun.\
+\n\n.hack\
+\nUsage: Do fake hack\
 \n\n.clap\
 \nUsage: Praise people!\
 \n\n.f <emoji/character>\
@@ -1436,7 +1435,7 @@ CMD_HELP.update({
 \n[Available Actions: (typing, contact, game, location, voice, round, video, photo, document, cancel)]\
 \nUsage: Create fake chat actions, for fun. (Default action: typing)\
 \n\nAnd many more\
-\n.nou ; .bot ; .gey ; .gey ; .tf ; .paw ; .taco ; .nih ; .ii ;\
+\n.nou ; .bot ; .gey ; .gey ; .tf ; .paw ; .taco ; .nih ;\
 \n.fag ; .gtfo ; .stfu ; .lol ; .lool ; .fail ; .leave\
 \n.love ; .rain ; .earth ; .fuck\
 \n\n\nThanks to 🅱️ottom🅱️ext🅱️ot (@NotAMemeBot) for some of these."
