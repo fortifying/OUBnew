@@ -5,6 +5,7 @@ bs4
 cowpy
 # cryptg>=0.2
 cffi>=1.0.0
+covid
 dnspython
 emoji
 gitpython
