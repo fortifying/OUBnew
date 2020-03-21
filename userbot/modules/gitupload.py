@@ -1,6 +1,7 @@
 # ported on OUB by @Mayur_Karaniya
 
-# import github
+
+from github import Github
 import aiohttp
 import asyncio
 import os
@@ -17,7 +18,8 @@ from userbot import CMD_HELP, GITHUB_ACCESS_TOKEN, GIT_REPO_NAME, bot
 
 GIT_TEMP_DIR = "./userbot/temp/"
 # @borg.on(admin_cmd(pattern="commit ?(.*)", allow_sudo=True))
-@register(pattern=r".commit (.*)", outgoing=True)
+@register(outgoing=True, pattern="^.commit(?: |$)(.*)")
+# @register(pattern=r".commit (.*)", outgoing=True)
 async def download(event):
     if event.fwd_from:
         return	
@@ -52,7 +54,7 @@ async def download(event):
 async def git_commit(file_name,mone):        
     content_list = []
     access_token = GITHUB_ACCESS_TOKEN
-    g = (access_token)
+    g = Github(access_token)
     file = open(file_name,"r",encoding='utf-8')
     commit_data = file.read()
     repo = g.get_repo(GIT_REPO_NAME)
