@@ -27,6 +27,7 @@ pylast
 pySmartDL
 python-barcode
 python-dotenv
+PyGithub
 youtube-dl
 regex
 pytz
