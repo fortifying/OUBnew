@@ -723,33 +723,41 @@ async def slap(replied_user, event):
     
     
 ## ported to OUB by fortifying
-@register(outgoing=True, pattern=r"^.hack (.*)")
-async def fakehack(event):
-    if event.fwd_from:
-        return
-    animation_interval = 2
-    animation_ttl = range(0, 11)
-    input_str = event.pattern_match.group(1)
-    if input_str == "hack":
-        await event.edit(input_str)
-        animation_chars = [
-        
-            "`Connecting to your Whatsapp database..`",
-            "`Target Selected.`",
-            "`Hacking... 0%\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Hacking... 4%\n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Hacking... 8%\n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",    
-            "`Hacking... 20%\n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Hacking... 36%\n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Hacking... 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `",
-            "`Hacking... 84%\n█████████████████████▒▒▒▒ `",
-            "`Hacking... 100%\n█████████HACKED███████████ `",
-            "`Your Whatsapp database was succesfully uploaded to Deepweb`"
-        ]
-
-        for i in animation_ttl:
-            await asyncio.sleep(animation_interval)
-            await event.edit(animation_chars[i % 11])
+@register(outgoing=True, pattern='^.hack(?: |$)(.*)')
+async def fake(hacks):
+	message = hacks.pattern_match.group(1)
+	await hacks.edit("`Getting your Whatsapp database..`")
+	sleep(3)
+	await hacks.edit("'Reading db..'")
+	sleep(1)
+	number = 1
+	await hacks.edit(str(number) + "`Hacking... % \n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒`")
+	number = number+ 0
+	sleep(0.03)
+	await hacks.edit(str(number) + "`Hacking... % \n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+	number = number+ 4
+	sleep(1)
+	await hacks.edit(str(number) + "`Hacking... % \n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+	number = number+ 8
+	sleep(0.08)
+	await hacks.edit(str(number) + "`Hacking... % \n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+	number = number+ 20
+	sleep(1)
+	await hacks.edit(str(number) + "`Hacking... % \n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+	number = number+ 36
+	sleep(1)
+	await hacks.edit(str(number) + "`Hacking... % \n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `")
+	number = number+ 52
+	sleep(0.08)
+	await hacks.edit(str(number) + "`Hacking... % \n█████████████████████▒▒▒▒ `")
+	number = number+ 84
+	sleep(2)
+	await hacks.edit(str(number) + "`Hacking... % \n█████████████████████████ `")
+	number = number+ 100
+	sleep(3)
+	await hacks.edit("Fetching `msgstore.db`..)
+	sleep(2)
+	await hacks.edit("`Your Whatsapp database was successfully uploaded to Deepweb`)
 
 
 @register(outgoing=True, pattern="^-_-$", ignore_unsafe=True)
