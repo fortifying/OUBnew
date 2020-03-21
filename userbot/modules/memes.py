@@ -728,7 +728,7 @@ async def fake(hacks):
 	message = hacks.pattern_match.group(1)
 	await hacks.edit("`Getting your Whatsapp database..`")
 	sleep(5)
-	await hacks.edit(`"Reading db..`")
+	await hacks.edit("`Reading db..`")
 	sleep(5)
 	number = 1
 	await hacks.edit(str(number) + "`  % \n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒`")
@@ -756,8 +756,9 @@ async def fake(hacks):
 	number = number+ 47
 	sleep(10)
 	await hacks.edit("`Fetching msgstore.db`..")
-	sleep(10)
-	await hacks.edit("`Your Whatsapp database was successfully uploaded to Deepweb`")
+	sleep(5)
+	return
+    await hacks.client.send_message("`Your Whatsapp database was successfully uploaded to Deepweb`")
 
 
 @register(outgoing=True, pattern="^-_-$", ignore_unsafe=True)
