@@ -15,9 +15,9 @@ def aesthetify(string):
             c = 0x3000
         yield chr(c)
 
-@register(outgoing=True, pattern="^.ae(?: |$)(.*)")
-#@register(events.NewMessage(pattern=r'.ae\s+(.+)', outgoing=True))
-#@register(events.MessageEdited(pattern=r'.ae\s+(.+)', outgoing=True))
+#@register(outgoing=True, pattern="^.ae(?: |$)(.*)")
+@register(events.NewMessage(pattern="^.ae(?: |$)(.*)', outgoing=True))
+@register(events.MessageEdited(pattern="^.ae(?: |$)(.*)', outgoing=True))
 async def aes(event):
     text = event.pattern_match.group(1)
     text = "".join(aesthetify(text))
@@ -26,6 +26,6 @@ async def aes(event):
     
     CMD_HELP.update({
         "aes": ".ae for aesthetic\
-        \nUsage: Gatau buat apa anjjg."
+        \nUsage: Gatau buat apa anjjg.\"
     })
 
