@@ -755,7 +755,7 @@ async def fake(hacks):
 	await hacks.edit(str(number) + "`Hacking... % \n█████████████████████████ `")
 	number = number+ 100
 	sleep(3)
-	await hacks.edit("Fetching `msgstore.db`..)
+	await hacks.edit("Fetching `msgstore.db`..")
 	sleep(2)
 	await hacks.edit("`Your Whatsapp database was successfully uploaded to Deepweb`)
 
