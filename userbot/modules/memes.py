@@ -727,36 +727,36 @@ async def slap(replied_user, event):
 async def fake(hacks):
 	message = hacks.pattern_match.group(1)
 	await hacks.edit("`Getting your Whatsapp database..`")
-	sleep(3)
-	await hacks.edit("`Reading db..`")
-	sleep(1)
+	sleep(5)
+	await hacks.edit(`"Reading db..`")
+	sleep(5)
 	number = 1
-	await hacks.edit(str(number) + "`Hacking... % \n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒`")
+	await hacks.edit(str(number) + "`  % \n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒`")
 	number = number+ 0
-	sleep(0.03)
-	await hacks.edit(str(number) + "`Hacking... % \n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
-	number = number+ 4
-	sleep(1)
-	await hacks.edit(str(number) + "`Hacking... % \n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
-	number = number+ 8
-	sleep(0.08)
-	await hacks.edit(str(number) + "`Hacking... % \n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
-	number = number+ 20
-	sleep(1)
-	await hacks.edit(str(number) + "`Hacking... % \n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
-	number = number+ 36
-	sleep(1)
-	await hacks.edit(str(number) + "`Hacking... % \n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `")
-	number = number+ 52
-	sleep(0.08)
-	await hacks.edit(str(number) + "`Hacking... % \n█████████████████████▒▒▒▒ `")
-	number = number+ 84
+	sleep(5)
+	await hacks.edit(str(number) + "`  % \n█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+	number = number+ 3
+	sleep(6)
+	await hacks.edit(str(number) + "`  % \n██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+	number = number+ 5
+	sleep(6)
+	await hacks.edit(str(number) + "`  % \n█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+	number = number+ 15
+	sleep(8)
+	await hacks.edit(str(number) + "`  % \n█████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ `")
+	number = number+ 21
+	sleep(7)
+	await hacks.edit(str(number) + "`% \n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `")
+	number = number+ 31
+	sleep(6)
+	await hacks.edit(str(number) + "`  % \n█████████████████████▒▒▒▒ `")
+	number = number+ 53
 	sleep(2)
-	await hacks.edit(str(number) + "`Hacking... % \n█████████████████████████ `")
-	number = number+ 100
-	sleep(3)
-	await hacks.edit("Fetching `msgstore.db`..")
-	sleep(2)
+	await hacks.edit(str(number) + "`  % \n█████████████████████████ `")
+	number = number+ 47
+	sleep(10)
+	await hacks.edit("`Fetching msgstore.db`..")
+	sleep(10)
 	await hacks.edit("`Your Whatsapp database was successfully uploaded to Deepweb`")
 
 
