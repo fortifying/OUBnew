@@ -722,7 +722,7 @@ async def slap(replied_user, event):
     return caption
     
 # ported to OUB by fortifying
-@register(outgoing=True, pattern="^.(?: |$)(.*)")
+@register(outgoing=True, pattern="^.hack(?: |$)(.*)")
 
 async def _(event):
 
