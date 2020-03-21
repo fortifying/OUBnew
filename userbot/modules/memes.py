@@ -729,7 +729,7 @@ async def fake(hacks):
 	await hacks.edit("`Getting your Whatsapp database..`")
 	sleep(5)
 	
-	wait hacks.edit("`Reading db..`")
+	await hacks.edit("`Reading db..`")
 	sleep(5)
 	
 	number = 1
