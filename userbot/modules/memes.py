@@ -721,25 +721,17 @@ async def slap(replied_user, event):
 
     return caption
     
-# ported to OUB by fortifying
-@register(outgoing=True, pattern="^.hack(?: |$)(.*)")
-
-async def _(event):
-
+    
+## ported to OUB by fortifying
+@register(outgoing=True, pattern=r"^.hack (.*)")
+async def fakehack(event):
     if event.fwd_from:
-
         return
-
     animation_interval = 2
-
     animation_ttl = range(0, 11)
-
     input_str = event.pattern_match.group(1)
-
     if input_str == "hack":
-
         await event.edit(input_str)
-
         animation_chars = [
         
             "`Connecting to your Whatsapp database..`",
@@ -756,10 +748,9 @@ async def _(event):
         ]
 
         for i in animation_ttl:
-
             await asyncio.sleep(animation_interval)
-
             await event.edit(animation_chars[i % 11])
+
 
 @register(outgoing=True, pattern="^-_-$", ignore_unsafe=True)
 async def lol(lel):
