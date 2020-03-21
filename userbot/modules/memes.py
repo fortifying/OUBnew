@@ -1416,7 +1416,7 @@ CMD_HELP.update({
 \n\n.mock\
 \nUsage: Do it and find the real fun.\
 \n\n.hack\
-\nUsage: Do fake hack\
+\nUsage: Do fake hacks\
 \n\n.clap\
 \nUsage: Praise people!\
 \n\n.f <emoji/character>\
