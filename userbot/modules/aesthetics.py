@@ -15,8 +15,8 @@ def aesthetify(string):
             c = 0x3000
         yield chr(c)
 
-#@register(outgoing=True, pattern="^.ae(?: |$)(.*)")
-@register(events.NewMessage(pattern="^.ae(?: |$)(.*), outgoing=True))
+@register(outgoing=True, pattern="^.ae(?: |$)(.*)")
+#@register(events.NewMessage(pattern="^.ae(?: |$)(.*)', outgoing=True))
 @register(events.MessageEdited(pattern="^.ae(?: |$)(.*), outgoing=True))
 async def aes(event):
     text = event.pattern_match.group(1)
