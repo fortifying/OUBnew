@@ -125,12 +125,12 @@ async def amireallyalive(on):
     await on.edit(" Mind if I break your rules? \n"
                      " ---------------------------------------- \n"
                      " __Version info__ \n"    
-                  f"~ Telethon : `v{version.__version__}` \n"
-                  f"~ Python  : `v{python_version()}` \n"
+                  f"~ Telethon : `v 1 doang` \n"
+                  f"~ Python  : `v 1 doang` \n"
                      " ---------------------------------------- \n"
                   f"User : {DEFAULTUSER}  \n"
                      " ---------------------------------------- \n"
-                     "**Fortizer is now Alive! \n**")
+                     "**Netz is now Alive! \n**")
 
 
 @register(outgoing=True, pattern="^.aliveu")
