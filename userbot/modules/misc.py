@@ -79,8 +79,8 @@ async def bot_community(community):
     """ For .community command, just returns OG Paperplane's group link. """
     await community.edit(
         "Join Userbot Indo for help and support: @userbotindo"
-        "\nNote: project OUBnew-fortizer is build based Raphiel'sGang ubot"
-        "OUBnew-fortizer project will improve to latest to make it stable.")
+        "\nNote: project OUBnew-Netz is build based Raphiel'sGang ubot"
+        "OUBnew-Netz project will improve to latest to make it stable.")
 
 
 @register(outgoing=True, pattern="^.support$")
@@ -103,7 +103,7 @@ async def creator(e):
 async def reedme(e):
     await e.edit(
         "Here's something for you to read:\n"
-        "\n[OUBnew-fortizer README.md file](https://github.com/fortifying/OUBnew/blob/sql-extended/README.md)"
+        "\n[OUBnew-Netz README.md file](https://github.com/fortifying/OUBnew/blob/sql-extended/README.md)"
         "\n[Setup Guide - Basic](https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02)"
         "\n[Setup Guide - Google Drive](https://telegra.ph/How-To-Setup-GDrive-11-02)"
         "\n[Setup Guide - LastFM Module](https://telegra.ph/How-to-set-up-LastFM-module-for-Paperplane-userbot-11-02)"
@@ -131,7 +131,7 @@ async def repeat(rep):
 async def repo_is_here(wannasee):
     """ For .repo command, just returns the repo URL. """
     await wannasee.edit(
-        "[Click here](https://github.com/fortifying/OUBnew) to open Fortizers GitHub page."
+        "[Click here](https://github.com/fortifying/OUBnew) to open Netzs GitHub page."
     )
 
 

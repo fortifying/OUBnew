@@ -1,4 +1,4 @@
-# Project OUBnew-Fortizer
+# Project OUBnew-Netz
 
 
 ## A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.
@@ -39,4 +39,4 @@ Join <a href="https://t.me/userbotindocloud">Userbot Indo Cloud</a> Channel for 
 Also join <a href="https://t.me/userbotindo">Userbot INDO🇮🇩</a> Telegram Group for help and support!
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
-<p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Fortizer@HeinzDF Public License</a> - Version 1.c, February 2020</p>
+<p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Netz@HeinzDF Public License</a> - Version 1.c, February 2020</p>

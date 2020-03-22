@@ -109,15 +109,15 @@ async def upstream(ups):
         changelog_str = f'**New UPDATE available for [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`'
         if len(changelog_str) > 4096:
             await ups.edit("`Changelog is too big, view the file to see it.`")
-            file = open("output.txt", "w+")
+            file = open("NetzLOG.txt", "w+")
             file.write(changelog_str)
             file.close()
             await ups.client.send_file(
                 ups.chat_id,
-                "output.txt",
+                "NetzLOG.txt",
                 reply_to=ups.id,
             )
-            remove("output.txt")
+            remove("NetzLOG.txt")
         else:
             await ups.edit(changelog_str)
         await ups.respond('`do \".update now\" to update`')
@@ -127,7 +127,7 @@ async def upstream(ups):
         await ups.edit(
             '`Force-Syncing to latest stable userbot code, please wait...`')
     else:
-        await ups.edit('`Updating Fortizer, please wait....`')
+        await ups.edit('`Updating Netz, please wait....`')
     # We're in a Heroku Dyno, handle it's memez.
     if HEROKU_APIKEY is not None:
         import heroku3
@@ -183,7 +183,7 @@ async def upstream(ups):
         if BOTLOG:
             await ups.client.send_message(
                 BOTLOG_CHATID, "#UPDATE \n"
-                "`Fortizer` was successfully updated")
+                "`Netz` was successfully updated")
 
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]

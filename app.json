@@ -1,6 +1,6 @@
 {
-  "name": "Project OUBnew-Fortizer bot Telegram",
-  "description": "OUB fortizer running on Python 3.8+ with an sqlalchemy database.",
+  "name": "Project OUBnew-Netz bot Telegram",
+  "description": "OUB Netz running on Python 3.8+ with an sqlalchemy database.",
   "logo": "https://telegra.ph/file/2d629aa7377e9129c18c2.jpg",
   "keywords": [
     "telegram",
