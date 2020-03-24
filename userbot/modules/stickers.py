@@ -115,7 +115,7 @@ async def kang(args):
                 while "120" in x.text:
                     pack += 1
                     packname = f"{user.username}{pack}"
-                    packnick = f"@{user.username} fortizers pack {pack}"
+                    packnick = f"@{user.username} dankpack {pack}"
                     await args.edit("`Switching to Pack " + str(pack) +
                                     " due to insufficient space`")
                     await conv.send_message(packname)
