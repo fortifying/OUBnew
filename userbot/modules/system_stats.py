@@ -130,7 +130,7 @@ async def amireallyalive(on):
                      " ---------------------------------------- \n"
                   f"User : {DEFAULTUSER}  \n"
                      " ---------------------------------------- \n"
-                     "**Fortizer is now Alive! \n**")
+                     "**Your Bot is now Alive!**")
 
 
 @register(outgoing=True, pattern="^.aliveu")
