@@ -1,4 +1,4 @@
-from john_hopkins import Covid as JohnHopkinsCovid
+from covid import JohnHopkinsCovid
 from userbot import CMD_HELP
 from userbot.events import register
 
