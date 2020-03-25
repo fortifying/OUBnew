@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 from telethon.utils import get_inner_text
 
 
-logger.info(Config.OPEN_LOAD_LOGIN)
+#logger.info(Config.OPEN_LOAD_LOGIN)
 # https://t.me/RoseSupport/33801
 
 
