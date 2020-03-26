@@ -1,13 +1,19 @@
-from johnhopkins import JohnHopkinsCovid
+# Copyright (C) 2019 The Raphielscape Company LLC.
+#
+# Licensed under the Raphielscape Public License, Version 1.d (the "License");
+# you may not use this file except in compliance with the License.
+#
+# Port to UserBot by @MoveAngel
+
+from covid import Covid
 from userbot import CMD_HELP
 from userbot.events import register
 
-@register(pattern="^.covid(?: |$)(.*)")
+@register(outgoing=True, pattern="^.coronavirus(?: |$)(.*)")
 async def corona(event):
     covid = Covid()
     data = covid.get_data()
-    input_str	 = event.pattern_match.group(1)
-    country = input_str.capitalize()
+    country = event.pattern_match.group(1)
     country_data = get_country_data(country, data)
     output_text = "" 
     for name, value in country_data.items():
@@ -19,8 +25,10 @@ def get_country_data(country, world):
         if country_data["country"] == country:
             return country_data
     return {"Status": "No information yet about this country!"}
-
+    
+    
 CMD_HELP.update({
-        "covid": ".covid <country>\
-        \nUsage: Get info about COVID-19 in countries.\n"
+        "covid": 
+        ".coronavirus <country>\
+          \nUsage: Get an information about data covid-19 in your country.\n"
     })
