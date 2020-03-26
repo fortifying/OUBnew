@@ -5,10 +5,14 @@ bs4
 cowpy
 # cryptg>=0.2
 cffi>=1.0.0
+coffeehouse
 covid
 dnspython
 emoji
 gitpython
+hachoir>=3.0a5
+# heroku
+heroku3=>3.4.0
 google-api-python-client
 google-auth-oauthlib
 googletrans>=2.4.0
@@ -29,6 +33,7 @@ pySmartDL
 python-barcode
 python-dotenv
 PyGithub
+redis=>3.3.10
 youtube-dl
 regex
 pytz
@@ -39,6 +44,7 @@ speedtest-cli>=2.0.2
 sqlalchemy>=1.2
 telethon>=1.10.6
 telethon-session-sqlalchemy>=0.2.6
+TgCrypto=>1.2.0
 urbandict>=0.5
 wikipedia>=1.4.0
 coffeehouse
