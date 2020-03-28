@@ -16,7 +16,7 @@ import sys
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from userbot import CMD_HELP, bot, HEROKU_API_KEY, HEROKU_APP_NAME, UPSTREAM_REPO_URL, HEROKU_MEMEZ
+from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot, HEROKU_API_KEY, HEROKU_APP_NAME, UPSTREAM_REPO_URL
 from userbot.events import register
 
 requirements_path = path.join(
@@ -127,7 +127,7 @@ async def upstream(ups):
         await ups.edit(
             '`Force-Syncing to latest stable userbot code, please wait...`')
     else:
-        await ups.edit('`Updating userbot, please wait....`')
+        await ups.edit('`Updating Fortizer, please wait....`')
     # We're in a Heroku Dyno, handle it's memez.
     if HEROKU_API_KEY is not None:
         import heroku3
@@ -179,6 +179,12 @@ async def upstream(ups):
         reqs_upgrade = await update_requirements()
         await ups.edit('`Successfully Updated!\n'
                        'Bot is restarting... Wait for a second!`')
+
+        if BOTLOG:
+            await ups.client.send_message(
+                BOTLOG_CHATID, "#UPDATE \n"
+                "`Fortizer` was successfully updated")
+
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
         execle(sys.executable, *args, environ)
