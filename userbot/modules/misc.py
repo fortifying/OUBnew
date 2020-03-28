@@ -83,11 +83,9 @@ async def killdabot(event):
 async def bot_community(community):
     """ For .community command, just returns OG Paperplane's group link. """
     await community.edit(
-    await community.edit(
         "Join Userbot Indo for help and support: @userbotindo"
         "\nNote: project OUBnew-fortizer is build based Raphiel'sGang ubot"
         "OUBnew-fortizer project will improve to latest to make it stable.")
-
 
 @register(outgoing=True, pattern="^.support$")
 async def bot_support(wannahelp):
@@ -96,6 +94,9 @@ async def bot_support(wannahelp):
         "Join the Userbot Indo Channel: @userbotindocloud \
         \nJoin the Community Userbot Indo Chat: @userbotindo")
 
+@register(outgoing=True, pattern="^.contributor$")
+async def contributor(e):
+    await e.edit("Check out who [Contribute](https://github.com/fortifying/OUBnew/graphs/contributors) to this bot")
 
 @register(outgoing=True, pattern="^.creator$")
 async def creator(e):
@@ -215,6 +216,10 @@ CMD_HELP.update({
     ".readme\
 \nUsage: Provide links to setup the userbot and it's modules."
 })
+
+CMD_HELP.update(
+    {"creator": ".contributor\
+\nUsage: See who contribute to this program"})
 
 CMD_HELP.update(
     {"creator": ".creator\
