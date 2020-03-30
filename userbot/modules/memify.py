@@ -53,7 +53,7 @@ async def mim(event):
        await event.edit("```Reply to actual users message.```")
        return
     else:
-     await event.edit("```Transfiguration Time! Mwahaha Memifying this image! (」ﾟﾛﾟ)｣ ```")
+     await event.edit("`Memeifying this image.. This would take sometime`")
      await asyncio.sleep(5)
     
     async with bot.conversation("@MemeAutobot") as bot_conv:
@@ -70,7 +70,7 @@ async def mim(event):
           if response.text.startswith("Forward"):
               await event.edit("```can you kindly disable your forward privacy settings for good, Nibba?```")
           if "Okay..." in response.text:
-            await event.edit("```🛑 🤨 NANI?! This is not an image! This will take sum tym to convert to image... UwU 🧐 🛑```")
+            await event.edit("`This is not an image! \nConverting to image...`")
             thumb = None
             if os.path.exists(THUMB_IMAGE_PATH):
                 thumb = THUMB_IMAGE_PATH
