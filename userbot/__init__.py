@@ -69,6 +69,11 @@ GITHUB_ACCESS_TOKEN = os.environ.get("GITHUB_ACCESS_TOKEN", None)
 BOTLOG = sb(os.environ.get("BOTLOG", "False"))
 LOGSPAMMER = sb(os.environ.get("LOGSPAMMER", "False"))
 
+# Genius lyrics get this value from https://genius.com/developers both has same values
+GENIUS_API_TOKEN = os.environ.get("GENIUS", None)
+# Genius lyrics get this value from https://genius.com/developers both has same values
+GENIUS = os.environ.get("GENIUS_API_TOKEN", None)
+
 # Quotes API Token
 QUOTES_API_TOKEN = os.environ.get("QUOTES_API_TOKEN", None)
 
@@ -77,8 +82,8 @@ PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))
 
 # Heroku Credentials for updater.
 HEROKU_MEMEZ = sb(os.environ.get("HEROKU_MEMEZ", "False"))
-HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
-HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
+HEROKU_APPNAME = os.environ.get("HEROKU_APPNAME", None)
+HEROKU_APIKEY = os.environ.get("HEROKU_APIKEY", None)
 
 # Custom (forked) repo URL for updater.
 UPSTREAM_REPO_URL = os.environ.get(
