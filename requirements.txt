@@ -22,7 +22,7 @@ httplib2==0.15.0
 humanize
 lxml
 oauth2client
-Pillow>=5.3.0
+Pillow>=6.0.0
 psycopg2
 psycopg2-binary
 pybase64>=0.4.0
@@ -43,6 +43,7 @@ telethon>=1.10.6
 telethon-session-sqlalchemy>=0.2.6
 urbandict>=0.5
 wikipedia>=1.4.0
+TgCrypto>=1.2.0
 coffeehouse>=2.1.0
 telegraph
 pyfiglet
