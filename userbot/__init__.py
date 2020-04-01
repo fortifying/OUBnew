@@ -93,6 +93,9 @@ UPSTREAM_REPO_URL = os.environ.get(
 # Console verbose logging
 CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 
+# Default .alive name
+ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
+
 # SQL Database URI
 DB_URI = os.environ.get("DATABASE_URL", None)
 
