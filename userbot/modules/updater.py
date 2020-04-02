@@ -1,6 +1,6 @@
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
+# Licensed under the Raphielscape Public License, Version 1.d (the "License");
 # you may not use this file except in compliance with the License.
 # credits to @AvinashReddy3108
 #
@@ -16,7 +16,7 @@ import sys
 from git import Repo
 from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot, HEROKU_API_KEY, HEROKU_APP_NAME, UPSTREAM_REPO_URL
+from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot, HEROKU_API_KEY, HEROKU_APP_NAME, UPSTREAM_REPO_URL, HEROKU_MEMEZ
 from userbot.events import register
 
 requirements_path = path.join(
@@ -183,7 +183,7 @@ async def upstream(ups):
         if BOTLOG:
             await ups.client.send_message(
                 BOTLOG_CHATID, "#UPDATE \n"
-                "`Fortizer` was successfully updated")
+                "`Fortizer was successfully updated`")
 
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
