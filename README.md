@@ -28,6 +28,10 @@
 [![Deploy](https://telegra.ph/file/008d8a88e29bd8ed9ece9.png)](https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended)
 
 
+<p align="center">&nbsp;</p>
+
+## How to setup Google Drive
+[![SetGD](https://telegra.ph/file/fde15d05e4bde3448b01a.png)](https://telegra.ph/How-To-Setup-Google-Drive-04-03)
 
 
 # Updates and Support
@@ -45,4 +49,4 @@ Also join <a href="https://t.me/userbotindo">Userbot INDO🇮🇩</a> Telegram G
 <p align="center"><a href="https://github.com/fortifying/OUBnew/graphs/contributors">Big thanks for Everyone who helped me</a></p>
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
-<p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Fortizer@HeinzDF Public License</a> - Version 1.c, February 2020</p>
+<p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Fortizer@HeinzDF Public License</a> - Version 1.d, March 2020</p>
