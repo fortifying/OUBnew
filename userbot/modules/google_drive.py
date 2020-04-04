@@ -11,6 +11,7 @@ import codecs
 import asyncio
 import math
 import time
+import re
 import binascii
 from os.path import isfile, isdir
 from mimetypes import guess_type
@@ -26,10 +27,10 @@ from googleapiclient.http import MediaFileUpload
 from userbot import (G_DRIVE_CLIENT_ID, G_DRIVE_CLIENT_SECRET,
                      G_DRIVE_AUTH_TOKEN_DATA, BOTLOG_CHATID,
                      TEMP_DOWNLOAD_DIRECTORY, CMD_HELP, LOGS,
-                     )
+                     G_DRIVE_FOLDER_ID)
 from userbot.events import register
 from userbot.modules.upload_download import humanbytes, time_formatter
-
+# =========================================================== #
 #                          STATIC                             #
 # =========================================================== #
 GOOGLE_AUTH_URI = "https://accounts.google.com/o/oauth2/auth"
@@ -39,7 +40,45 @@ SCOPES = [
     "https://www.googleapis.com/auth/drive.metadata"
 ]
 REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob"
-# ============================================================ #
+# =========================================================== #
+#      STATIC CASE FOR G_DRIVE_FOLDER_ID IF VALUE IS URL      #
+# =========================================================== #
+__ = G_DRIVE_FOLDER_ID
+if __ is not None:
+    if "uc?id=" in G_DRIVE_FOLDER_ID:
+        LOGS.info(
+            "G_DRIVE_FOLDER_ID is not a valid folderURL...")
+        G_DRIVE_FOLDER_ID = None
+    try:
+        G_DRIVE_FOLDER_ID = __.split("folders/")[1]
+    except IndexError:
+        try:
+            G_DRIVE_FOLDER_ID = __.split("open?id=")[1]
+        except IndexError:
+            try:
+                if "/view" in __:
+                    G_DRIVE_FOLDER_ID = __.split("/")[-2]
+            except IndexError:
+                try:
+                    G_DRIVE_FOLDER_ID = __.split(
+                                      "folderview?id=")[1]
+                except IndexError:
+                    if any(map(str.isdigit, __)):
+                        _1 = True
+                    else:
+                        _1 = False
+                    if "-" in __ or "_" in __:
+                        _2 = True
+                    else:
+                        _2 = False
+                    if True in [_1 or _2]:
+                        pass
+                    else:
+                        LOGS.info(
+                           "G_DRIVE_FOLDER_ID not valid...")
+# =========================================================== #
+#                                                             #
+# =========================================================== #
 
 
 async def progress(current, total, event, start, type_of_ps, file_name=None):
@@ -63,15 +102,15 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
         if file_name:
             await event.edit(f"{type_of_ps}\n\n"
                              f" • `Name   :` `{file_name}`"
-                             f" • `Status :`\n   {tmp}")
+                             f" • `Status :`\n    {tmp}")
         else:
             await event.edit(f"{type_of_ps}\n\n"
-                             f" • `Status :`\n   {tmp}")
+                             f" • `Status :`\n    {tmp}")
 
 
 async def get_raw_name(file_path):
-    file_name = file_path.split("/")[-1]
-    return file_name
+    """ - Get file_name from file_path - """
+    return file_path.split("/")[-1]
 
 
 async def get_mimeType(name):
@@ -83,20 +122,27 @@ async def get_mimeType(name):
 
 
 @register(pattern="^.gdf (mkdir|rm|chck)(.*)", outgoing=True)
-async def folders(gdrive):
+async def google_drive_managers(gdrive):
     """ - Google Drive folder/file management - """
     await gdrive.edit("`Sending information...`")
     service = await create_app(gdrive)
     f_name = gdrive.pattern_match.group(2).strip()
     exe = gdrive.pattern_match.group(1)
-    """ - Check if given value is file and exists in local - """
-    if isfile(f_name) and exe == "mkdir":
-        return await gdrive.edit("`Failed to send information...`")
     """ - Only if given value are mkdir - """
     metadata = {
         'name': f_name,
         'mimeType': 'application/vnd.google-apps.folder',
     }
+    try:
+        if parent_Id is not None:
+            pass
+    except NameError:
+        """ - Fallback to G_DRIVE_FOLDER_ID else to root dir - """
+        if G_DRIVE_FOLDER_ID is not None:
+            metadata['parents'] = [G_DRIVE_FOLDER_ID]
+    else:
+        """ - Override G_DRIVE_FOLDER_ID because parent_Id not empty - """
+        metadata['parents'] = [parent_Id]
     permission = {
         "role": "reader",
         "type": "anyone",
@@ -213,7 +259,7 @@ async def folders(gdrive):
         if mimeType != "application/vnd.google-apps.folder":
             msg += f" • `Download :` [{f_name}]({downloadURL})\n"
         if description:
-            msg += f" • `About    :`\n   `{description}`"
+            msg += f" • `About    :`\n    `{description}`"
         await gdrive.edit(msg)
     page_token = result.get('nextPageToken', None)
     return
@@ -225,17 +271,23 @@ async def google_drive(gdrive):
     file_path = gdrive.pattern_match.group(1)
     if not file_path and not gdrive.reply_to_msg_id:
         return
+    if not isfile(file_path):
+        return await gdrive.edit(
+            "`[UNKNOWN - ERROR]`\n\n"
+            " • `Status :` **BAD**\n"
+            f" • `Reason :` {file_path} is not a file!."
+        )
+    if isdir(file_path):
+        return await gdrive.edit(
+            "`[FOLDER - ERROR]`\n\n"
+            " • `Status :` **BAD**\n"
+            " • `Reason :` Folder upload not supported."
+        )
     service = await create_app(gdrive)
     if not file_path and gdrive.reply_to_msg_id:
         return await download(gdrive, service)
     mimeType = await get_mimeType(file_path)
     file_name = await get_raw_name(file_path)
-    if isdir(file_path):
-        return await gdrive.edit(
-            "`[FOLDER - ERROR]`\n\n"
-            " • `Status :` **BAD**\n"
-            " • `Reason :` `Folder upload not supported"
-        )
     viewURL, downloadURL = await upload(
                          gdrive, service, file_path, file_name, mimeType)
     if viewURL and downloadURL:
@@ -253,6 +305,7 @@ async def download(gdrive, service, file_path=None, file_name=None, url=None):
     """ - Download files to local then upload - """
     if not isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
+        required_file_name = None
     if file_path is None and file_name is None and url is None:
         try:
             current_time = time.time()
@@ -265,8 +318,9 @@ async def download(gdrive, service, file_path=None, file_name=None, url=None):
         except Exception as e:
             await gdrive.edit(str(e))
         else:
-            file_name = await get_raw_name(downloaded_file_name)
-            mimeType = await get_mimeType(downloaded_file_name)
+            required_file_name = downloaded_file_name
+            file_name = await get_raw_name(required_file_name)
+            mimeType = await get_mimeType(required_file_name)
             await gdrive.edit(
                 f"`[FILE - DOWNLOAD]`\n\n"
                 f" • `Name   :` `{file_name}`\n"
@@ -275,7 +329,7 @@ async def download(gdrive, service, file_path=None, file_name=None, url=None):
                 "Initiating Upload to Google Drive..."
             )
             try:
-                result = await upload(gdrive, service, downloaded_file_name,
+                result = await upload(gdrive, service, required_file_name,
                                       file_name, mimeType)
                 await gdrive.edit(
                     "`[FILE - DOWNLOAD]`\n\n"
@@ -290,7 +344,7 @@ async def download(gdrive, service, file_path=None, file_name=None, url=None):
                     f" • `Name   :` `{file_name}`\n"
                     " • `Status :` **BAD**\n"
                     f" • `Reason :` failed to upload.\n"
-                    f"   `{str(e)}`"
+                    f"    `{str(e)}`"
                 )
     return
 
@@ -302,6 +356,16 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
         "description": "Uploaded from Telegram using ProjectBish userbot.",
         "mimeType": mimeType,
     }
+    try:
+        if parent_Id is not None:
+            pass
+    except NameError:
+        """ - Fallback to G_DRIVE_FOLDER_ID else root dir - """
+        if G_DRIVE_FOLDER_ID is not None:
+            body['parents'] = [G_DRIVE_FOLDER_ID]
+    else:
+        """ - Override G_DRIVE_FOLDER_ID because parent_Id not empty - """
+        body['parents'] = [parent_Id]
     permission = {
         "role": "reader",
         "type": "anyone",
@@ -332,7 +396,7 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
                 "`[FILE - UPLOAD]`\n\n"
                 f" • `Name   :` `{file_name}`\n"
                 " • `Status :`\n"
-                f"   {prog_str}"
+                f"    {prog_str}"
             )
             if display_message != current_message:
                 try:
@@ -349,6 +413,87 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
     except HttpError as e:
         return await gdrive.edit("`" + str(e) + "`")
     return viewURL, downloadURL
+
+
+@register(pattern="^.gdfset (put|rm)(?: |$)(.*)", outgoing=True)
+async def set_upload_folder(gdrive):
+    """ - Set parents dir for upload/check/makedir/remove - """
+    await gdrive.edit("`Sending information...`")
+    global parent_Id
+    exe = gdrive.pattern_match.group(1)
+    if exe == "rm":
+        if G_DRIVE_FOLDER_ID is not None:
+            parent_Id = G_DRIVE_FOLDER_ID
+            return await gdrive.edit(
+                "`[FOLDER - SET]`\n\n"
+                " • `Status :` **OK**\n"
+                " • `Reason :` upload will use `G_DRIVE_FOLDER_ID`,\n"
+                "    as parentId for next."
+            )
+        else:
+            parent_Id = None
+            return await gdrive.edit(
+                "`[FOLDER - SET]`\n\n"
+                " • `Status :` **OK**\n"
+                " • `Reason :` `G_DRIVE_FOLDER_ID` is empty,\n"
+                "    upload will use root dir.")
+    inp = gdrive.pattern_match.group(2)
+    if not inp:
+        return await gdrive.edit(">`.gdfset put <folderURL/folderID>`")
+    """ - Value for .gdfset (put|rm) can be folderId or folder link - """
+    try:
+        ext_id = re.findall(r'\bhttps?://drive\.google\.com\S+', inp)[0]
+    except IndexError:
+        """ - if given value isn't folderURL assume it's an Id - """
+        if any(map(str.isdigit, inp)):
+            c1 = True
+        else:
+            c1 = False
+        if "-" in inp or "_" in inp:
+            c2 = True
+        else:
+            c2 = False
+        if True in [c1 or c2]:
+            parent_Id = inp
+            await gdrive.edit(
+                "`[PARENT - FOLDER]`\n\n"
+                " • `Status :` **OK**\n"
+                " • `Reason :` Successfully changed."
+            )
+        parent_Id = inp
+    else:
+        if "uc?id=" in ext_id:
+            return await gdrive.edit(
+                "`[URL - ERROR]`\n\n"
+                " • `Status :` **BAD**\n"
+                " • `Reason :` Not a valid folderURL"
+            )
+        try:
+            parent_Id = ext_id.split("folders/")[1]
+        except IndexError:
+            """ - Try catch again if URL open?id= - """
+            try:
+                parent_Id = ext_id.split("open?id=")[1]
+            except IndexError:
+                try:
+                    if "/view" in ext_id:
+                        parent_Id = ext_id.split("/")[-2]
+                except IndexError:
+                    """ - Last attemp to catch - """
+                    try:
+                        parent_Id = ext_id.split("folderview?id=")[1]
+                    except IndexError:
+                        return await gdrive.edit(
+                            "`[URL - ERROR]`\n\n"
+                            " • `Status :` **BAD**\n"
+                            " • `Reason :` Not a valid folderURL or empty"
+                        )
+        await gdrive.edit(
+                "`[PARENT - FOLDER]`\n\n"
+                " • `Status :` **OK**\n"
+                " • `Reason :` Successfully changed."
+        )
+    return parent_Id
 
 
 async def generate_credentials(gdrive):
@@ -379,13 +524,13 @@ async def generate_credentials(gdrive):
             "`[TOKEN - ERROR]`\n\n"
             " • `Status :` **BAD**\n"
             " • `Reason :` Invalid credentials or token data\n"
-            f"   -> `{str(e)}`\n\n"
+            f"    -> `{str(e)}`\n\n"
             "`if you copy paste from 'auth.txt' file and still error "
             "try use MiXplorer file manager and open as code editor or "
             "if you don't want to download just run command`\n"
-            ">`term cat auth.txt`\n"
+            ">`.term cat auth.txt`\n"
             "Cp and paste to `G_DRIVE_AUTH_TOKEN_DATA` heroku ConfigVars or\n"
-            ">`set var G_DRIVE_AUTH_TOKEN_DATA <token you get>`\n\n"
+            ">`.set var G_DRIVE_AUTH_TOKEN_DATA <token you get>`\n\n"
             "Or if you still have value from old module remove it first!, "
             "because my module use v3 api while the old is using v2 api...\n"
             ">`.del var G_DRIVE_AUTH_TOKEN_DATA` to delete the old token data."
@@ -395,10 +540,6 @@ async def generate_credentials(gdrive):
             await gdrive.edit("`Refreshing credentials...`")
             """ - Refresh credentials - """
             creds.refresh(Request())
-            with open("auth.txt", "w") as token:
-                pickled = codecs.encode(
-                        pickle.dumps(creds), "base64").decode()
-                token.write(pickled)
         else:
             """ - Create credentials - """
             await gdrive.edit("`Creating credentials...`")
@@ -407,7 +548,8 @@ async def generate_credentials(gdrive):
             auth_url, _ = flow.authorization_url(
                         access_type='offline', prompt='consent')
             msg = await gdrive.respond(
-                "`Go to your BOTLOG chat to authenticate` **G_DRIVE_AUTH_TOKEN_DATA**"
+                "`Go to your BOTLOG chat to authenticate`"
+                " **G_DRIVE_AUTH_TOKEN_DATA**"
             )
             async with gdrive.client.conversation(BOTLOG_CHATID) as conv:
                 await conv.send_message(
@@ -420,7 +562,7 @@ async def generate_credentials(gdrive):
                 code = r.message.message.strip()
                 flow.fetch_token(code=code)
                 creds = flow.credentials
-            await msg.delete()
+                await gdrive.client.delete_messages(gdrive.chat_id, msg.id)
             """ - Unpack credential objects into strings - """
             if G_DRIVE_AUTH_TOKEN_DATA is None:
                 with open("auth.txt", "w") as f:
@@ -432,7 +574,7 @@ async def generate_credentials(gdrive):
                 BOTLOG_CHATID, "auth.txt",
                 caption=("This is your `G_DRIVE_AUTH_TOKEN_DATA`, "
                          "open then copy and paste to your heroku ConfigVars, "
-                         "or you can do\n>`.set var G_DRIVE_AUTH_TOKEN_DATA "
+                         "or do:\n>`.set var G_DRIVE_AUTH_TOKEN_DATA "
                          "<value inside auth.txt>`")
             )
             msg = await gdrive.respond(
@@ -443,7 +585,7 @@ async def generate_credentials(gdrive):
                 " to your heroku app ConfigVars.` **G_DRIVE_AUTH_TOKEN_DATA**"
             )
             await asyncio.sleep(3.5)
-            await msg.delete()
+            await gdrive.client.delete_messages(gdrive.chat_id, msg.id)
     return creds
 
 
@@ -459,10 +601,15 @@ CMD_HELP.update({
     ">.`gd`"
     "\nUsage: Upload file into google drive"
     "\n\n>`.gdf mkdir <folder name>`"
-    "\nUsage: create google drive folder"
+    "\nUsage: create google drive folder."
     "\n\n>`.gdf chck <folder/file|name/id>`"
-    "\nUsage: check given value is exist or no"
+    "\nUsage: check given value is exist or not."
     "\n\n>`.gdf rm <folder/file|name/id>`"
     "\nUsage: delete a file/folder, and can't be undone"
     "\nThis method skipping file trash, so be caution..."
+    "\n\n>`.gdfset put <folderURL/folderID>`"
+    "\nUsage: change upload directory."
+    "\n\n>`.gdfset rm`"
+    "\nUsage: remove set parentId from\n>`.gdfset put <value>` "
+    "to **G_DRIVE_FOLDER_ID** and if empty upload will go to root."
 })
