@@ -122,7 +122,7 @@ async def pipcheck(pip):
 @register(outgoing=True, pattern=r"^\.(?:live|on)\s?(.)?")
 async def amireallyalive(on):
     """ For .on or .alive command, check if the bot is running.  """
-    await on.edit("`{DEFAULTUSER}@heroku` \n"
+    await on.edit("`azure7-heroku@phoenix` \n"
                      " ---------------------------------------- \n"
                      "`Phoenix Version info` \n"    
                   f"T: `v{version.__version__}` \n"
