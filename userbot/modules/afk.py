@@ -163,7 +163,7 @@ async def mention_afk(mention):
                 afk_since = f"`({int(seconds)}s` ago)"
             if mention.sender_id not in USERS:
                 if AFKREASON:
-                    await mention.reply(f"My mastor is not here for a while since {afk_since}.\
+                    await mention.reply(f"**My mastor is not here for a while since** {afk_since}.\
                         \nReason: `{AFKREASON}`")
                 else:
                     await mention.reply(str(choice(AFKSTR)))
@@ -172,8 +172,9 @@ async def mention_afk(mention):
             elif mention.sender_id in USERS:
                 if USERS[mention.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
-                        await mention.reply(f"I'm still AFK since {afk_since}.\
-                            \nReason: `{AFKREASON}`")
+                        await mention.reply(f"**As I said, my Mastor is not online since {afk_since}.\
+                        \nLeave your Message here and I'll go back soon..**
+                            \nAFK Reason: `{AFKREASON}`")
                     else:
                         await mention.reply(str(choice(AFKSTR)))
                     USERS[mention.sender_id] = USERS[mention.sender_id] + 1
