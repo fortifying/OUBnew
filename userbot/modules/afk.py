@@ -173,7 +173,7 @@ async def mention_afk(mention):
                 if USERS[mention.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
                         await mention.reply(f"**As I said, my Mastor is not online since {afk_since}.\
-                        \nLeave your Message here and I'll go back soon..**
+                        \nLeave your Message here and I'll go back soon..** \
                             \nAFK Reason: `{AFKREASON}`")
                     else:
                         await mention.reply(str(choice(AFKSTR)))
