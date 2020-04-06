@@ -29,7 +29,7 @@
 ## NOT THE BEST ONE, BUT HERE YOU GO
 
 ## Easy way to deploy
-[![Deploy](https://telegra.ph/file/008d8a88e29bd8ed9ece9.png)](https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/phoenix)
+[![Deploy](https://telegra.ph/file/008d8a88e29bd8ed9ece9.png)](https://telegra.ph/Heinz-04-06)
 
 
 <p align="center">&nbsp;</p>
