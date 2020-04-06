@@ -178,9 +178,9 @@ async def terminal_runner(term):
         return
 
     if uid == 0:
-        await term.edit("`" f"{curruser}:~# {command}" f"\n{result}" "`")
+        await term.edit("`" f"azure7@phoenix:~# {command}" f"\n{result}" "`")
     else:
-        await term.edit("`" f"{curruser}:~$ {command}" f"\n{result}" "`")
+        await term.edit("`" f"azure7@phoenix:~$ {command}" f"\n{result}" "`")
 
     if BOTLOG:
         await term.client.send_message(
