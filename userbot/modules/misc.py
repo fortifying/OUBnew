@@ -60,7 +60,7 @@ async def sleepybot(time):
 async def killdabot(event):
 	""" For .shutdown command, shut the bot down."""
 	await event.edit("`Shutting down` **⬢ {DEFAULTUSER}** ..")
-    if BOTLOG:
+	if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
                                         "Bot shut down")
     await bot.disconnect()
