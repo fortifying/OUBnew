@@ -58,9 +58,9 @@ async def sleepybot(time):
 
 @register(outgoing=True, pattern="^.shutdown$")
 async def killdabot(event):
-	""" For .shutdown command, shut the bot down."""
-	await event.edit("`Shutting down` **⬢ {DEFAULTUSER}** ..")
-	if BOTLOG:
+    """ For .shutdown command, shut the bot down."""
+    await event.edit("`Shutting down` **⬢ {DEFAULTUSER} ** ..")
+    if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
                                         "Bot shut down")
     await bot.disconnect()
@@ -71,7 +71,7 @@ async def killdabot(event):
     await event.edit("`Restarting` **⬢ {DEFAULTUSER}** ..")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#RESTART \n"
-                                        "**⬢ {DEFAULTUSER}** Restarted")
+                                        "Bot Restarted")
     await bot.disconnect()
     # Spin a new instance of bot
     execl(sys.executable, sys.executable, *sys.argv)
@@ -81,7 +81,7 @@ async def killdabot(event):
 
 @register(outgoing=True, pattern="^.community$")
 async def bot_community(community):
-    """ For .community command, just returns UserbotIndo group link. """
+    """ For .community command, just returns OG Paperplane's group link. """
     await community.edit(
         "Join Userbot Indo for help and support: @userbotindo"
         "\nNote: project OUBnew-fortizer is build based Raphiel'sGang"
@@ -98,16 +98,16 @@ async def bot_support(wannahelp):
 async def contributor(e):
     await e.edit("Check out who [Contribute](https://github.com/fortifying/OUBnew/graphs/contributors) to this bot")
 
-@register(outgoing=True, pattern="^.maintainer$")
+@register(outgoing=True, pattern="^.creator$")
 async def creator(e):
-    await e.edit("[HeinzDF](https://t.me/fortifying)")
+    await e.edit("[Heinz Der Flugel](https://t.me/fortifying)")
 
 
 @register(outgoing=True, pattern="^.readme$")
 async def reedme(e):
     await e.edit(
         "Here's something for you to read:\n"
-        "\n[OUBnew-fortizer README.md file](https://github.com/fortifying/OUBnew/blob/sql-extenxed/README.md)"
+        "\n[OUBnew-fortizer README.md file](https://github.com/fortifying/OUBnew/blob/phoenix/README.md)"
         "\n[Setup Guide - Basic](https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02)"
         "\n[Setup Guide - Google Drive](https://telegra.ph/How-To-Setup-Google-Drive-04-03)"
         "\n[Setup Guide - LastFM Module](https://telegra.ph/How-to-set-up-LastFM-module-for-Paperplane-userbot-11-02)"
@@ -143,7 +143,7 @@ async def repo_is_here(wannasee):
 async def myrepo_is_here(wannaseeme):
     """ For .myrepo command, just returns the repo URL. """
     await wannaseeme.edit(
-        f'Click [here](https://github.com/{GIT_REPO_NAME}/tree/sql-extenxed/) to open {DEFAULTUSER}`s GitHub page'
+        f'Click [here](https://github.com/{GIT_REPO_NAME}/tree/phoenix/) to open {DEFAULTUSER}`s GitHub page'
     )
 
 @register(outgoing=True, pattern="^.raw$")
@@ -222,8 +222,8 @@ CMD_HELP.update(
 \nUsage: See who contribute to this program"})
 
 CMD_HELP.update(
-    {"creator": ".creator\
-\nUsage: Know who created this awesome userbot !!"})
+    {"creator": ".maintain\
+\nUsage: Know who maintain this awesome userbot !!"})
 
 CMD_HELP.update({
     "repeat":
