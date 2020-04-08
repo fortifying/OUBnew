@@ -59,7 +59,7 @@ async def sleepybot(time):
 @register(outgoing=True, pattern="^.shutdown$")
 async def killdabot(event):
     """ For .shutdown command, shut the bot down."""
-    await event.edit("`Goodbye *Windows XP shutdown sound*....`")
+    await event.edit("`Shutting down` **⬢{DEFAULTUSER}**")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
                                         "Bot shut down")
@@ -68,10 +68,10 @@ async def killdabot(event):
 
 @register(outgoing=True, pattern="^.restart$")
 async def killdabot(event):
-    await event.edit("`*i would be back in a moment*`")
+    await event.edit("`Restarting` **⬢ {DEFAULTUSER}**..")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#RESTART \n"
-                                        "Bot Restarted")
+                                        "**⬢ {DEFAULTUSER}** Restarted")
     await bot.disconnect()
     # Spin a new instance of bot
     execl(sys.executable, sys.executable, *sys.argv)
@@ -81,10 +81,10 @@ async def killdabot(event):
 
 @register(outgoing=True, pattern="^.community$")
 async def bot_community(community):
-    """ For .community command, just returns OG Paperplane's group link. """
+    """ For .community command, just returns UserbotIndo group link. """
     await community.edit(
         "Join Userbot Indo for help and support: @userbotindo"
-        "\nNote: project OUBnew-fortizer is build based Raphiel'sGang ubot"
+        "\nNote: project OUBnew-fortizer is build based Raphiel'sGang"
         "OUBnew-fortizer project will improve to latest to make it stable.")
 
 @register(outgoing=True, pattern="^.support$")
@@ -98,18 +98,18 @@ async def bot_support(wannahelp):
 async def contributor(e):
     await e.edit("Check out who [Contribute](https://github.com/fortifying/OUBnew/graphs/contributors) to this bot")
 
-@register(outgoing=True, pattern="^.creator$")
+@register(outgoing=True, pattern="^.maintainer$")
 async def creator(e):
-    await e.edit("[TeKnoways](https://t.me/Three_Cube_TeKnoways)")
+    await e.edit("[HeinzDF](https://t.me/fortifying)")
 
 
 @register(outgoing=True, pattern="^.readme$")
 async def reedme(e):
     await e.edit(
         "Here's something for you to read:\n"
-        "\n[OUBnew-fortizer README.md file](https://github.com/fortifying/OUBnew/blob/sql-extended/README.md)"
+        "\n[OUBnew-fortizer README.md file](https://github.com/fortifying/OUBnew/blob/sql-extenxed/README.md)"
         "\n[Setup Guide - Basic](https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02)"
-        "\n[Setup Guide - Google Drive](https://telegra.ph/How-To-Setup-GDrive-11-02)"
+        "\n[Setup Guide - Google Drive](https://telegra.ph/How-To-Setup-Google-Drive-04-03)"
         "\n[Setup Guide - LastFM Module](https://telegra.ph/How-to-set-up-LastFM-module-for-Paperplane-userbot-11-02)"
         "\n[Video Tutorial - 576p](https://mega.nz/#!ErwCESbJ!1ZvYAKdTEfb6y1FnqqiLhHH9vZg4UB2QZNYL9fbQ9vs)"
         "\n[Video Tutorial - 1080p](https://mega.nz/#!x3JVhYwR!u7Uj0nvD8_CyyARrdKrFqlZEBFTnSVEiqts36HBMr-o)"
@@ -143,7 +143,7 @@ async def repo_is_here(wannasee):
 async def myrepo_is_here(wannaseeme):
     """ For .myrepo command, just returns the repo URL. """
     await wannaseeme.edit(
-        f'Click [here](https://github.com/{GIT_REPO_NAME}/tree/sql-extended/) to open {DEFAULTUSER}`s GitHub page'
+        f'Click [here](https://github.com/{GIT_REPO_NAME}/tree/sql-extenxed/) to open {DEFAULTUSER}`s GitHub page'
     )
 
 @register(outgoing=True, pattern="^.raw$")
