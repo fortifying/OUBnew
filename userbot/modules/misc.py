@@ -59,9 +59,9 @@ async def sleepybot(time):
 @register(outgoing=True, pattern="^.shutdown$")
 async def killdabot(event):
 	    """ For .shutdown command, shut the bot down."""
-	global DEFAULTUSER
-	DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
     await event.edit("`Shutting down` **⬢{DEFAULTUSER}**")
+    global DEFAULTUSER
+	DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
                                         "Bot shut down")
