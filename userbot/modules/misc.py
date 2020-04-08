@@ -58,23 +58,23 @@ async def sleepybot(time):
 
 @register(outgoing=True, pattern="^.shutdown$")
 async def killdabot(event):
-	global DEFAULTUSER
-	DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 	await event.edit("`Shutting down` **⬢{DEFAULTUSER}**..")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
                                         "Bot shut down")
+    global DEFAULTUSER
+	DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
     await bot.disconnect()
 
 
 @register(outgoing=True, pattern="^.restart$")
 async def killdabot(event):
-	global DEFAULTUSER
-	DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
     await event.edit("`Restarting` **⬢{DEFAULTUSER}**..")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#RESTART \n"
                                         "**⬢ {DEFAULTUSER}** Restarted")
+    global DEFAULTUSER
+	DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
     await bot.disconnect()
     # Spin a new instance of bot
     execl(sys.executable, sys.executable, *sys.argv)
