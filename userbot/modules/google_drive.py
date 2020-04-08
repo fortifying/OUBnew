@@ -1,7 +1,6 @@
 # Copyright (C) 2019 Adek Maulana
 #
-# Ported and add more features from my script inside build-kernel.py
-""" - ProjectBish Google Drive managers - """
+""" - OUBnew Google Drive managers - """
 import os
 import pickle
 import codecs
