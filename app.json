@@ -175,6 +175,22 @@
       "description": "Set the default city for the userbot's weather module.",
       "required": false
     },
+    "GITHUB_ACCESS_TOKEN": {
+      "description": "Set this in order to make the gitupload work. you can look https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line to assist you.",
+      "required": false
+    },
+    "GENIUS_API_TOKEN": {
+      "description": "Get this value from https://genius.com/developers.",
+      "required": false 
+    },
+    "QUOTES_API_TOKEN": {
+      "description": "enhance chat to sticker like quotly. Get this API from http://antiddos.systems.",
+      "required": false
+    },
+    "TERM_ALIAS": {
+      "description": "set alias name for term cmd",
+      "required": false
+    },  	
     "LOGSPAMMER": {
       "description": "Set this to True in case you want the error logs to be stored in the userbot log group, instead of spitting out the file in the current chat, requires a valid BOTLOG_CHATID to be set.",
       "value": "True"
