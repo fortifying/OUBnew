@@ -19,6 +19,9 @@ from userbot.events import register
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 # ============================================
 
+MODULESTR = [
+    "0"
+]
 
 @register(outgoing=True, pattern="^.sysd$")
 async def sysdetails(sysd):
@@ -128,7 +131,8 @@ async def amireallyalive(on):
                   f"Telethon: `v{version.__version__}` \n"
                   f"Python: `v{python_version()}` \n"
                      " ---------------------------------------- \n\n"
-                     "`All modules  loaded with (0) errors`")
+                     "User:` {DEFAULTUSER}`\n"
+                     "`All modules  loaded with (MODULESTR) errors`")
 
 
 @register(outgoing=True, pattern="^.aliveu")
