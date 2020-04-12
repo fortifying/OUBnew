@@ -123,16 +123,16 @@ async def pipcheck(pip):
 
 
 @register(outgoing=True, pattern=r"^\.(?:live|on)\s?(.)?")
-async def amireallyalive(on):
-    """ For .on or .alive command, check if the bot is running.  """
-    await on.edit("`running on` __sql-extended__ \n"
-                     " ---------------------------------------- \n"
-                     "`Bot Version info` \n"    
-                  f"Telethon: `v{version.__version__}` \n"
-                  f"Python: `v{python_version()}` \n"
-                     " ---------------------------------------- \n\n"
-                     "`User: `{DEFAULTUSER} \n"
-                     "All modules  loaded with (MODULESTR) errors")
+async def amireallyalive(alive):
+    """ For .alive command, check if the bot is running.  """
+    await alive.edit("running on `sql-extended`\n"  
+                     "----------------------------------------\n"    
+                     "`Bot Version Info`"
+                  f"`Telethon : v{version.__version__} `\n"
+                  f"`Python  : v{python_version()} `\n"
+                     "----------------------------------------\n"
+                  f"`User : `{DEFAULTUSER} \n\n"
+                   "`All modules loaded with (0) errors`")
 
 
 @register(outgoing=True, pattern="^.aliveu")
