@@ -131,8 +131,8 @@ async def amireallyalive(on):
                   f"Telethon: `v{version.__version__}` \n"
                   f"Python: `v{python_version()}` \n"
                      " ---------------------------------------- \n\n"
-                     "User:` {DEFAULTUSER}`\n"
-                     "`All modules  loaded with (MODULESTR) errors`")
+                     "`User: `{DEFAULTUSER} \n"
+                     "All modules  loaded with (MODULESTR) errors")
 
 
 @register(outgoing=True, pattern="^.aliveu")
