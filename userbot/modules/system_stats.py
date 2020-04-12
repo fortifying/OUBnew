@@ -127,7 +127,7 @@ async def amireallyalive(alive):
     """ For .alive command, check if the bot is running.  """
     await alive.edit("running on `sql-extended`\n"  
                      "----------------------------------------\n"    
-                     "`Bot Version Info`"
+                     "`Bot Version Info` \n"
                   f"`Telethon : v{version.__version__} `\n"
                   f"`Python  : v{python_version()} `\n"
                      "----------------------------------------\n"
