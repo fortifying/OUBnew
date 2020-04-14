@@ -90,6 +90,16 @@ async def variable(var):
         await asyncio.sleep(1.5)
         if variable in heroku_var:
             await var.edit(f"**{variable}**  `successfully deleted`")
+            await var.edit(f"**{variable}** `successfully deleted`.")
+            if BOTLOG:
+                await var.client.send_message(
+                    BOTLOG_CHATID, "#DELCONFIGVAR\n\n"
+                    "**Delete ConfigVar**:\n"
+                    " -> `Config Variable`:\n"
+                    f"     • `{variable}`\n\n"
+                    "`Successfully deleted...`"
+                )
+            await var.edit("`Information deleted...`")
             del heroku_var[variable]
         else:
             return await var.edit(f"**{variable}**  `is not exists`")
