@@ -159,8 +159,8 @@
       "description": "Name to show in .alive message",
       "required": false
     },
-    "G_DRIVE_CLIENT_SECRET": {
-      "description": "Enter Your Client Secret for Google Drive.",
+    "G_DRIVE_DATA": {
+      "description": "Your client_secret.json.",
       "required": false
     },
     "G_DRIVE_AUTH_TOKEN_DATA": {
