@@ -58,6 +58,16 @@ async def variable(var):
                         reply_to=var.id,
                         caption="`Output too large, sending it as a file`.",
                     )
+            app.scale_formation_process("worker", 1)
+            text = f"`Starting` ⬢**{HEROKU_APP_NAME}**"
+            sleep = 1
+            dot = "."
+            await dyno.edit(text)
+            while (sleep <= 24):
+                await dyno.edit(text + f"`{dot}`")
+                await asyncio.sleep(1)
+                if len(dot) == 3:
+                    dot = "."
                 else:
                     await var.edit("`[HEROKU]` ConfigVars:\n\n"
                                    "================================"
@@ -103,6 +113,50 @@ async def variable(var):
             del heroku_var[variable]
         else:
             return await var.edit(f"**{variable}** `is not exists`.")
+            text = f"`Restarting` ⬢**{HEROKU_APP_NAME}**"
+            Dyno.restart()
+            sleep = 1
+            dot = "."
+            await dyno.edit(text)
+            while (sleep <= 24):
+                await dyno.edit(text + f"`{dot}`")
+                await asyncio.sleep(1)
+                if len(dot) == 3:
+                    dot = "."
+                else:
+                    dot += "."
+                sleep += 1
+            await dyno.respond(f"⬢**{HEROKU_APP_NAME}** `restarted...`")
+            return await dyno.delete()
+    elif exe == "shutdown":
+        """ - Complete shutdown - """
+        app.scale_formation_process("worker", 0)
+        text = f"`Shutdown` ⬢**{HEROKU_APP_NAME}**"
+        sleep = 1
+        dot = "."
+        while (sleep <= 3):
+            await dyno.edit(text + f"`{dot}`")
+            dot += "."
+            sleep += 1
+        await dyno.respond(f"⬢**{HEROKU_APP_NAME}** `turned off...`")
+        return await dyno.delete()
+    elif exe == "usage":
+        """ - Get your account Dyno Usage - """
+        await dyno.edit("`Getting information...`")
+        user_id = Heroku.account().id
+        headers = {
+            'User-Agent': useragent,
+            'Authorization': f'Bearer {HEROKU_API_KEY}',
+            'Accept': 'application/vnd.heroku+json; version=3.account-quotas',
+        }
+        path = "/accounts/" + user_id + "/actions/get-quota"
+        r = requests.get(heroku_api + path, headers=headers)
+        if r.status_code != 200:
+            return await dyno.edit("`Error: something bad happened`\n\n"
+                                   f">.`{r.reason}`\n")
+        result = r.json()
+        quota = result['account_quota']
+        quota_used = result['quota_used']
 
 
 @register(outgoing=True, pattern=r"^.usage(?: |$)")
@@ -175,3 +229,45 @@ CMD_HELP.update({
     "\nUsage: delete existing variable"
     "\n!!! WARNING !!!, after deleting variable the bot will restarted"
 })
+        """ - Used per/App Usage - """
+        Apps = result['apps']
+        msg = "**Dyno Usage Applications**:\n\n"
+        for App in Apps:
+            try:
+                AppQuota = App['quota_used']
+                AppQuotaUsed = AppQuota / 60
+                AppPercentage = math.floor(AppQuota * 100 / quota)
+            except IndexError:
+                AppQuotaUsed = 0
+                AppPercentage = 0
+            finally:
+                AppHours = math.floor(AppQuotaUsed / 60)
+                AppMinutes = math.floor(AppQuotaUsed % 60)
+                msg += (
+                    f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
+                    f"**|**  [`{AppPercentage}`**%**]\n"
+                )
+        if not msg:
+            msg = (" -> `No quota used for any of your Apps`:\n")
+            for App in Heroku.apps():
+                msg += f"     •  ⬢**{App.name}**.\n"
+        return await dyno.edit(
+            f"{msg}\n"
+            " -> `Dyno hours quota remaining this month`:\n"
+            f"     •  `{hours}`**h**  `{minutes}`**m**  "
+            f"**|**  [`{percentage}`**%**]"
+        )
+    elif exe == "help":
+        return await dyno.edit(
+            ">`.dyno usage`"
+            "\nUsage: Check your heroku App usage dyno quota."
+            "\nIf one of your app usage is empty, it won't be write in output."
+            "\n\n>`.dyno on`"
+            "\nUsage: Restart your dyno application, turn it on if off."
+            "\n\n>`.dyno restart`"
+            "\nUsage: Restart your dyno application, turn it on if off."
+            "\n\n>`.dyno shutdown`"
+            "\nUsage: Shutdown dyno completly."
+            "\n\n>`.dyno help`"
+            "\nUsage: print this help."
+        )
