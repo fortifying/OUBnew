@@ -616,10 +616,7 @@ async def tagaso(event):
         mentions += f"[\u2063](tg://user?id={user.id})"
     await bot.send_message(
         chat, mentions, reply_to=event.message.reply_to_msg_id)
-<<<<<<< HEAD
-=======
 
->>>>>>> bc6b43d... admin: add tag all cmd
 
 
 @register(outgoing=True, pattern="^.admins(?: |$)(.*)")
