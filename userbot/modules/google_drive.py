@@ -439,7 +439,7 @@ async def upload(gdrive, service, file_path, file_name, mimeType):
     await gdrive.edit("`Processing upload...`")
     body = {
         "name": file_name,
-        "description": "Uploaded from Telegram using ProjectBish userbot.",
+        "description": "Uploaded from Telegram using `sql-extended`.",
         "mimeType": mimeType,
     }
     try:
