@@ -169,3 +169,4 @@ CMD_HELP.update({
      \nUsage : Get latest recovery MIUI\
 \n\n.of (codename)\
      \nUsage : Get latest ORangeFox Recovery"})
+     \nUsage : Get latest ORangeFox Recovery"})
