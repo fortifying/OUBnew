@@ -637,18 +637,15 @@ async def set_upload_folder(gdrive):
 
 CMD_HELP.update({
     "gdrive":
-<<<<<<< HEAD
     ".gd"
     "\nUsage: Upload file from local or uri into google drive."
     "\n\n.gdf mkdir <folder name>"
-=======
     ">`.gdauth`"
     "\nUsage: generate token to enable all cmd google drive service."
     "\nThis only need to run once in life time."
     "\n\n>.`gd`"
     "\nUsage: Upload file from local or uri/url into google drive."
     "\n\n>`.gdf mkdir <folder name>`"
->>>>>>> e94ceb5... google_drive: simplify token generate to avoid confusing for end-user
     "\nUsage: create google drive folder."
     "\n\n.gdf chck <folder/file|name/id>"
     "\nUsage: check given value is exist or not."
@@ -657,13 +654,10 @@ CMD_HELP.update({
     "\nThis method skipping file trash, so be caution..."
     "\n\n.gdfset put <folderURL/folderID>"
     "\nUsage: change upload directory."
-<<<<<<< HEAD
     "\n\n.gdfset rm"
     "\nUsage: remove set parentId from\n.gdfset put <value>"
     "to **G_DRIVE_FOLDER_ID** and if empty upload will go to root."
-=======
     "\n\n>`.gdfset rm`"
     "\nUsage: remove set parentId from cmd\n>`.gdfset put` "
     "into **G_DRIVE_FOLDER_ID** and if empty upload will go to root."
->>>>>>> e94ceb5... google_drive: simplify token generate to avoid confusing for end-user
 })
