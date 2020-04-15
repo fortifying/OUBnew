@@ -1,6 +1,5 @@
 #created by @eve_enryu
 
-
 import datetime
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
@@ -26,7 +25,7 @@ async def _(event):
               return
           else:
              await event.delete()
-             await bot.send_message(event.chat_id, response.message)
+             await bot.forward_messages(event.chat_id, response.message)
                 
                 
 @register(outgoing=True, pattern="^.eu(?: |$)(.*)")
@@ -47,7 +46,7 @@ async def _(event):
               return
           else:
              await event.delete()
-             await bot.send_message(event.chat_id, response.message)
+             await bot.forward_messages(event.chat_id, response.message)
                 
                 
 @register(outgoing=True, pattern="^.fastboot(?: |$)(.*)")
@@ -68,7 +67,7 @@ async def _(event):
               return
           else:
              await event.delete()
-             await bot.send_message(event.chat_id, response.message)
+             await bot.forward_messages(event.chat_id, response.message)
                 
                 
 @register(outgoing=True, pattern="^.recovery(?: |$)(.*)")
@@ -89,7 +88,7 @@ async def _(event):
               return
           else:
              await event.delete()
-             await bot.send_message(event.chat_id, response.message)
+             await bot.forward_messages(event.chat_id, response.message)
                 
                 
                 
@@ -111,7 +110,7 @@ async def _(event):
               return
           else:
              await event.delete()
-             await bot.send_message(event.chat_id, response.message)
+             await bot.forward_messages(event.chat_id, response.message)
                 
                 
 @register(outgoing=True, pattern="^.pb(?: |$)(.*)")
@@ -132,7 +131,7 @@ async def _(event):
               return
           else:
              await event.delete()
-             await bot.send_message(event.chat_id, response.message)
+             await bot.forward_messages(event.chat_id, response.message)
                 
                 
 @register(outgoing=True, pattern="^.of(?: |$)(.*)")
@@ -153,7 +152,7 @@ async def _(event):
               return
           else:
              await event.delete()
-             await bot.send_message(event.chat_id, response.message)
+             await bot.forward_messages(event.chat_id, response.message)
 
 CMD_HELP.update({
 "oprek":
@@ -169,5 +168,4 @@ CMD_HELP.update({
 \n\n.recovery (codename)\
      \nUsage : Get latest recovery MIUI\
 \n\n.of (codename)\
-     \nUsage : Get latest ORangeFox Recovery"})
      \nUsage : Get latest ORangeFox Recovery"})
