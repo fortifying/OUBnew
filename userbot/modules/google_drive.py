@@ -299,8 +299,6 @@ async def download(gdrive, service, uri=None):
     return
 
 
-<<<<<<< HEAD
-=======
 async def download_gdrive(gdrive, service, uri):
     """ - remove drivesdk and export=download from link - """
     if not isdir(TEMP_DOWNLOAD_DIRECTORY):
@@ -434,7 +432,6 @@ async def create_dir(service, folder_name):
     return folder_id
 
 
->>>>>>> 33535d4... google_drive: download files from gdrive url/id
 async def upload(gdrive, service, file_path, file_name, mimeType):
     await gdrive.edit("`Processing upload...`")
     body = {
