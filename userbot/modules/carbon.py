@@ -395,6 +395,6 @@ CMD_HELP.update({
         \nUsage: Beautify your text.\
     \n\n.carbon4 <text> [or reply]\
         \nUsage: Beautify your text.\
-    .carbon5 <text> [or reply]\
+    \n\n.carbon5 <text> [or reply]\
         \nUsage: Beautify your text."
 })
