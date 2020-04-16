@@ -35,7 +35,7 @@ from asyncio import sleep
 from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, YOUTUBE_API_KEY, CHROME_DRIVER, GOOGLE_CHROME_BIN, bot
 from userbot.events import register
 from telethon.tl.types import DocumentAttributeAudio
-from userbot.utils.modules.upload_download import progress, humanbytes, time_formatter
+from userbot.utils.upload_download import progress, humanbytes, time_formatter
 from userbot.utils.google_images_download import googleimagesdownload
 import subprocess
 from datetime import datetime
