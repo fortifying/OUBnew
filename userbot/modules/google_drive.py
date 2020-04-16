@@ -670,11 +670,6 @@ async def google_drive(gdrive):
             " • `Reason :` Folder upload not supported."
         )
     else:
-<<<<<<< HEAD
-        uri = re.findall(r'\bhttps?://.*\.\S+', value)
-        if "magnet:?" in value:
-            uri = [value]
-=======
         if re.findall(r'\bhttps?://.*\.\S+', value) or "magnet:?" in value:
             try:
                 uri = re.findall(r'\bhttps?://drive\.google\.com\S+', value)[0]
@@ -694,7 +689,6 @@ async def google_drive(gdrive):
                 two = False
             if True in [one or two]:
                 return await download_gdrive(gdrive, service, value)
->>>>>>> 33535d4... google_drive: download files from gdrive url/id
         if not uri and not gdrive.reply_to_msg_id:
             return await gdrive.edit(
                 "`[VALUE - ERROR]`\n\n"
