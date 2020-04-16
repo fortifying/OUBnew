@@ -388,7 +388,7 @@ async def carbon_api(e):
 CMD_HELP.update({
     "carbon":
     "Beautify your code using carbon.now.sh\
-    \n\nUsage:
+    \n\nUsage:\
     \n\n.carbon1 <text> [or reply]\
     \n\n.carbon2 <text> [or reply]\
     \n\n.carbon3 <text> [or reply]\
