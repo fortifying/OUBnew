@@ -1,11 +1,9 @@
-# We're using Alpine Edge
-FROM alpine:edge
+# We're using Arch Linux
+FROM anggarsx/arch:bleeding
 
 #
-# We have to uncomment Community repo for some packages
+# Starting Phoenix branch
 #
-RUN sed -e 's;^#http\(.*\)/edge/community;http\1/edge/community;g' -i /etc/apk/repositories
-
 
 #
 # Installing Packages
@@ -55,18 +53,13 @@ RUN apk add --no-cache=true --update \
     zip 
 
 
-RUN python3 -m ensurepip \
-    && pip3 install --upgrade pip setuptools \
-    && rm -r /usr/lib/python*/ensurepip && \
-    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
-    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
-    rm -r /root/.cache
-
 #
 # Clone repo and prepare working directory
 #
-RUN git clone -b phoenix https://github.com/fortifying/OUBnew/ /root/userbot
+RUN git clone -b phoenix https://github.com/fortifying/OUBnew /root/userbot
 RUN mkdir /root/userbot/bin/
+RUN chmod 777 /root/userbot/
+RUN chmod 777 /root/userbot/bin/
 WORKDIR /root/userbot/
 
 #
