@@ -6,55 +6,9 @@ FROM anggarsx/arch:bleeding
 #
 
 #
-# Installing Packages
-#
-RUN apk add --no-cache=true --update \
-    coreutils \
-    bash \
-    build-base \
-    bzip2-dev \
-    curl \
-    figlet \
-    gcc \
-    g++ \
-    git \
-    aria2 \
-    util-linux \
-    libevent \
-    jpeg-dev \
-    libffi-dev \
-    libpq \
-    libwebp-dev \
-    libxml2 \
-    libxml2-dev \
-    libxslt-dev \
-    linux-headers \
-    musl \
-    neofetch \
-    openssl-dev \
-    postgresql \
-    postgresql-client \
-    postgresql-dev \
-    openssl \
-    pv \
-    jq \
-    wget \
-    readline-dev \
-    sqlite \
-    ffmpeg \
-    sqlite-dev \
-    sudo \
-    chromium \
-    chromium-chromedriver \
-    zlib-dev \
-    jpeg \
-    zip 
-
-
-#
 # Clone repo and prepare working directory
 #
-RUN git clone -b phoenix https://github.com/fortifying/OUBnew /root/userbot
+RUN git clone -b phoenix 'https://github.com/fortifying/OUBnew' /root/userbot
 RUN mkdir /root/userbot/bin/
 RUN chmod 777 /root/userbot/
 RUN chmod 777 /root/userbot/bin/
