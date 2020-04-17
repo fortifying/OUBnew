@@ -114,6 +114,8 @@ async def dyno_manage(dyno):
         Apps = result['apps']
         msg = "**Dyno Usage Applications**:\n\n"
         for App in Apps:
+            AppName = '~~Deleted or transferred app~~'
+            ID = App.get('app_uuid')
             try:
                 AppQuota = App['quota_used']
                 AppQuotaUsed = AppQuota / 60
@@ -125,6 +127,14 @@ async def dyno_manage(dyno):
                 AppHours = math.floor(AppQuotaUsed / 60)
                 AppMinutes = math.floor(AppQuotaUsed % 60)
                 msg += (
+                for names in apps:
+                    if ID == names.id:
+                        AppName = f"**{names.name}**"
+                        break
+                    else:
+                        continue
+                msg += (
+                    f" -> `Dyno usage for`  {AppName}:\n"
                     f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
                     f"**|**  [`{AppPercentage}`**%**]\n"
                 )
@@ -133,7 +143,7 @@ async def dyno_manage(dyno):
             for App in Heroku.apps():
                 msg += f"     •  ⬢**{App.name}**.\n"
         return await dyno.edit(
-            f"{msg}\n"
+            f"{msg}"
             " -> `Dyno hours quota remaining this month`:\n"
             f"     •  `{hours}`**h**  `{minutes}`**m**  "
             f"**|**  [`{percentage}`**%**]"
