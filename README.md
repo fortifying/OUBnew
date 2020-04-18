@@ -1,3 +1,4 @@
+[![Build](https://github.com/fortifying/OUBnew/workflows/FailedChecker/badge.svg?branch=phoenix)](https://github.com/fortifying/OUBnew/actions "Build")
 <h2 align="center">PHOENIX BRANCH IS FOR TEST ONLY</h2>
 
 ### This branch will merge to `sql-extended` once tested from this branch
