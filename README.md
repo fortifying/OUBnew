@@ -1,3 +1,4 @@
+[![Build](https://github.com/fortifying/OUBnew/workflows/FailedChecker/badge.svg?branch=sql-extended)](https://github.com/fortifying/OUBnew/actions "Build")
 # Project OUBnew-Fortizer
 
 `
