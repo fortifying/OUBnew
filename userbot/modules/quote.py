@@ -46,7 +46,7 @@ if 1 == 1:
                                                               "#62d4e3", "#65bdf3", "#ff5694"],
                                           "default_username_color": "#b48bf2"})
 
-    @register(outgoing=True, pattern="^.pch(?: |$)(.*)")
+    @register(outgoing=True, pattern="^.q(?: |$)(.*)")
     async def quotecmd(message):  # noqa: C901
         """Quote a message.
         Usage: .pch [template]
@@ -216,7 +216,7 @@ def get_markdown(reply):
     return markdown
 
 CMD_HELP.update({
-        "stickerchat": 
-        ".pch \
-          \nUsage: Same as quotly, enhance ur text to sticker."
+        "quote": 
+        ".q \
+          \nUsage: Enhance your text to sticker!."
     })
