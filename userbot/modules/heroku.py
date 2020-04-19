@@ -159,6 +159,34 @@ async def dyno_usage(dyno):
                            f"     •  `{hours}`**h**  `{minutes}`**m**  "
                            f"**|**  [`{percentage}`**%**]"
                            )
+    Apps = result['apps']
+    for apps in Apps:
+        if apps.get('app_uuid') == app.id:
+            AppQuotaUsed = apps.get('quota_used') / 60
+            AppPercentage = math.floor(apps.get('quota_used') * 100 / quota)
+            break
+        else:
+            continue
+    try:
+        AppQuotaUsed
+        AppPercentage
+    except NameError:
+        AppQuotaUsed = 0
+        AppPercentage = 0
+
+    AppHours = math.floor(AppQuotaUsed / 60)
+    AppMinutes = math.floor(AppQuotaUsed % 60)
+
+    return await dyno.edit(
+         "**Dyno Usage**:\n\n"
+         f" -> `Dyno usage for`  **{app.name}**:\n"
+         f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
+         f"**|**  [`{AppPercentage}`**%**]"
+         "\n\n"
+         " -> `Dyno hours quota remaining this month`:\n"
+         f"     •  `{hours}`**h**  `{minutes}`**m**  "
+         f"**|**  [`{percentage}`**%**]"
+    )
 
 
 CMD_HELP.update({
