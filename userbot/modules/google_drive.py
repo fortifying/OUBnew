@@ -321,6 +321,17 @@ async def download_gdrive(gdrive, service, uri):
                 file_Id = uri
     file = service.files().get(fileId=file_Id,
                                fields='name, mimeType').execute()
+                try:
+                    file_Id = uri.split("uc?export=download&confirm="
+                                        )[1].split("id=")[1]
+                except IndexError:
+                    """ - if error parse in url, assume given value is Id - """
+                    file_Id = uri
+    try:
+        file_Id
+    except NameError:
+        file_Id = uri
+    file = await get_information(service, file_Id)
     file_name = file.get('name')
     mimeType = file.get('mimeType')
     if mimeType == 'application/vnd.google-apps.folder':
@@ -662,6 +673,7 @@ async def google_drive(gdrive):
         file_path = value
         if file_path.endswith(".torrent"):
             uri = file_path
+            uri = [file_path]
             file_path = None
     elif isdir(value):
         return await gdrive.edit(
@@ -689,6 +701,28 @@ async def google_drive(gdrive):
                 two = False
             if True in [one or two]:
                 return await download_gdrive(gdrive, service, value)
+            for fileId in value.split():
+                if any(map(str.isdigit, fileId)):
+                    one = True
+                else:
+                    one = False
+                if "-" in fileId or "_" in fileId:
+                    two = True
+                else:
+                    two = False
+                if True in [one or two]:
+                    try:
+                        reply += await download_gdrive(gdrive, service, fileId)
+                    except Exception as e:
+                        reply += (
+                            "`[FILE - ERROR]`\n\n"
+                            "`Status :` **BAD**\n"
+                            f"`Reason :` {str(e)}\n\n"
+                        )
+                        continue
+            if reply:
+                await gdrive.respond(reply, link_preview=False)
+                return await gdrive.delete()
         if not uri and not gdrive.reply_to_msg_id:
             return await gdrive.edit(
                 "`[VALUE - ERROR]`\n\n"
