@@ -143,6 +143,9 @@ TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
 # Clean Welcome
 CLEAN_WELCOME = sb(os.environ.get("CLEAN_WELCOME", "True"))
 
+# Screenshot web access key
+SCREEN_SHOT_LAYER_ACCESS_KEY = os.environ.get("SCREEN_SHOT_LAYER_ACCESS_KEY", None)
+
 # Last.fm Module
 BIO_PREFIX = os.environ.get("BIO_PREFIX", None)
 DEFAULT_BIO = os.environ.get("DEFAULT_BIO", None)
