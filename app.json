@@ -157,7 +157,7 @@
     },
     "SS_LAYER_KEY": {
       "description": "Key for screencap modules. get it from https://screenshotlayer.com/product.",
-      "value": "Live, Love, Life"
+      "value": "Live, Love, Life",
       "required": false
     },
     "ALIVE_NAME": {
