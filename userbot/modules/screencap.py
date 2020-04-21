@@ -3,7 +3,7 @@
 import io
 import requests
 from telethon import events
-from userbot import CMD_HELP, SCREEN_SHOT_LAYER_ACCESS_KEY
+from userbot import CMD_HELP, SS_LAYER_KEY
 from userbot.events import register
 
 
@@ -11,14 +11,14 @@ from userbot.events import register
 async def _(event):
     if event.fwd_from:
         return
-    if SCREEN_SHOT_LAYER_ACCESS_KEY is None:
+    if SS_LAYER_KEY is None:
         await event.edit("Need to get an API key from https://screenshotlayer.com/product \nModule stopping!")
         return
     await event.edit("Processing ...")
     sample_url = "https://api.screenshotlayer.com/api/capture?access_key={}&url={}&fullpage={}&viewport={}&format={}&force={}"
     input_str = event.pattern_match.group(1)
     response_api = requests.get(sample_url.format(
-        SCREEN_SHOT_LAYER_ACCESS_KEY,
+        SS_LAYER_KEY,
         input_str,
         "1",
         "2560x1440",
