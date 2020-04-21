@@ -152,7 +152,12 @@
     },
     "DEFAULT_BIO": {
       "description": "Default profile bio.",
-      "value": "[PM = Report Spam] I ❤ ️@OpenUserBot",
+      "value": "Live, Love, Life",
+      "required": false
+    },
+    "SS_LAYER_KEY": {
+      "description": "Key for screencap modules. get it from https://screenshotlayer.com/product.",
+      "value": "Live, Love, Life",
       "required": false
     },
     "ALIVE_NAME": {
