@@ -26,7 +26,7 @@
 ## NOT THE BEST ONE, BUT HERE YOU GO
 
 ## Easy way to deploy
-[![Deploy](https://telegra.ph/file/008d8a88e29bd8ed9ece9.png)](https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended)
+[![Deploy](https://telegra.ph/file/008d8a88e29bd8ed9ece9.png)](https://heroku.com/deploy?template=https://github.com/x0rzavi/OUBnew/tree/sql-extended)
 
 
 <p align="center">&nbsp;</p>
