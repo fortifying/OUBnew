@@ -4,7 +4,7 @@ async_generator
 bs4
 cowpy
 # cryptg>=0.2
-cffi>=1.0.0
+# cffi>=1.0.0
 covid
 REPO_LINK
 cryptg
