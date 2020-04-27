@@ -163,8 +163,17 @@
       "description": "Name to show in .alive message",
       "required": false
     },
+<<<<<<< HEAD
     "G_DRIVE_CLIENT_SECRET": {
       "description": "Enter Your Client Secret for Google Drive.",
+=======
+    "GENIUS_ACCESS_TOKEN": {
+      "description": "Client Access Token from https://genius.com/api-clients.",
+      "required": false
+    },
+    "WEATHER_DEFCITY": {
+      "description": "Set the default city for the userbot's weather module.",
+>>>>>>> 627a1e88... lyrics: tell user to use Client Access Token instead of Client ID or Client Secret
       "required": false
     },
     "G_DRIVE_AUTH_TOKEN_DATA": {

@@ -49,6 +49,17 @@ async def lyrics(lyric):
 
     if songs is None:
         await lyric.edit(f"Song **{artist} - {song}** not found!")
+    try:
+        songs = genius.search_song(song, artist)
+    except TypeError:
+        return await lyric.edit(
+            "`Error credentials for GENIUS_ACCESS_TOKEN."
+            "Use Client Access Token - click Generate Access Token "
+            "instead of Client ID or Client Secret "
+            "from`  https://genius.com/api-clients"
+        )
+    if songs is None:
+        await lyric.edit(f"`Song`  **{artist} - {song}**  `not found...`")
         return
     if len(songs.lyrics) > 4096:
         await lyric.edit("`Lyrics is too big, view the file to see it.`")
@@ -76,4 +87,8 @@ CMD_HELP.update({
   "   & GENIUS and token value in heroku app settings \n"
 
 "Lyrics Plugin Syntax: .lyrics <aritst name - song nane>"
+    ">`.lyrics` **<artist name> - <song name>**"
+    "\nUsage: Get lyrics matched artist and song."
+    "\n\n>`.lyrics now`"
+    "\nUsage: Get lyrics artist and song from current lastfm scrobbling."
 })
