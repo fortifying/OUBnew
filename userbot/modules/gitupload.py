@@ -21,6 +21,10 @@ GIT_TEMP_DIR = "./userbot/temp/"
 @register(outgoing=True, pattern="^.commit(?: |$)(.*)")
 # @register(pattern=r".commit (.*)", outgoing=True)
 async def download(event):
+    #Prevent Channel Bug to control commiy
+    if event.is_channel and not event.is_group:
+        await event.edit("`commit Commad isn't permitted on channels`")
+        return
     if event.fwd_from:
         return	
     if GITHUB_ACCESS_TOKEN is None:
