@@ -54,6 +54,10 @@ afk_start = {}
 # =================================================================
 @register(outgoing=True, pattern="^.afk(?: |$)(.*)", disable_errors=True)
 async def set_afk(afk_e):
+    #Prevent Channel Bug to use afk
+    if afk_e.is_channel and not afk_e.is_group:
+        await afk_e.edit("`afk Commad isn't permitted on channels`")
+        return
     """ For .afk command, allows you to inform people that you are afk when they message you """
     message = afk_e.text
     string = afk_e.pattern_match.group(1)
@@ -84,6 +88,10 @@ async def set_afk(afk_e):
 
 @register(outgoing=True)
 async def type_afk_is_not_true(notafk):
+    #Prevent Channel Bug to use afk
+    if notafk.is_channel and not notafk.is_group:
+        await notafk.edit("`unafk Commad isn't permitted on channels`")
+        return
     """ This sets your status as not afk automatically when you write something while being afk """
     global ISAFK
     global COUNT_MSG

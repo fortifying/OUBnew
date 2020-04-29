@@ -48,6 +48,10 @@ LastLog = False
 @register(outgoing=True, pattern="^.lastfm$")
 async def last_fm(lastFM):
     """ For .lastfm command, fetch scrobble data from last.fm. """
+    #Prevent Channel Bug to control lastfm
+    if lastFM.is_channel and not lastFM.is_group:
+        await lastFM.edit("`Lastfm Commad isn't permitted on channels`")
+        return
     await lastFM.edit("Processing...")
     preview = None
     playing = User(LASTFM_USERNAME, lastfm).get_now_playing()
@@ -179,6 +183,10 @@ async def get_curr_track(lfmbio):
 
 @register(outgoing=True, pattern=r"^.lastbio (on|off)")
 async def lastbio(lfmbio):
+    #Prevent Channel Bug to control lastbio
+    if lfmbio.is_channel and not lfmbio.is_group:
+        await lfmbio.edit("`Lastbio Commad isn't permitted on channels`")
+        return
     arg = lfmbio.pattern_match.group(1).lower()
     global LASTFMCHECK
     global RUNNING
@@ -203,6 +211,10 @@ async def lastbio(lfmbio):
 
 @register(outgoing=True, pattern=r"^.lastlog (on|off)")
 async def lastlog(lstlog):
+    #Prevent Channel Bug to control lastlog
+    if lstlog.is_channel and not lstlog.is_group:
+        await lstlog.edit("`Lastlog Commad isn't permitted on channels`")
+        return
     arg = lstlog.pattern_match.group(1).lower()
     global LastLog
     LastLog = False

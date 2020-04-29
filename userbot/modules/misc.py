@@ -41,6 +41,10 @@ async def randomise(items):
 async def sleepybot(time):
     """ For .sleep command, let the userbot snooze for a few second. """
     message = time.text
+    if time.is_channel and not time.is_group:
+        await time.edit("`sleep commad isn't permitted on channels`")
+        return
+        
     if " " not in time.pattern_match.group(1):
         await time.reply("Syntax: `.sleep [seconds]`")
     else:
@@ -59,7 +63,12 @@ async def sleepybot(time):
 @register(outgoing=True, pattern="^.shutdown$")
 async def killdabot(event):
     """ For .shutdown command, shut the bot down."""
-    await event.edit("`Shutting down` **⬢ {DEFAULTUSER} ** ..")
+    await event.edit("`Shutting down..`")
+    if event.is_channel and not event.is_group:
+        await event.edit("`shutdown commad isn't permitted on channels`")
+        return
+        
+    await event.edit("`Goodbye *Windows XP shutdown sound*....`")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
                                         "Bot shut down")
@@ -69,6 +78,10 @@ async def killdabot(event):
 @register(outgoing=True, pattern="^.restart$")
 async def killdabot(event):
     await event.edit("`Restarting` **⬢ {DEFAULTUSER}** ..")
+    if event.is_channel and not event.is_group:
+        await event.edit("`Restart isn't permitted on channels`")
+        return
+    await event.edit("`*i would be back in a moment*`")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#RESTART \n"
                                         "Bot Restarted")

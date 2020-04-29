@@ -13,6 +13,10 @@ from userbot.events import register
 async def help(event):
     """ For .help command,"""
     args = event.pattern_match.group(1).lower()
+    #Prevent Channel Bug to get any information and commad from all modules 
+    if event.is_channel and not event.is_group:
+        await event.edit("`Help Commad isn't permitted on channels`")
+        return
     if args:
         if args in CMD_HELP:
             await event.edit(str(CMD_HELP[args]))

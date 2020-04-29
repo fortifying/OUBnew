@@ -117,6 +117,10 @@ async def update(event, repo, ups_rem, ac_br):
 
 @register(outgoing=True, pattern=r"^.update(?: |$)(now|deploy)?")
 async def upstream(event):
+    #Prevent Channel Bug to use update
+    if event.is_channel and not event.is_group:
+        await event.edit("`update Commad isn't permitted on channels`")
+        return
     "For .update command, check if the bot is up to date, update if specified"
     await event.edit("`Checking for updates, please wait....`")
     conf = event.pattern_match.group(1)

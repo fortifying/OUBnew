@@ -15,6 +15,10 @@ from userbot.util import admin_cmd, humanbytes, progress, time_formatter
 #  @borg.on(admin_cmd("compress"))
 @register(outgoing=True, pattern=r"^.compress(?: |$)(.*)")
 async def _(event):
+    #Prevent Channel Bug to use update
+    if event.is_channel and not event.is_group:
+        await event.edit("`compress Commad isn't permitted on channels`")
+        return
     if event.fwd_from:
         return
     if not event.is_reply:

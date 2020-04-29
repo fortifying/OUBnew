@@ -21,6 +21,43 @@ from userbot.utils.prettyjson import prettyjson
 Heroku = heroku3.from_key(HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 
+@register(pattern="^.hlist(?: |$)(.*)", outgoing=True)
+async def heroku_list(list):
+    """ Getting Information From Heroku Account """
+    
+    if list.is_channel and not list.is_group:
+        await list.edit("`hlist isn't permitted on channels`")
+        return
+    if HEROKU_API_KEY is not None:
+        heroku_str = list.pattern_match.group(1)
+        if heroku_str == "app":
+            applist = str(heroku_conn.apps(order_by='id'))
+            plist = applist.replace("[<app '", "").replace("<app '", "").replace("'>,", "\n\n").replace("'>]", "")
+            await list.edit(f"**List App on Your Account:**\n\n`{plist}`")
+        elif heroku_str == "worker":
+            if HEROKU_APP_NAME is not None:
+                app = heroku_conn.apps()[HEROKU_APP_NAME]
+                dynolist = str(app.dynos(order_by='id'))
+                dlist = dynolist.replace("[<Dyno '", "").replace("<Dyno '", "").replace("'>,", "\n\n").replace("'>]", "")
+                await list.edit(f"**List Worker on Your {HEROKU_APP_NAME}:**\n\n{dlist}")
+            else:
+                await list.edit("Please setup your **HEROKU_APP_NAME** Config Variable")
+        elif heroku_str == "var":
+            if HEROKU_APP_NAME is not None:
+                app = heroku_conn.apps()[HEROKU_APP_NAME]
+                config = str(app.config())
+                vlist = config.replace(",", "\n\n").replace("'", "`").replace("{", "").replace("}", "")
+                if BOTLOG:
+                    await list.edit(f"List of `Config Variable` has been sent to your `BOTLOG Group`")
+                    await list.client.send_message(BOTLOG_CHATID, (f"**List Config Variable on Your {HEROKU_APP_NAME}:**\n\n{vlist}"))
+                else:
+                    await list.edit(f"Sorry, Can't send `Config Variable` to Public.\nPlease setup your **BOTLOG Group**")
+            else:
+                await list.edit("Please setup your **HEROKU_APP_NAME** Config Variable")
+        else:
+            await list.edit("Please enter valid command\nSee `.help heroku`")
+    else:
+        await list.edit("Please setup your **HEROKU_API_KEY** Config Variable")
 
 @register(outgoing=True, pattern=r"^.(set|get|del) var(?: |$)(.*)(?: |$)([\s\S]*)")
 async def variable(var):
@@ -28,6 +65,10 @@ async def variable(var):
         Manage most of ConfigVars setting, set new var, get current var,
         or delete var...
     """
+    """ Manage most of ConfigVars setting, set new var, or delete var... """
+    if var.is_channel and not var.is_group:
+        await var.edit("`Heroku Set isn't permitted on channels`")
+        return
     if HEROKU_APP_NAME is not None:
         app = Heroku.app(HEROKU_APP_NAME)
     else:
