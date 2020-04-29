@@ -5,6 +5,10 @@ from userbot import CMD_HELP
 
 @register(pattern=r".git (.*)", outgoing=True)
 async def github(event):
+    #Prevent Channel Bug to control commiy
+    if event.is_channel and not event.is_group:
+        await event.edit("`git Commad isn't permitted on channels`")
+        return
     URL = f"https://api.github.com/users/{event.pattern_match.group(1)}"
     chat = await event.get_chat()
     async with aiohttp.ClientSession() as session:
