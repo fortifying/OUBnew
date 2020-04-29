@@ -13,4 +13,13 @@ def start() -> scoped_session:
     return scoped_session(sessionmaker(bind=engine, autoflush=False))
 
 
+def delete_table(table_name):
+    metadata = MetaData()
+    metadata.reflect(engine)
+    table = metadata.tables.get(table_name)
+    if table is not None:
+        LOGS.info(f"Deleting '{table_name}' table...")
+        BASE.metadata.drop_all(engine, [table], checkfirst=True)
+
+
 SESSION = start()
