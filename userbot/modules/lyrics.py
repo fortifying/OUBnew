@@ -2,53 +2,37 @@
 #
 # Licensed under the Raphielscape Public License, Version 1.c (the "License");
 # you may not use this file except in compliance with the License.
-
-
-
-
+#
+#
 import os
 import lyricsgenius
-import random
 
 from userbot.events import register
-from userbot import CMD_HELP, LOGS, GENIUS
+from userbot import (CMD_HELP, GENIUS, lastfm, LASTFM_USERNAME)
+from pylast import User
+
+if GENIUS is not None:
+    genius = lyricsgenius.Genius(GENIUS)
 
 
-@register(outgoing=True, pattern="^.lyrics(?: |$)(.*)")
+@register(outgoing=True, pattern="^.lyrics (?:(now)|(.*) - (.*))")
 async def lyrics(lyric):
-    if r"-" in lyric.text:
-        pass
-    else:
-        await lyric.edit("`Error: please use '-' as divider for <artist> and <song>`\n"
-                         "eg: `Nicki Minaj - Super Bass`")
-        return
-
+    await lyric.edit("`Getting information...`")
     if GENIUS is None:
-        await lyric.edit(
-            "`Provide genius access token to config.py or Heroku Var first kthxbye!`")
+        return await lyric.edit(
+            "`Provide genius access token to Heroku ConfigVars...`")
+    if lyric.pattern_match.group(1) == "now":
+        playing = User(LASTFM_USERNAME, lastfm).get_now_playing()
+        if playing is None:
+            return await lyric.edit(
+                "`No information current lastfm scrobbling...`"
+            )
+        artist = playing.get_artist()
+        song = playing.get_title()
     else:
-        genius = lyricsgenius.Genius(GENIUS)
-        try:
-            args = lyric.text.split('.lyrics')[1].split('-')
-            artist = args[0].strip(' ')
-            song = args[1].strip(' ')
-        except Exception:
-            await lyric.edit("`LMAO please provide artist and song names`")
-            return
-
-    if len(args) < 1:
-        await lyric.edit("`Please provide artist and song names`")
-        return
-
+        artist = lyric.pattern_match.group(2)
+        song = lyric.pattern_match.group(3)
     await lyric.edit(f"`Searching lyrics for {artist} - {song}...`")
-
-    try:
-        songs = genius.search_song(song, artist)
-    except TypeError:
-        songs = None
-
-    if songs is None:
-        await lyric.edit(f"Song **{artist} - {song}** not found!")
     try:
         songs = genius.search_song(song, artist)
     except TypeError:
@@ -69,24 +53,17 @@ async def lyrics(lyric):
             lyric.chat_id,
             "lyrics.txt",
             reply_to=lyric.id,
-            )
-        os.remove("lyrics.txt")
+        )
+        return os.remove("lyrics.txt")
     else:
-        await lyric.edit(f"**Search query**: \n`{artist} - {song}`\n\n```{songs.lyrics}```")
-    return
+        return await lyric.edit(
+            f"**Search query**:\n`{artist}` - `{song}`"
+            f"\n\n```{songs.lyrics}```"
+        )
 
 
 CMD_HELP.update({
     "lyrics":
-    "**Usage:** .`lyrics <artist name> - <song name>`\n"
-    "__note__: **-** is neccessary when searching the lyrics to divided artist and song \n"
-"Genius lyrics plugin \n"
- "get this value from https://genius.com/developers \n"
-
-"Add:-  GENIUS_API_TOKEN and token value in heroku app settings \n"
-  "   & GENIUS and token value in heroku app settings \n"
-
-"Lyrics Plugin Syntax: .lyrics <aritst name - song nane>"
     ">`.lyrics` **<artist name> - <song name>**"
     "\nUsage: Get lyrics matched artist and song."
     "\n\n>`.lyrics now`"
