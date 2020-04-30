@@ -164,6 +164,13 @@ async def upstream(event):
     ups_rem.fetch(ac_br)
 
     changelog = await gen_chlog(repo, f'HEAD..upstream/{ac_br}')
+    """ - Special case for deploy - """
+    if conf == "deploy":
+        await event.edit('`Deploying userbot, please wait....`')
+        if changelog != '':
+            await print_changelogs(event, ac_br, changelog)
+        await deploy(event, repo, ups_rem, ac_br, txt)
+        return
 
     if changelog == '' and force_update is False:
         await event.edit(
