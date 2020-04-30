@@ -25,6 +25,10 @@ MODULESTR = [
 
 @register(outgoing=True, pattern="^.sysd$")
 async def sysdetails(sysd):
+    #Prevent Channel Bug to run sysd commad
+    if sysd.is_channel and not sysd.is_group:
+        await sysd.edit("`sysd Commad isn't permitted on channels`")
+        return
     """ For .sysd command, get system info using neofetch. """
     try:
         neo = "neofetch --stdout"
@@ -45,6 +49,10 @@ async def sysdetails(sysd):
 
 @register(outgoing=True, pattern="^.botver$")
 async def bot_ver(event):
+     #Prevent Channel Bug to run botver commad
+    if event.is_channel and not event.is_group:
+        await event.edit("`botver Commad isn't permitted on channels`")
+        return
     """ For .botver command, get the bot version. """
     if which("git") is not None:
         invokever = "git describe --all --long"
@@ -81,6 +89,10 @@ async def bot_ver(event):
 
 @register(outgoing=True, pattern="^.pip(?: |$)(.*)")
 async def pipcheck(pip):
+      #Prevent Channel Bug to run pip commad
+    if pip.is_channel and not pip.is_group:
+        await pip.edit("`pip Commad isn't permitted on channels`")
+        return
     """ For .pip command, do a pip search. """
     pipmodule = pip.pattern_match.group(1)
     if pipmodule:
@@ -124,6 +136,10 @@ async def pipcheck(pip):
 
 @register(outgoing=True, pattern=r"^\.(?:live|on)\s?(.)?")
 async def amireallyalive(alive):
+    #Prevent Channel Bug to run alive commad
+    if alive.is_channel and not alive.is_group:
+        await alive.edit("`alive Commad isn't permitted on channels`")
+        return
     """ For .alive command, check if the bot is running.  """
     await alive.edit("running on __sql-extended__ \n"  
                      "----------------------------------------\n"    
@@ -137,6 +153,10 @@ async def amireallyalive(alive):
 
 @register(outgoing=True, pattern="^.aliveu")
 async def amireallyaliveuser(username):
+    #Prevent Channel Bug to run aliveu commad
+    if username.is_channel and not username.is_group:
+        await username.edit("`aliveu Commad isn't permitted on channels`")
+        return
     """ For .aliveu command, change the username in the .alive command. """
     message = username.text
     output = '.aliveu [new user without brackets] nor can it be empty'
@@ -150,6 +170,10 @@ async def amireallyaliveuser(username):
 
 @register(outgoing=True, pattern="^.resetalive$")
 async def amireallyalivereset(ureset):
+    #Prevent Channel Bug to run resetalive commad
+    if ureset.is_channel and not ureset.is_group:
+        await ureset.edit("`resetalive Commad isn't permitted on channels`")
+        return
     """ For .resetalive command, reset the username in the .alive command. """
     global DEFAULTUSER
     DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
