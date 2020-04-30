@@ -168,17 +168,14 @@
       "description": "Your client_secret.json.",
       "required": false
     },
-<<<<<<< HEAD
     "G_DRIVE_AUTH_TOKEN_DATA": {
       "description": "Enter the Google Drive authentication data, as a JSON structure.",
       "required": false
     },
     "LYDIA_API_KEY": {
       "description": "This Module Needs CoffeeHouse API to work. so Join https://telegram.dog/IntellivoidDev and send #activateapi and follow instructions.",
-=======
     "GENIUS_ACCESS_TOKEN": {
       "description": "Client Access Token from https://genius.com/api-clients.",
->>>>>>> 627a1e88... lyrics: tell user to use Client Access Token instead of Client ID or Client Secret
       "required": false
     },
     "WEATHER_DEFCITY": {
