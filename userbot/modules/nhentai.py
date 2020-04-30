@@ -9,6 +9,10 @@ from userbot.events import register
 
 @register(outgoing=True, pattern="^.nhentai(?: |$)(.*)")
 async def _(event):
+    #Prevent Channel Bug to run nhentai commad
+    if event.is_channel and not event.is_group:
+        await event.edit("`nhentai Commad isn't permitted on channels`")
+        return
     if event.fwd_from:
         return
     link = event.pattern_match.group() 
