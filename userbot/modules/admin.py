@@ -71,6 +71,10 @@ UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 @register(outgoing=True, pattern="^.setgpic$")
 async def set_group_photo(gpic):
+    #Prevent Channel Bug to set channel pic
+    if gpic.is_channel and not gpic.is_group:
+        await gpic.edit("`setgpic Commad isn't permitted on channels`")
+        return
     """ For .setgpic command, changes the picture of a group """
     await gpic.edit("`Processing...`")
     await sleep(1)
@@ -110,6 +114,10 @@ async def set_group_photo(gpic):
 
 @register(outgoing=True, pattern="^.promote(?: |$)(.*)")
 async def promote(promt):
+    #Prevent Channel Bug to set channel pic
+    if promt.is_channel and not promt.is_group:
+        await promt.edit("`Promote Commad isn't permitted on channels`")
+        return
     """ For .promote command, promotes the replied/tagged person """
     # Get targeted chat
     chat = await promt.get_chat()
@@ -162,6 +170,10 @@ async def promote(promt):
 
 @register(outgoing=True, pattern="^.demote(?: |$)(.*)")
 async def demote(dmod):
+    #Prevent Channel Bug to set channel pic
+    if dmod.is_channel and not dmod.is_group:
+        await dmod.edit("`demote Commad isn't permitted on channels`")
+        return
     """ For .demote command, demotes the replied/tagged person """
     # Admin right check
     chat = await dmod.get_chat()
@@ -213,6 +225,10 @@ async def demote(dmod):
 
 @register(outgoing=True, pattern="^.ban(?: |$)(.*)")
 async def ban(bon):
+    #Prevent Channel Bug to ban
+    if bon.is_channel and not bon.is_group:
+        await bon.edit("`ban Commad isn't permitted on channels`")
+        return
     """ For .ban command, bans the replied/tagged person """
     # Here laying the sanity check
     chat = await bon.get_chat()
@@ -268,6 +284,10 @@ async def ban(bon):
 
 @register(outgoing=True, pattern="^.unban(?: |$)(.*)")
 async def nothanos(unbon):
+    #Prevent Channel Bug to unban
+    if unbon.is_channel and not unbon.is_group:
+        await unbon.edit("`unban Commad isn't permitted on channels`")
+        return
     """ For .unban command, unbans the replied/tagged person """
     # Here laying the sanity check
     chat = await unbon.get_chat()
@@ -306,6 +326,10 @@ async def nothanos(unbon):
 
 @register(outgoing=True, pattern="^.mute(?: |$)(.*)")
 async def spider(spdr):
+    #Prevent Channel Bug to mute
+    if spdr.is_channel and not spdr.is_group:
+        await spdr.edit("`mute Commad isn't permitted on channels`")
+        return
     """
     This function is basically muting peeps
     """
@@ -367,6 +391,10 @@ async def spider(spdr):
 
 @register(outgoing=True, pattern="^.unmute(?: |$)(.*)")
 async def unmoot(unmot):
+    #Prevent Channel Bug to unmute
+    if unmot.is_channel and not unmot.is_group:
+        await unmot.edit("`unmute Commad isn't permitted on channels`")
+        return
     """ For .unmute command, unmute the replied/tagged person """
     # Admin or creator check
     chat = await unmot.get_chat()
@@ -644,6 +672,11 @@ async def _(event):
         except Exception as e:
             await event.edit(str(e))
             return None
+    mentions = f'<b>Admins in {title}:</b> \n'
+    #Prevent Channel Bug to check admins
+    if show.is_channel and not show.is_group:
+        await show.edit("`admins Commad isn't permitted on channels`")
+        return
     try:
         async for x in bot.iter_participants(chat, filter=ChannelParticipantsAdmins):
             if not x.deleted:
@@ -671,6 +704,10 @@ async def _(event):
 
 @register(outgoing=True, pattern="^.pin(?: |$)(.*)")
 async def pin(msg):
+    #Prevent Channel Bug to check admins
+    if msg.is_channel and not msg.is_group:
+        await msg.edit("`pin Commad isn't permitted on channels`")
+        return
     """ For .pin command, pins the replied/tagged message on the top the chat. """
     # Admin or creator check
     chat = await msg.get_chat()
@@ -718,6 +755,10 @@ async def pin(msg):
 
 @register(outgoing=True, pattern="^.kick(?: |$)(.*)")
 async def kick(usr):
+    #Prevent Channel Bug to check admins
+    if usr.is_channel and not usr.is_group:
+        await usr.edit("`kick Commad isn't permitted on channels`")
+        return
     """ For .kick command, kicks the replied/tagged person from the group. """
     # Admin or creator check
     chat = await usr.get_chat()
