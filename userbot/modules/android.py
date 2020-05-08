@@ -14,12 +14,16 @@ import math
 from requests import get
 from bs4 import BeautifulSoup
  
+
+from datetime import datetime
+from requests import get
+from bs4 import BeautifulSoup
+
 from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
 from userbot.utils import (
     chrome, humanbytes, time_formatter, md5, human_to_bytes
 )
- 
 GITHUB = 'https://github.com'
 DEVICES_DATA = ('https://raw.githubusercontent.com/androidtrackers/'
                 'certified-android-devices/master/by_device.json')
@@ -124,6 +128,17 @@ async def download_api(dl):
     if not re.findall(r'\bhttps?://download.*pixelexperience.*\.org\S+', URL):
         await dl.edit("`Invalid information...`")
         return
+    if URL.endswith('/'):
+        file_name = URL.split("/")[-2]
+    else:
+        file_name = URL.split("/")[-1]
+    build_date = datetime.strptime(file_name.split("-")[2], '%Y%m%d'
+                                   ).strftime('%Y/%m/%d')  # Full ROM
+    android_version = file_name.split("-")[1]
+    if android_version == "9.0":
+        await dl.edit("`Abort, only support android 10...`")
+        return
+    await dl.edit("`Sending information...`")
     driver = await chrome()
     await dl.edit("`Getting information...`")
     driver.get(URL)
