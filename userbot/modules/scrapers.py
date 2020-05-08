@@ -36,14 +36,8 @@ from userbot import (CMD_HELP, BOTLOG, BOTLOG_CHATID, YOUTUBE_API_KEY,
                      TEMP_DOWNLOAD_DIRECTORY)
 from userbot.events import register
 from telethon.tl.types import DocumentAttributeAudio
-<<<<<<< HEAD
 from userbot.utils import progress, chrome, googleimagesdownload
  
-=======
-from userbot.utils import progress, chrome
-from userbot.google_images_download import googleimagesdownload
-
->>>>>>> 9c968d5... ProjectBish: move chromedriver into it's own file in utils
 CARBONLANG = "auto"
 TTS_LANG = "en"
 TRT_LANG = "en"
@@ -94,11 +88,7 @@ async def carbon_api(e):
         force_document=True,
         reply_to=e.message.reply_to_msg_id,
     )
-<<<<<<< HEAD
  
-=======
-
->>>>>>> 9c968d5... ProjectBish: move chromedriver into it's own file in utils
     os.remove(file_path)
     driver.quit()
     # Removing carbon.png after uploading
