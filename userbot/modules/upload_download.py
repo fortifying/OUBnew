@@ -6,33 +6,29 @@
 # The entire source code is OSSRPL except
 # 'download, uploadir, uploadas, upload' which is MPL
 # License: MPL and OSSRPL
-""" Userbot module which contains everything related to \
-    downloading/uploading from/to the server. """
-
+""" Userbot module which contains everything related to
+     downloading/uploading from/to the server. """
+ 
 import json
 import os
 import subprocess
 import time
 import math
-
+ 
 from pySmartDL import SmartDL
 import asyncio
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
 from telethon.tl.types import DocumentAttributeVideo
-
+ 
 from userbot import LOGS, CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.utils import progress, humanbytes
 from userbot.events import register
-
-
+ 
+ 
 @register(pattern=r".download(?: |$)(.*)", outgoing=True)
 async def download(target_file):
     """ For .download command, download files to the userbot's server. """
-    #Prevent Channel Bug to control download
-    if target_file.is_channel and not target_file.is_group:
-        await target_file.edit("`Download Commad isn't permitted on channels`")
-        return
     await target_file.edit("Processing ...")
     input_str = target_file.pattern_match.group(1)
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
@@ -60,20 +56,6 @@ async def download(target_file):
             diff = now - c_time
             percentage = downloader.get_progress() * 100
             speed = downloader.get_speed()
-            elapsed_time = round(diff) * 1000
-            progress_str = "[{0}{1}] {2}%".format(
-                ''.join(["▰" for i in range(math.floor(percentage / 10))]),
-                ''.join(["▱"
-                         for i in range(10 - math.floor(percentage / 10))]),
-                round(percentage, 2))
-            estimated_total_time = downloader.get_eta(human=True)
-            try:
-                current_message = f"{status}..\
-                \nURL: {url}\
-                \nFile Name: {file_name}\
-                \n{progress_str}\
-                \n{humanbytes(downloaded)} of {humanbytes(total_length)}\
-                \nETA: {estimated_total_time}"
             progress_str = "[{0}{1}] `{2}%`".format(
                 ''.join(["●" for i in range(
                         math.floor(percentage / 10))]),
@@ -90,7 +72,7 @@ async def download(target_file):
                     f" @ {speed}"
                     f"\n`ETA` -> {estimated_total_time}"
                 )
-
+ 
                 if round(diff %
                          10.00) == 0 and current_message != display_message:
                     await target_file.edit(current_message)
@@ -119,15 +101,11 @@ async def download(target_file):
     else:
         await target_file.edit(
             "Reply to a message to download to my local server.")
-
-
+ 
+ 
 @register(pattern=r".uploadir (.*)", outgoing=True)
 async def uploadir(udir_event):
     """ For .uploadir command, allows you to upload everything from a folder in the server"""
-     #Prevent Channel Bug to control uploadir
-    if udir_event.is_channel and not udir_event.is_group:
-        await udir_event.edit("`Uploadir Commad isn't permitted on channels`")
-        return
     input_str = udir_event.pattern_match.group(1)
     if os.path.exists(input_str):
         await udir_event.edit("Processing ...")
@@ -199,20 +177,15 @@ async def uploadir(udir_event):
             "Uploaded {} files successfully !!".format(uploaded))
     else:
         await udir_event.edit("404: Directory Not Found")
-
-
+ 
+ 
 @register(pattern=r".upload (.*)", outgoing=True)
 async def upload(u_event):
     """ For .upload command, allows you to upload a file from the userbot's server """
-     #Prevent Channel Bug to control upload
-    if u_event.is_channel and not u_event.is_group:
-        await u_event.edit("`Upload Commad isn't permitted on channels`")
-        return
     await u_event.edit("Processing ...")
     input_str = u_event.pattern_match.group(1)
     if input_str in ("userbot.session", "config.env"):
-        await u_event.edit("`That's a dangerous operation! Not Permitted!`")
-        return
+        return await u_event.edit("`That's a dangerous operation! Not Permitted!`")
     if os.path.exists(input_str):
         c_time = time.time()
         await u_event.client.send_file(
@@ -227,8 +200,8 @@ async def upload(u_event):
         await u_event.edit("Uploaded successfully !!")
     else:
         await u_event.edit("404: File Not Found")
-
-
+ 
+ 
 def get_video_thumb(file, output=None, width=90):
     """ Get video thumbnail """
     metadata = extractMetadata(createParser(file))
@@ -247,14 +220,15 @@ def get_video_thumb(file, output=None, width=90):
             "1",
             output,
         ],
+        shell=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL,
     )
     if not popen.returncode and os.path.lexists(file):
         return output
     return None
-
-
+ 
+ 
 def extract_w_h(file):
     """ Get width and height of media """
     command_to_run = [
@@ -279,15 +253,11 @@ def extract_w_h(file):
         width = int(response_json["streams"][0]["width"])
         height = int(response_json["streams"][0]["height"])
         return width, height
-
-
+ 
+ 
 @register(pattern=r".uploadas(stream|vn|all) (.*)", outgoing=True)
 async def uploadas(uas_event):
     """ For .uploadas command, allows you to specify some arguments for upload. """
-     #Prevent Channel Bug to control uploads
-    if uas_event.is_channel and not uas_event.is_group:
-        await uas_event.edit("`Uploads Commad isn't permitted on channels`")
-        return
     await uas_event.edit("Processing ...")
     type_of_upload = uas_event.pattern_match.group(1)
     supports_streaming = False
@@ -368,20 +338,20 @@ async def uploadas(uas_event):
                         progress(d, t, uas_event, c_time, "[UPLOAD]",
                                  file_name)))
             elif spam_big_messages:
-                await uas_event.edit("TBD: Not (yet) Implemented")
-                return
+                return await uas_event.edit("TBD: Not (yet) Implemented")
             os.remove(thumb)
             await uas_event.edit("Uploaded successfully !!")
         except FileNotFoundError as err:
             await uas_event.edit(str(err))
     else:
         await uas_event.edit("404: File Not Found")
-
-
+ 
+ 
 CMD_HELP.update({
     "download":
-    ".download <link|filename> or reply to media\
-\nUsage: Downloads file to the server.\
-\n\n.upload <path in server>\
-\nUsage: Uploads a locally stored file to the chat."
+    ">`.download <link|filename> or reply to media`"
+    "\nUsage: Downloads file to the server."
+    "\n\n>`.upload <path in server>`"
+    "\nUsage: Uploads a locally stored file to the chat."
 })
+ 
