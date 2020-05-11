@@ -4,31 +4,27 @@
 # you may not use this file except in compliance with the License.
 #
 """ Userbot module containing commands related to android"""
-
+ 
 import asyncio
 import re
 import os
 import time
 import math
-
-from datetime import datetime
-from selenium import webdriver
-from selenium.common import exceptions as Exceptions
-from selenium.webdriver.chrome.options import Options
+ 
 from requests import get
 from bs4 import BeautifulSoup
-
-from userbot import (
-    CMD_HELP, TEMP_DOWNLOAD_DIRECTORY, GOOGLE_CHROME_BIN, CHROME_DRIVER
-)
+ 
+from userbot import CMD_HELP, TEMP_DOWNLOAD_DIRECTORY
 from userbot.events import register
-from userbot.utils import humanbytes, time_formatter, md5, human_to_bytes
-
+from userbot.utils import (
+    chrome, humanbytes, time_formatter, md5, human_to_bytes
+)
+ 
 GITHUB = 'https://github.com'
-DEVICES_DATA = 'https://raw.githubusercontent.com/wulan17/' \
-               'certified-android-devices/master/devices.json'
-
-
+DEVICES_DATA = ('https://raw.githubusercontent.com/androidtrackers/'
+                'certified-android-devices/master/by_device.json')
+ 
+ 
 @register(outgoing=True, pattern="^.magisk$")
 async def magisk(request):
     """ magisk latest releases """
@@ -49,8 +45,8 @@ async def magisk(request):
                     f'[APK v{data["app"]["version"]}]({data["app"]["link"]}) | ' \
                     f'[Uninstaller]({data["uninstaller"]["link"]})\n'
     await request.edit(releases)
-
-
+ 
+ 
 @register(outgoing=True, pattern=r"^.device(?: |$)(\S*)")
 async def device_info(request):
     """ get android device basic info from its codename """
@@ -62,25 +58,23 @@ async def device_info(request):
         device = textx.text
     else:
         return await request.edit("`Usage: .device <codename> / <model>`")
-    found = [
-        i for i in get(DEVICES_DATA).json()
-        if i["device"] == device or i["model"] == device
-    ]
-    if found:
+    try:
+        found = get(DEVICES_DATA).json()[device]
+    except KeyError:
+        reply = f"`Couldn't find info about {device}!`\n"
+    else:
         reply = f'Search results for {device}:\n\n'
         for item in found:
             brand = item['brand']
             name = item['name']
-            codename = item['device']
+            codename = device
             model = item['model']
             reply += f'{brand} {name}\n' \
                 f'**Codename**: `{codename}`\n' \
                 f'**Model**: {model}\n\n'
-    else:
-        reply = f"`Couldn't find info about {device}!`\n"
     await request.edit(reply)
-
-
+ 
+ 
 @register(outgoing=True, pattern=r"^.codename(?: |)([\S]*)(?: |)([\s\S]*)")
 async def codename_info(request):
     """ search for android codename """
@@ -113,12 +107,10 @@ async def codename_info(request):
     else:
         reply = f"`Couldn't find {device} codename!`\n"
     await request.edit(reply)
-
-
+ 
+ 
 @register(outgoing=True, pattern="^.pixeldl(?: |$)(.*)")
 async def download_api(dl):
-    if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
-        os.mkdir(TEMP_DOWNLOAD_DIRECTORY)
     await dl.edit("`Collecting information...`")
     URL = dl.pattern_match.group(1)
     URL_MSG = await dl.get_reply_message()
@@ -132,33 +124,7 @@ async def download_api(dl):
     if not re.findall(r'\bhttps?://download.*pixelexperience.*\.org\S+', URL):
         await dl.edit("`Invalid information...`")
         return
-    if URL.endswith('/'):
-        file_name = URL.split("/")[-2]
-    else:
-        file_name = URL.split("/")[-1]
-    build_date = datetime.strptime(file_name.split("-")[2], '%Y%m%d'
-                                   ).strftime('%Y/%m/%d')  # Full ROM
-    android_version = file_name.split("-")[1]
-    if android_version == "9.0":
-        await dl.edit("`Abort, only support android 10...`")
-        return
-    await dl.edit("`Sending information...`")
-    chrome_options = Options()
-    chrome_options.binary_location = GOOGLE_CHROME_BIN
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--window-size=1920x1080")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-gpu")
-    prefs = {'download.default_directory': TEMP_DOWNLOAD_DIRECTORY}
-    chrome_options.add_experimental_option('prefs', prefs)
-    try:
-        driver = webdriver.Chrome(executable_path=CHROME_DRIVER,
-                                  options=chrome_options)
-    except (Exceptions.SessionNotCreatedException,
-            Exceptions.WebDriverException):
-        await dl.edit("`Failed to start driver...`")
-        return
+    driver = await chrome()
     await dl.edit("`Getting information...`")
     driver.get(URL)
     error = driver.find_elements_by_class_name("swal2-content")
@@ -166,45 +132,40 @@ async def download_api(dl):
         if error[0].text == "File Not Found.":
             await dl.edit(f"`FileNotFoundError`: {URL} is not found.")
             return
-    data = driver.find_elements_by_class_name("package__data")
-    """
-    - Parse index for download button so it will match with current build_date
-    """
-    if "-update-" in file_name:
-        """ - Incremental don't need build_date because index is known  - """
-        if '_Plus_' in file_name:
-            i = 5
-        else:
-            i = 2
-    else:
-        for index, value in enumerate(data):
-            for val in value.text.split('\n'):
-                if val == build_date:
-                    i = index
-                    break
-                else:
-                    i = None
-            if i is not None:
+    datas = driver.find_elements_by_class_name('download__meta')
+    """ - enumerate data to make sure we download the matched version - """
+    md5_origin = None
+    i = None
+    for index, value in enumerate(datas):
+        for data in value.text.split("\n"):
+            if data.startswith("MD5"):
+                md5_origin = data.split(':')[1].strip()
+                i = index
                 break
-        if '_Plus_' in file_name:
-            """
-            - Because of incremental package from non plus edition
-            """
-            i += 1
-    data = driver.find_elements_by_class_name('download__meta')
-    md5_origin = data[i].text.split('\n')[2].split(':')[1].strip()
+        if md5_origin is not None and i is not None:
+            break
+    if md5_origin is None and i is None:
+        await dl.edit("`There is no match version available...`")
+    if URL.endswith('/'):
+        file_name = URL.split("/")[-2]
+    else:
+        file_name = URL.split("/")[-1]
     file_path = TEMP_DOWNLOAD_DIRECTORY + file_name
     download = driver.find_elements_by_class_name("download__btn")[i]
     download.click()
-    x = download.get_attribute('text').split()[-2:]
-    file_size = human_to_bytes((x[0] + x[1]).strip('()'))
+    await dl.edit("`Starting download...`")
+    file_size = human_to_bytes(download.text.split(None, 3)[-1].strip('()'))
     display_message = None
     complete = False
     start = time.time()
     while complete is False:
         if os.path.isfile(file_path + '.crdownload'):
-            downloaded = os.stat(file_path + '.crdownload').st_size
-            status = "Downloading"
+            try:
+                downloaded = os.stat(file_path + '.crdownload').st_size
+                status = "Downloading"
+            except OSError:  # Rare case
+                await asyncio.sleep(1)
+                continue
         elif os.path.isfile(file_path):
             downloaded = os.stat(file_path).st_size
             file_size = downloaded
@@ -237,24 +198,25 @@ async def download_api(dl):
             display_message = current_message
         if downloaded == file_size:
             if not os.path.isfile(file_path):  # Rare case
-                await asyncio.sleep(3.5)
+                await asyncio.sleep(1)
+                continue
             MD5 = await md5(file_path)
             if md5_origin == MD5:
                 complete = True
             else:
                 await dl.edit("`Download corrupt...`")
                 os.remove(file_path)
-                driver.close()
+                driver.quit()
                 return
     await dl.respond(
         f"`{file_name}`\n\n"
         f"Successfully downloaded to `{file_path}`."
     )
     await dl.delete()
-    driver.close()
+    driver.quit()
     return
-
-
+ 
+ 
 @register(outgoing=True, pattern=r"^.specs(?: |)([\S]*)(?: |)([\s\S]*)")
 async def devices_specifications(request):
     """ Mobile devices specifications """
@@ -305,8 +267,8 @@ async def devices_specifications(request):
                 .replace('<b>', '').replace('</b>', '').strip()
             reply += f'**{title}**: {data}\n'
     await request.edit(reply)
-
-
+ 
+ 
 @register(outgoing=True, pattern=r"^.twrp(?: |$)(\S*)")
 async def twrp(request):
     """ get android device twrp """
@@ -332,8 +294,8 @@ async def twrp(request):
         f'[{dl_file}]({dl_link}) - __{size}__\n' \
         f'**Updated:** __{date}__\n'
     await request.edit(reply)
-
-
+ 
+ 
 CMD_HELP.update({
     "android":
     ">`.magisk`"
@@ -349,3 +311,4 @@ CMD_HELP.update({
     "\n\n>`.twrp <codename>`"
     "\nUsage: Get latest twrp download for android device."
 })
+ 
