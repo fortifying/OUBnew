@@ -7,7 +7,7 @@ from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from userbot import bot, CMD_HELP
 from userbot.events import register
 
-@register(outgoing=True, pattern="^.df(?: |$)(.*)")
+@register(outgoing=True, pattern=r'^.df(:? |$)([1-8])?')
 async def _(event):
     if event.fwd_from:
         return 
