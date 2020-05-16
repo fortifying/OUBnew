@@ -330,7 +330,7 @@ CMD_HELP.update({
 \n\n.get/.kang [emoji('s)] [number]\
 \nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
 \n\n.stkrinfo\
-\nUsage: Gets info about the sticker pack.
+\nUsage: Gets info about the sticker pack.\
 \n\n.getsticker\
 \nUsage: Convert sticker to PNG."
 })
