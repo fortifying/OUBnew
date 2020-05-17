@@ -105,7 +105,7 @@ async def mim(event):
                 response.media,
                 download_file_name,
                 )
-            requires_file_name = ./downloads/ + "memes.webp"
+            requires_file_name = TEMP_DOWNLOAD_DIRECTORY + "memes.webp"
             await bot.send_file(  # pylint:disable=E0602
                 event.chat_id,
                 requires_file_name,
