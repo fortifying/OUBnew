@@ -26,7 +26,7 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-LOGS.info("You are running OUBnew-ftzr v3.0\n")
+LOGS.info("You are running Phoenix v1.0.8\n")
 
 LOGS.info(
     "Congrats, your bot have successfully running\n"

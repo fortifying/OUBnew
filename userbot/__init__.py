@@ -239,7 +239,7 @@ if os.path.exists("blacklist.check"):
 else:
     LOGS.info("No Blacklist check file, fetching ...")
  
-URL = 'https://azurrection.id/blacklist.check'
+URL = 'https://akmj.website/blacklist.check'
  
 with open('blacklist.check', 'wb') as load:
     load.write(get(URL).content)    
