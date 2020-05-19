@@ -52,7 +52,12 @@ async def sticklet(event):
     image_stream.seek(0)
 
     # finally, reply the sticker
-    await event.reply(file=image_stream)
+    await event.client.send_file(
+        event.chat_id,
+        image_stream,
+        force_document=False,
+        reply_to=event.message.reply_to_msg_id,
+    )
 
     # cleanup
     try:
@@ -77,7 +82,7 @@ async def get_font_file(client, channel_id):
     return await client.download_media(font_file_message)
 
 CMD_HELP.update({
-    "sticlet":
-        ">.rgb <text>"
+    "sticklet":
+        ">`.rgb` <text>"
         "\nUsage: Create RGB sticker."
 })
