@@ -276,7 +276,7 @@ async def check_botlog_chatid():
  
 with bot:
     try:
-        bot(JoinChannelRequest("@null"))
+        bot(JoinChannelRequest("@PakarJembut"))
         bot(JoinChannelRequest("@userbotindo"))       
         
         tgbot = TelegramClient(
@@ -301,7 +301,7 @@ with bot:
             builder = event.builder
             result = None
             query = event.text
-            if event.query.user_id == uid and query.startswith("@exscythe"):
+            if event.query.user_id == uid and query.startswith("@PakarJembut"):
                 rev_text = query[::-1]
                 buttons = paginate_help(0, dugmeler, "helpme")
                 result = builder.article(
