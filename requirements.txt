@@ -22,6 +22,7 @@ gTTS-token
 hachoir
 httplib2
 google-auth-httplib2
+instantmusic
 humanize
 lxml
 oauth2client
