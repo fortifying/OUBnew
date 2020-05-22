@@ -8,12 +8,18 @@
 from asyncio import sleep
 from random import choice, getrandbits, randint
 from re import sub
+from PIL import Image
+from telethon.tl.functions.account import UpdateNotifySettingsRequest
+from telethon.tl.types import MessageMediaPhoto
+import re
 import time
-
+import datetime
 from collections import deque
-
+import urllib
 import requests
-
+import io
+import os
+from bs4 import BeautifulSoup
 from cowpy import cow
 
 from userbot import CMD_HELP, LOGS
@@ -873,6 +879,29 @@ async def lol(lel):
         okay = okay[:-1] + "_-"
         await lel.edit(okay)
 
+@register(outgoing=True, pattern="^.boobs(?: |$)(.*)")
+async def boobs(e):
+    await e.edit("`Finding some big boobs...`")
+    await sleep(3)
+    await e.edit("`Sending some big boobs...`")
+    nsfw = requests.get('http://api.oboobs.ru/noise/1').json()[0]["preview"]
+    urllib.request.urlretrieve("http://media.oboobs.ru/{}".format(nsfw), "*.jpg")
+    os.rename('*.jpg', 'boobs.jpg')
+    await bot.send_file(e.chat_id, "boobs.jpg")
+    os.remove("boobs.jpg")
+    await e.delete()
+    
+@register(outgoing=True, pattern="^.butts(?: |$)(.*)")
+async def butts(e):
+    await e.edit("`Finding some beautiful butts...`")
+    await sleep(3)
+    await e.edit("`Sending some beautiful butts...`")
+    nsfw = requests.get('http://api.obutts.ru/noise/1').json()[0]["preview"]
+    urllib.request.urlretrieve("http://media.obutts.ru/{}".format(nsfw), "*.jpg")
+    os.rename('*.jpg', 'butts.jpg')
+    await bot.send_file(e.chat_id, "butts.jpg")
+    os.remove("butts.jpg")
+    await e.delete()
 
 @register(outgoing=True, pattern="^.(yes|no|maybe|decide)$")
 async def decide(event):
@@ -1526,6 +1555,10 @@ CMD_HELP.update({
 \nUsage: Just a small command to make your keyboard become a typewriter!\
 \n\n>`.lfy` <query>\
 \nUsage: Let me Google that for you real quick !!\
+\n\n>`.boobs`\
+\nUsage: Get b00bs imej\
+\n\n>`.butts`\
+\nUsage: Get 🅱️utts imej\
 \n\n>`.decide` [Alternates: (`.yes`, `.no`, `.maybe`)]\
 \nUsage: Make a quick decision.\
 \n\n>`.scam` <action> <time>\
