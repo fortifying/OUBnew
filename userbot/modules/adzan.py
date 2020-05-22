@@ -18,7 +18,7 @@ async def get_adzan(adzan):
     else:
         LOCATION = adzan.pattern_match.group(1)
 
-    url = f'http://muslimsalat.com/{LOCATION}.json?key=bd099c5825cbedb9aa934e255a81a5fc'
+    url = f'http://muslimsalat.com/{LOCATION}.json?key=2e78acba015745177969e7a03ea46c1a'
     # url = f'https://api.pray.zone/v2/times/today.json?city={LOCATION}'
     request = requests.get(url)
     if request.status_code == 500:
