@@ -18,8 +18,8 @@ async def get_adzan(adzan):
     else:
         LOCATION = adzan.pattern_match.group(1)
 
-    url = f'http://muslimsalat.com/{LOKASI}.json?key=bd099c5825cbedb9aa934e255a81a5fc'
-    # url = f'https://api.pray.zone/v2/times/today.json?city={LOCATION}'
+    # url = f'http://muslimsalat.com/{LOKASI}.json?key=bd099c5825cbedb9aa934e255a81a5fc'
+    url = f'https://api.pray.zone/v2/times/today.json?city={LOCATION}'
     request = requests.get(url)
     if request.status_code == 500:
         return await adzan.edit(f"Couldn't find city `{LOCATION}`")
