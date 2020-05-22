@@ -12,6 +12,7 @@ from PIL import Image
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from telethon.tl.types import MessageMediaPhoto
 import re
+from urllib.request import urlopen
 import time
 import datetime
 from collections import deque
