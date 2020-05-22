@@ -23,7 +23,7 @@ import os
 from bs4 import BeautifulSoup
 from cowpy import cow
 
-from userbot import CMD_HELP, LOGS
+from userbot import bot, CMD_HELP, LOGS
 from userbot.events import register
 from userbot.modules.admin import get_user_from_event
 
