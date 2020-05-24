@@ -83,7 +83,7 @@ async def instagram_dl(igdl):
         os.makedirs(input_str)
     try:
         await igdl.edit(f"`Getting info.....`")
-        looter = ProfileLooter(f"{uname}")
+        looter = InstaLooter(profile=uname)
         looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
 
     except ValueError:
