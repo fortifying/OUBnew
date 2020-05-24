@@ -84,7 +84,7 @@ async def instagram_dl(igdl):
     try:
         await igdl.edit(f"`Getting info.....`")
         looter = ProfileLooter(uname)
-        looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
+        looter.download('TEMP_DOWNLOAD_DIRECTORY', media_count=5)
 
     except ValueError:
         await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
