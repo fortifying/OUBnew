@@ -83,15 +83,15 @@ async def instagram_dl(igdl):
         os.makedirs(input_str)
     try:
         await igdl.edit(f"`Getting info.....`")
-        looter = ProfileLooter(uname_ig)
+        looter = ProfileLooter("uname")
         looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
 
     except ValueError:
-        await igdl.edit(f"**Account {uname_ig} Not Found.**\nPlease enter correct username.")
+        await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
         return
         
     except RuntimeError:
-        await igdl.edit(f"**Can't Catch Media.**\nAccount {uname_ig} is Private.")
+        await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
         return
 
     await igdl.edit("Processing ...")
@@ -120,7 +120,7 @@ async def instagram_dl(igdl):
                     await igdl.client.send_file(
                         igdl.chat_id,
                         single_file,
-                        caption=f"[{uname_ig}](https://instagram.com/{uname_ig})",
+                        caption=f"[{uname}](https://instagram.com/{uname})",
                         force_document=True,
                         allow_cache=False,
                         progress_callback=lambda d, t: asyncio.get_event_loop(
