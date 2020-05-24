@@ -4,7 +4,7 @@
 # Licensed under the Raphielscape Public License, Version 1.d (the "License");
 # you may not use this file except in compliance with the License.
 
-from instalooter.looters import ProfileLooter , InstaLooter
+from instalooter.looters import ProfileLooter
 import os
 import time
 import asyncio
@@ -77,21 +77,21 @@ def time_formatter(milliseconds: int) -> str:
 @register(outgoing=True, pattern=r"^.ig(?: |$)(.*)")
 async def instagram_dl(igdl):
     """ To downloading photos from instagram account """
-    uname = igdl.pattern_match.group(1)
+    uname_ig_ig = igdl.pattern_match.group(1)
     input_str = TEMP_DOWNLOAD_DIRECTORY
     if not os.path.exists(input_str):
         os.makedirs(input_str)
     try:
         await igdl.edit(f"`Getting info.....`")
-        looter = InstaLooter(profile=uname)
+        looter = ProfileLooter(uname_ig)
         looter.download(TEMP_DOWNLOAD_DIRECTORY, media_count=5)
 
     except ValueError:
-        await igdl.edit(f"**Account {uname} Not Found.**\nPlease enter correct username.")
+        await igdl.edit(f"**Account {uname_ig} Not Found.**\nPlease enter correct username.")
         return
         
     except RuntimeError:
-        await igdl.edit(f"**Can't Catch Media.**\nAccount {uname} is Private.")
+        await igdl.edit(f"**Can't Catch Media.**\nAccount {uname_ig} is Private.")
         return
 
     await igdl.edit("Processing ...")
@@ -120,7 +120,7 @@ async def instagram_dl(igdl):
                     await igdl.client.send_file(
                         igdl.chat_id,
                         single_file,
-                        caption=f"[{uname}](https://instagram.com/{uname})",
+                        caption=f"[{uname_ig}](https://instagram.com/{uname_ig})",
                         force_document=True,
                         allow_cache=False,
                         progress_callback=lambda d, t: asyncio.get_event_loop(
