@@ -3,11 +3,11 @@ import os
 from PIL import Image
 from datetime import datetime
 from telegraph import Telegraph, upload_file, exceptions
-from userbot import (TELEGRAPH_SHORT_NAME, TEMP_DOWNLOAD_DIRECTORY, BOTLOG_CHATID, CMD_HELP, bot)
+from userbot import (TEMP_DOWNLOAD_DIRECTORY, BOTLOG_CHATID, CMD_HELP, bot)
 from userbot.events import register
 
 telegraph = Telegraph()
-r = telegraph.create_account(short_name=TELEGRAPH_SHORT_NAME)
+r = telegraph.create_account(short_name=tele.graph)
 auth_url = r["auth_url"]
 
 
@@ -71,7 +71,7 @@ async def telegraphs(graph):
                 ms = (end - start).seconds
                 await graph.edit("Pasted to https://telegra.ph/{} in {} seconds.".format(response["path"], ms), link_preview=True)
         else:
-            await graph.edit("Reply to a message to get a permanent telegra.ph link. (Inspired by @ControllerBot)")
+            await graph.edit("Reply to a message to get a permanent telegra.ph link.")
 
 
 def resize_image(image):
@@ -80,6 +80,6 @@ def resize_image(image):
 
 
 CMD_HELP.update({
-    'telegraph': '.telegraph media | text\
+    'telegraph': '>`.telegraph media | text`\
         \nUsage: Upload text & media on Telegraph.'
 })
