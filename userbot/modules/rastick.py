@@ -25,7 +25,7 @@ def deEmojify(inputString: str) -> str:
 
 
 
-@register(outgoing=True, pattern="^\.rst(?: |$)(.*)")
+@register(outgoing=True, pattern="^\.rs(?: |$)(.*)")
 async def rastick(animu):
     text = animu.pattern_match.group(1)
     if not text:
