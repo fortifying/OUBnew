@@ -65,3 +65,4 @@ wget
 python-dateutil
 justwatch
 bitlyshortener
+justwatch
