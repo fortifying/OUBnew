@@ -40,7 +40,7 @@ pySmartDL
 python-barcode
 python-dotenv
 PyGithub
-youtube-dl
+youtube-dl>=2019.9.28
 regex
 pytz
 qrcode
