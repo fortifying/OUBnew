@@ -6,7 +6,7 @@ Available Commands:
 from telethon import events
 import asyncio
 from userbot.events import register 
-from userbot import bot, G_BAN_LOGGER_GROUP, ALIVE_NAME
+from userbot import bot, CMD_HELP, G_BAN_LOGGER_GROUP, ALIVE_NAME
 #imported from uniborg by @heyworld
 
 # ================= CONSTANT =================

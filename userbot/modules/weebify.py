@@ -168,5 +168,5 @@ CMD_HELP.update({
 \n\n`.medieval` make text medival.\
 \n\n`.medievalbold` make text medival bold.\
 \n\n`.doublestruck` make text doublestruck.\
-\n\n`.bold` make text bold.\"
+\n\n`.bold` make text bold."
 })
