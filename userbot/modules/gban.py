@@ -62,5 +62,5 @@ CMD_HELP.update({
 `.gban reason`\
 \nUsage: Globally Ban users from all the Group Administrations bots where you are SUDO.\
 \n\n`.ungban reason`\
-\nUsage: Globally unBan users from all the Group Administrations bots where you are SUDO\"
+\nUsage: Globally unBan users from all the Group Administrations bots where you are SUDO"
 })
