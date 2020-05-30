@@ -74,6 +74,14 @@
       "description": "Get your own APPID (API key)from https://api.openweathermap.org/data/2.5/weather",
       "required": false
     },
+	"G_BAN_LOGGER_GROUP": {
+      "description": "Same as BOTLOG_CHATID. Put your group ID here to enable Gban features.",
+      "required": false
+    },
+	"TERM_ALIAS": {
+      "description": "Some unique name or else.",
+      "required": true
+    },
     "BOTLOG": {
       "description": "Incase you want to turn off logging, put this to false",
       "value": "False"
@@ -114,17 +122,13 @@
       "description": "Report spambots to @admins in groups after they join, just in case when you don't have admin powers to kick that shit yourself.",
       "value": "False"
     },
-    "TMP_DOWNLOAD_DIRECTORY": {
+    "TEMP_DOWNLOAD_DIRECTORY": {
       "description": "Download location for many modules (GDrive, .download etc..)",
       "value": "./downloads/"
     },
     "CLEAN_WELCOME": {
       "description": "When a new person joins, the old welcome message is deleted.",
       "value": "True"
-    },
-    "G_DRIVE_CLIENT_ID": {
-      "description": "Enter Your Client ID for Google Drive.",
-      "required": false
     },
     "LASTFM_API": {
       "description": "API Key for Last.FM module. [Get one from - https://www.last.fm/api/account/create]",
@@ -162,10 +166,6 @@
     },
     "G_DRIVE_DATA": {
       "description": "Your client_secret.json.",
-      "required": false
-    },
-    "G_DRIVE_AUTH_TOKEN_DATA": {
-      "description": "Enter the Google Drive authentication data, as a JSON structure.",
       "required": false
     },
     "LYDIA_API_KEY": {
