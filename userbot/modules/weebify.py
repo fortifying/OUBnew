@@ -159,15 +159,14 @@ async def xcursive(cursivelite):
     
 
     
-     CMD_HELP.update({
-     "textx":
-     "Usage: .font <text>\
-       \n`.weeb` Weebify a text\
-     \n\n`.cursive` make text cursive.\
-     \n\n`.cursivebold` make text cursive bold.\
-     \n\n`.medieval` make text medival.\
-     \n\n`.medievalbold` make text medival bold.\
-     \n\n`.doublestruck` make text doublestruck.\
-     \n\n`.bold` make text bold."
-   
- })
+CMD_HELP.update({
+    "textx":
+"Usage: .font <text>\
+\n`.weeb` Weebify a text\
+\n\n`.cursive` make text cursive.\
+\n\n`.cursivebold` make text cursive bold.\
+\n\n`.medieval` make text medival.\
+\n\n`.medievalbold` make text medival bold.\
+\n\n`.doublestruck` make text doublestruck.\
+\n\n`.bold` make text bold.\"
+})

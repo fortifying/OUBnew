@@ -57,10 +57,10 @@ async def _(event):
     asyncio.sleep(3.5)
     await event.reply(f"user ungbanned by @{DEFAULTUSER}")
     
-# CMD_HELP.update({
-#     "gban": "\
-# `.gban reason`\
-# \nUsage: Globally Ban users from all the Group Administrations bots where you are SUDO.\
-# \n\n`.ungban reason`\
-# \nUsage: Globally unBan users from all the Group Administrations bots where you are SUDO"
-# })
+ CMD_HELP.update({
+     "gban": "\
+`.gban reason`\
+\nUsage: Globally Ban users from all the Group Administrations bots where you are SUDO.\
+\n\n`.ungban reason`\
+\nUsage: Globally unBan users from all the Group Administrations bots where you are SUDO\"
+})
