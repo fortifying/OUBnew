@@ -888,7 +888,7 @@ async def boobs(e):
     nsfw = requests.get('http://api.oboobs.ru/noise/1').json()[0]["preview"]
     urllib.request.urlretrieve("http://media.oboobs.ru/{}".format(nsfw), "*.jpg")
     os.rename('*.jpg', 'boobs.jpg')
-    await bot.send_file(e.chat_id, "boobs.jpg")
+    await e.client.send_file(e.chat_id, "boobs.jpg")
     os.remove("boobs.jpg")
     await e.delete()
     
@@ -900,7 +900,7 @@ async def butts(e):
     nsfw = requests.get('http://api.obutts.ru/noise/1').json()[0]["preview"]
     urllib.request.urlretrieve("http://media.obutts.ru/{}".format(nsfw), "*.jpg")
     os.rename('*.jpg', 'butts.jpg')
-    await bot.send_file(e.chat_id, "butts.jpg")
+    await e.client.send_file(e.chat_id, "butts.jpg")
     os.remove("butts.jpg")
     await e.delete()
 
