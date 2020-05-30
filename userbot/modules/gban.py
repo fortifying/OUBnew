@@ -55,7 +55,7 @@ async def _(event):
     await event.delete()
     await event.reply("ungbanning...")
     asyncio.sleep(3.5)
-    await event.reply(f"user ungbanned by @{DEFAULTUSER}")
+    await event.reply(f"user ungbanned by` {DEFAULTUSER} `")
     
 CMD_HELP.update({
      "gban": "\
