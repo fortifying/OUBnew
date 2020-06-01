@@ -196,6 +196,15 @@
       "description": "set alias name for term cmd",
       "required": false
     },  	
+    "IMG_LIMIT": {
+      "description": "Set limit for .img module",
+      "value": "3",
+      "required": true
+    },
+    "BITLY_TOKEN": {
+      "description": "Your Bit.ly API key, get it from 'https://bitly.com/a/sign_up'",
+      "value": ""
+    },
     "LOGSPAMMER": {
       "description": "Set this to True in case you want the error logs to be stored in the userbot log group, instead of spitting out the file in the current chat, requires a valid BOTLOG_CHATID to be set.",
       "value": "True"

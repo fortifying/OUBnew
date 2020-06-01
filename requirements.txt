@@ -63,3 +63,5 @@ redis
 beautifulsoup4
 wget
 python-dateutil
+justwatch
+bitlyshortener
