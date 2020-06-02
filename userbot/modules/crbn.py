@@ -1,7 +1,5 @@
 from userbot import CMD_HELP
 
-"" for carbon cmd help ""
-
 CMD_HELP.update({
     "carbon":
     "`.carbon1` <text> [or reply]\
