@@ -46,6 +46,7 @@ pytz
 qrcode
 requests
 search-engine-parser
+selenium
 speedtest-cli
 sqlalchemy
 telethon
