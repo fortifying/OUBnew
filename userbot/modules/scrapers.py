@@ -897,6 +897,7 @@ CMD_HELP.update({
     ">`.currency <amount> <from> <to>`"
     "\nUsage: Converts various currencies for you.",
     "\nUsage: Beautify your code using carbon.now.sh\n"
+    "carbon":
     "Use .crblang <text> to set language for your code.",
     "google":
     ">`.google <query>`"
