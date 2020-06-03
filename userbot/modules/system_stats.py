@@ -186,7 +186,7 @@ async def amireallyalive(alive):
                   f"`Python  : v{python_version()} `\n"
                      "----------------------------------------\n"
                   f"`User : `{DEFAULTUSER} \n\n"
-                  f"`All modules loaded with {MODULESTR} errors`")
+                  f"`All modules loaded with ({MODULESTR}) errors`")
 
 
 @register(outgoing=True, pattern="^.aliveu")
