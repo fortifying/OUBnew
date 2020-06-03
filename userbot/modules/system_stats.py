@@ -181,14 +181,14 @@ async def amireallyalive(alive):
         await alive.edit("`alive Commad isn't permitted on channels`")
         return
     """ For .alive command, check if the bot is running.  """
-    await alive.edit("running on__ {UPSTREAM_REPO_BRANCH}__ \n"  
+    await alive.edit(f"running on__{UPSTREAM_REPO_BRANCH}__ \n"  
                      "----------------------------------------\n"    
                      "`Bot Version Info` \n"
                   f"`Telethon : v{version.__version__} `\n"
                   f"`Python  : v{python_version()} `\n"
                      "----------------------------------------\n"
                   f"`User : `{DEFAULTUSER} \n\n"
-                   "`All modules loaded with (0) errors`")
+                  f"`All modules loaded with {MODULESTR} errors`")
 
 
 @register(outgoing=True, pattern="^.aliveu")
