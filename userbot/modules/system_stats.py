@@ -12,7 +12,7 @@ from shutil import which
 from os import remove
 from telethon import version
 
-from userbot import CMD_HELP, ALIVE_NAME
+from userbot import CMD_HELP, ALIVE_NAME, UPSTREAM_REPO_BRANCH
 from userbot.events import register
 
 # ================= CONSTANT =================
@@ -181,7 +181,7 @@ async def amireallyalive(alive):
         await alive.edit("`alive Commad isn't permitted on channels`")
         return
     """ For .alive command, check if the bot is running.  """
-    await alive.edit("running on __sql-extended__ \n"  
+    await alive.edit("running on__ {UPSTREAM_REPO_BRANCH}__ \n"  
                      "----------------------------------------\n"    
                      "`Bot Version Info` \n"
                   f"`Telethon : v{version.__version__} `\n"
