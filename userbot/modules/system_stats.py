@@ -19,9 +19,7 @@ from userbot.events import register
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 # ============================================
 
-MODULESTR = [
-    "0"
-]
+MODULESTR = 0
 
 @register(outgoing=True, pattern="^.sysd$")
 async def sysdetails(sysd):
@@ -181,7 +179,7 @@ async def amireallyalive(alive):
         await alive.edit("`alive Commad isn't permitted on channels`")
         return
     """ For .alive command, check if the bot is running.  """
-    await alive.edit(f"running on__{UPSTREAM_REPO_BRANCH}__ \n"  
+    await alive.edit(f"running on __{UPSTREAM_REPO_BRANCH}__ \n"  
                      "----------------------------------------\n"    
                      "`Bot Version Info` \n"
                   f"`Telethon : v{version.__version__} `\n"
