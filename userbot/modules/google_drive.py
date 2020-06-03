@@ -463,9 +463,9 @@ async def download_gdrive(gdrive, service, uri):
                     speed = round(downloaded / diff, 2)
                     eta = round((file_size - downloaded) / speed)
                     prog_str = "`Downloading...` | [{0}{1}] `{2}%`".format(
-                        "".join(["●" for i in range(
+                        "".join(["▰" for i in range(
                                 math.floor(percentage / 10))]),
-                        "".join(["○" for i in range(
+                        "".join(["▱" for i in range(
                                 10 - math.floor(percentage / 10))]),
                         round(percentage, 2))
                     current_message = (
