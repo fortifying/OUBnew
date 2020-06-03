@@ -1,4 +1,4 @@
-[![Build](https://github.com/fortifying/OUBnew/workflows/FailedChecker/badge.svg?branch=sql-extended)](https://github.com/fortifying/OUBnew/actions "Build")
+[![Build](https://github.com/fortifying/OUBnew/workflows/FailedChecker/badge.svg?branch=sql-extended)](https://github.com/fortifying/OUBnew/actions "Build") [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e35faa6a680f4d66abdffddaad76e418)](https://app.codacy.com/manual/MoveAngel/One4uBot?utm_source=github.com&utm_medium=referral&utm_content=fortifying/OUBnew&utm_campaign=Badge_Grade_Dashboard) ![Last Commit](https://img.shields.io/github/last-commit/fortifying/OUBnew/sql-extended) ![Contributors](https://img.shields.io/github/contributors/fortifying/OUBnew?color=LightSlateGrey)
 # Project OUBnew-Fortizer
 
 `
@@ -46,8 +46,15 @@ Also join <a href="https://t.me/userbotindo">Userbot INDO🇮🇩</a> Telegram G
 
 
 
-<h2 align="center">Credits</h2>
-<p align="center"><a href="https://github.com/fortifying/OUBnew/graphs/contributors">Big thanks for Everyone who help making this project</a></p>
+
+## Credits
+* [lonami](https://lonami.dev) - For creating [Telethon](https://github.com/LonamiWebs/Telethon)
+* [RaphielGang](https://github.com/RaphielGang) - Telegram-Paperplane
+* [AvinashReddy3108](https://github.com/AvinashReddy3108) - PaperplaneExtended
+* [kandnub](https://github.com/kandnub) - TG-UserBot
+* [AdekMaulana](https://github.com/adekmaulana) - ProjectBish
+* [Mkaraniya](https://github.com/mkaraniya) - OpenUserBot
+
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
-<p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Fortizer@HeinzDF Public License</a> - Version 1.d, March 2020</p>
+<p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Fortizer@HeinzDF Public License</a> - Version 1.d, June 2020</p>
