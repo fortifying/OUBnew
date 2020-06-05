@@ -163,8 +163,8 @@ async def mention_afk(mention):
                 afk_since = f"`{int(seconds)}s` ago"
             if mention.sender_id not in USERS:
                 if AFKREASON:
-                    await mention.reply(f"{str(choice(AFKSTR))}\n"
-    f"\n\nI'm AFK right now {afk_since}"
+                    await mention.reply(f"{str(choice(AFKSTR))}"
+    f"\n\nI'm AFK right now since {afk_since}"
     f"\nReason: `{AFKREASON}`")
                 else:
                     await mention.reply(str(choice(AFKSTR)))
@@ -238,7 +238,7 @@ async def afk_on_pm(sender):
             if sender.sender_id not in USERS:
                 if AFKREASON:
                     await sender.reply(f"{str(choice(AFKSTR))}\n"
-    f"\n\nI'm AFK right now {afk_since}"
+    f"\n\nI'm AFK right now since {afk_since}"
     f"\nReason: `{AFKREASON}`")
                 else:
                     await sender.reply(str(choice(AFKSTR)))
