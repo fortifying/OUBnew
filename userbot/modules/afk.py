@@ -172,9 +172,9 @@ async def mention_afk(mention):
                 COUNT_MSG = COUNT_MSG + 1
             elif mention.sender_id in USERS:
                     if AFKREASON:
-                        await mention.reply(f"**As I said, my Mastor is not online since** {afk_since}.\
-                        \n**Leave your Message here and I'll go back soon..**\
-                            \nAFK Reason: `{AFKREASON}`")
+                        await await mention.reply(f"{str(choice(AFKSTR))}"
+    f"\n\nI'm AFK right now since {afk_since}"
+    f"\nReason: `{AFKREASON}`")
                     else:
                         await mention.reply(str(choice(AFKSTR)))
                     USERS[mention.sender_id] = USERS[mention.sender_id] + 1
