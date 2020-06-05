@@ -71,10 +71,6 @@ async def killdabot(event):
 @register(outgoing=True, pattern="^.restart$")
 async def killdabot(event):
     await event.edit(f"`Restarting` **⬢ {DEFAULTUSER}**..")
-    if event.is_channel and not event.is_group:
-        await event.edit("`Restart isn't permitted on channels`")
-        return
-    await event.edit("`*i would be back in a moment*`")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#RESTART \n"
                                         "Bot Restarted")
