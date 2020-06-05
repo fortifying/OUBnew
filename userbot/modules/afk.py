@@ -172,7 +172,7 @@ async def mention_afk(mention):
                 COUNT_MSG = COUNT_MSG + 1
             elif mention.sender_id in USERS:
                     if AFKREASON:
-                        await await mention.reply(f"{str(choice(AFKSTR))}"
+                        await mention.reply(f"{str(choice(AFKSTR))}"
     f"\n\nI'm AFK right now since {afk_since}"
     f"\nReason: `{AFKREASON}`")
                     else:
