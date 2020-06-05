@@ -75,8 +75,50 @@ async def setlang(prog):
     global CARBONLANG
     CARBONLANG = prog.pattern_match.group(1)
     await prog.edit(f"Language for carbon.now.sh set to {CARBONLANG}")
+
+@register(outgoing=True, pattern="^\.carbon")
+async def carbon_api(e):
+    """ A Wrapper for carbon.now.sh """
+    await e.edit("`Processing...`")
+    CARBON = 'https://carbon.now.sh/?l={lang}&code={code}'
+    global CARBONLANG
+    textx = await e.get_reply_message()
+    pcode = e.text
+    if pcode[8:]:
+        pcode = str(pcode[8:])
+    elif textx:
+        pcode = str(textx.message)  # Importing message to module
+    code = quote_plus(pcode)  # Converting to urlencoded
+    await e.edit("`Processing...\n25%`")
+    file_path = TEMP_DOWNLOAD_DIRECTORY + "carbon.png"
+    if os.path.isfile(file_path):
+        os.remove(file_path)
+    url = CARBON.format(code=code, lang=CARBONLANG)
+    driver = await chrome()
+    driver.get(url)
+    await e.edit("`Processing...\n50%`")
+    driver.find_element_by_xpath("//button[@id='export-menu']").click()
+    driver.find_element_by_xpath("//button[contains(text(),'4x')]").click()
+    driver.find_element_by_xpath("//button[contains(text(),'PNG')]").click()
+    await e.edit("`Processing...\n75%`")
+    # Waiting for downloading
+    while not os.path.isfile(file_path):
+        await sleep(0.5)
+    await e.edit("`Processing...\n100%`")
+    await e.edit("`Uploading...`")
+    await e.client.send_file(
+        e.chat_id,
+        file_path,
+        force_document=False,
+        reply_to=e.message.reply_to_msg_id,
+    )
  
-@register(outgoing=True, pattern="^.carbon1")
+    os.remove(file_path)
+    driver.quit()
+    # Removing carbon.png after uploading
+    await e.delete()  # Deleting msg
+
+@register(outgoing=True, pattern="^.carbon2")
 async def carbon_api(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing..`")
@@ -142,7 +184,7 @@ async def carbon_api(e):
     await e.delete()  # Deleting msg
     
  
-@register(outgoing=True, pattern="^.carbon2")
+@register(outgoing=True, pattern="^.carbon3")
 async def carbon_api(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing..`")
@@ -208,7 +250,7 @@ async def carbon_api(e):
     await e.delete()  # Deleting msg
     
  
-@register(outgoing=True, pattern="^.carbon3")
+@register(outgoing=True, pattern="^.carbon4")
 async def carbon_api(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing..`")
@@ -274,7 +316,7 @@ async def carbon_api(e):
     await e.delete()  # Deleting msg
     
     
-@register(outgoing=True, pattern="^.carbon4")
+@register(outgoing=True, pattern="^.carbon5")
 async def carbon_api(e):
     """ A Wrapper for carbon.now.sh """
     await e.edit("`Processing..`")
