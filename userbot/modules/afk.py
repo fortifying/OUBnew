@@ -171,7 +171,6 @@ async def mention_afk(mention):
                 USERS.update({mention.sender_id: 1})
                 COUNT_MSG = COUNT_MSG + 1
             elif mention.sender_id in USERS:
-                if USERS[mention.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
                         await mention.reply(f"**As I said, my Mastor is not online since** {afk_since}.\
                         \n**Leave your Message here and I'll go back soon..**\
