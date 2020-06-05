@@ -2,13 +2,10 @@ aiohttp
 aria2p
 async_generator
 bs4
-base
 cowpy
 beautifulsoup4
 cryptg
 cffi
-covid
-coffeehouse
 dnspython
 emoji
 gitpython
@@ -33,10 +30,6 @@ pylast
 pySmartDL
 python-barcode
 python-dotenv
-pyGithub
-pyfiglet
-regex
-instantmusic
 youtube-dl
 pytz
 qrcode
@@ -44,12 +37,9 @@ requests
 search-engine-parser
 speedtest-cli
 sqlalchemy
-selenium
 telethon
 telethon-session-sqlalchemy
 urbandict
-lyricsgenius
-redis
 wikipedia
 telegraph
 python-dateutil
