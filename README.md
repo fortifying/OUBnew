@@ -1,4 +1,4 @@
-[![Build](https://github.com/fortifying/OUBnew/workflows/FailedChecker/badge.svg?branch=sql-extended)](https://github.com/fortifying/OUBnew/actions "Build") [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e35faa6a680f4d66abdffddaad76e418)](http://app.codacy.com/manual/fortifying/OUBnew/dashboard) ![Last Commit](https://img.shields.io/github/last-commit/fortifying/OUBnew/sql-extended) ![Contributors](https://img.shields.io/github/contributors/fortifying/OUBnew?color=LightSlateGrey)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e35faa6a680f4d66abdffddaad76e418)](http://app.codacy.com/manual/fortifying/OUBnew/dashboard) ![Last Commit](https://img.shields.io/github/last-commit/fortifying/OUBnew/sql-extended) ![Contributors](https://img.shields.io/github/contributors/fortifying/OUBnew?color=LightSlateGrey)
 # Project OUBnew-Fortizer
 
 `
