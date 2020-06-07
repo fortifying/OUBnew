@@ -157,12 +157,11 @@
     },
     "SS_LAYER_KEY": {
       "description": "Key for screencap modules. get it from https://screenshotlayer.com/product.",
-      "value": "YOUR TOKEN",
       "required": false
     },
     "ALIVE_NAME": {
-      "description": "Name to show in .alive message",
-      "required": false
+      "description": "Name to show in .alive message, Fill this with your name or else.",
+      "required": true
     },
     "G_DRIVE_DATA": {
       "description": "Your client_secret.json.",
