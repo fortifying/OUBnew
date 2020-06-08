@@ -1,7 +1,6 @@
 # We're using ArchLinux
 FROM dasbastard/arch:latest
  
-RUN pacman -Syu
 RUN pacman -S python3-pip
 
 #
