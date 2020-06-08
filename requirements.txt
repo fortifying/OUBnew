@@ -6,7 +6,7 @@ cowpy
 covid
 REPO_LINK
 cryptg
-cffi
+cffi>=1.0.0
 dnspython
 emoji
 gitpython
