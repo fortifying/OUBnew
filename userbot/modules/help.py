@@ -1,6 +1,6 @@
 # Copyright (C) 2019 The Raphielscape Company LLC.
 #
-# Licensed under the Raphielscape Public License, Version 1.c (the "License");
+# Licensed under the Raphielscape Public License, Version 1.d (the "License");
 # you may not use this file except in compliance with the License.
 #
 """ Userbot help command """
@@ -23,10 +23,10 @@ async def help(event):
         else:
             await event.edit("Please specify a valid module name.")
     else:
-        await event.edit("Please specify which module do you want help for !!\
-            \nUsage: .help <module name>")
-        string = ""
+        string = "**List of all loaded module(s)**\n\
+                 \nSpecify which module do you want help for !! \
+                 \n**Usage:** `.help` <module name>\n\n•    "
         for i in CMD_HELP:
             string += "`" + str(i)
-            string += "` - "
-        await event.reply(string)
+            string += "`\t\t\t•\t\t\t "
+        await event.edit(f"{string}")
