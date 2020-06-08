@@ -1,7 +1,7 @@
 {
   "name": "Project OUBnew-Fortizer bot Telegram",
   "description": "OUB fortizer running on Python 3.8+ with an sqlalchemy database.",
-  "logo": "https://telegra.ph/file/2d629aa7377e9129c18c2.jpg",
+  "logo": "https://telegra.ph/file/60e950dde25f7de86bcec.jpg",
   "keywords": [
     "telegram",
     "userbot",
@@ -36,8 +36,8 @@
       "value": ""
     },
     "HEROKU_APP_NAME": {
-      "description": "Add the Heroku app name here. It helps with userbot updates.",
-      "required": false
+      "description": "FILL THE VALUE, SAME AS THAT YOU CREATE IN APP NAME!.",
+      "required": true
     },
     "GITHUB_ACCESS_TOKEN": {
       "description": "Your GITHUB_ACCESS_TOKEN, get it from 'https://github.com/settings/tokens'",
