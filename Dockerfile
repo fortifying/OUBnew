@@ -1,8 +1,6 @@
 # We're using ArchLinux
 FROM dasbastard/arch:latest
  
-RUN pacman -S python-pip
-
 #
 # Clone repo and prepare working directory
 #
