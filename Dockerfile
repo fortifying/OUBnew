@@ -1,8 +1,8 @@
 # We're using ArchLinux
 FROM dasbastard/arch:latest
  
-RUN apt update && apt upgrade -y
-RUN apt install python3-pip
+RUN pacman -Syu
+RUN pacman -S python3-pip
 
 #
 # Clone repo and prepare working directory
