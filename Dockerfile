@@ -1,7 +1,7 @@
 # We're using ArchLinux
 FROM dasbastard/arch:latest
  
-RUN apt-get update && apt upgrade -y
+RUN apt update && apt upgrade -y
 RUN apt install python3-pip
 
 #
