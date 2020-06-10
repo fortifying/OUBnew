@@ -14,6 +14,10 @@ from userbot import CMD_HELP
 # from uniborg.util import admin_cmd, humanbytes, progress, time_formatter
 from userbot.util import admin_cmd, humanbytes, progress, time_formatter
 
+# ====================
+today = date.today()
+# ====================
+
 #  @borg.on(admin_cmd("compress"))
 @register(outgoing=True, pattern=r"^.compress(?: |$)(.*)")
 async def _(event):
