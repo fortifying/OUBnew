@@ -90,7 +90,8 @@ async def addzip(add):
                 )
             )
             directory_name = downloaded_file_name
-            await add.edit(downloaded_file_name)
+            success = str(downloaded_file_name).replace(".zips", "")
+            await add.edit(f"{success} Successfully added to list")
         except Exception as e:  # pylint:disable=C0103,W0703
             await mone.edit(str(e))
             return
@@ -116,7 +117,7 @@ async def upload_zip(up):
         caption="Zipped By EyePatch",
         force_document=True,
         allow_cache=False,
-        reply_to=event.message.id,
+        reply_to=up.message.id,
     )
     os.rmdir(ZIP_DOWNLOAD_DIRECTORY)
 
