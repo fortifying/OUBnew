@@ -119,7 +119,7 @@ async def mega_downloader(megadl):
               display_message != current_message or total_length == downloaded
               ):
                 await megadl.edit(current_message)
-                await asyncio.sleep(0.2)
+                await asyncio.sleep(2)
                 display_message = current_message
         except Exception:
             pass

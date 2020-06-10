@@ -163,23 +163,20 @@ async def mention_afk(mention):
                 afk_since = f"`{int(seconds)}s` ago"
             if mention.sender_id not in USERS:
                 if AFKREASON:
-                    await mention.reply(f"**My mastor is not here for a while since** {afk_since}.\
-                        \nReason: `{AFKREASON}`")
+                    await mention.reply(f"{str(choice(AFKSTR))}"
+    f"\n\nI'm AFK right now since {afk_since}"
+    f"\nReason: `{AFKREASON}`")
                 else:
                     await mention.reply(str(choice(AFKSTR)))
                 USERS.update({mention.sender_id: 1})
                 COUNT_MSG = COUNT_MSG + 1
             elif mention.sender_id in USERS:
-                if USERS[mention.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
-                        await mention.reply(f"**As I said, my Mastor is not online since** {afk_since}.\
-                        \n**Leave your Message here and I'll go back soon..**\
-                            \nAFK Reason: `{AFKREASON}`")
+                        await mention.reply(f"{str(choice(AFKSTR))}"
+    f"\n\nI'm AFK right now since {afk_since}"
+    f"\nReason: `{AFKREASON}`")
                     else:
                         await mention.reply(str(choice(AFKSTR)))
-                    USERS[mention.sender_id] = USERS[mention.sender_id] + 1
-                    COUNT_MSG = COUNT_MSG + 1
-                else:
                     USERS[mention.sender_id] = USERS[mention.sender_id] + 1
                     COUNT_MSG = COUNT_MSG + 1
 
@@ -240,8 +237,9 @@ async def afk_on_pm(sender):
                 afk_since = f"`{int(seconds)}s` ago"
             if sender.sender_id not in USERS:
                 if AFKREASON:
-                    await sender.reply(f"**My mastor is not here for a while since** {afk_since}.\
-                        \nReason: `{AFKREASON}`")
+                    await sender.reply(f"{str(choice(AFKSTR))}\n"
+    f"\n\nI'm AFK right now since {afk_since}"
+    f"\nReason: `{AFKREASON}`")
                 else:
                     await sender.reply(str(choice(AFKSTR)))
                 USERS.update({sender.sender_id: 1})

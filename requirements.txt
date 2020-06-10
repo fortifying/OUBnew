@@ -6,7 +6,7 @@ cowpy
 covid
 REPO_LINK
 cryptg
-cffi
+cffi>=1.0.0
 dnspython
 emoji
 gitpython
@@ -22,8 +22,6 @@ google-auth-httplib2
 instantmusic
 googletrans
 google_images_download
-gTTS
-gTTS-token
 hachoir
 heroku3
 httplib2
@@ -64,6 +62,5 @@ redis
 beautifulsoup4
 wget
 python-dateutil
-justwatch
 bitlyshortener
 justwatch

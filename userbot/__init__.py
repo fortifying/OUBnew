@@ -242,6 +242,10 @@ with bot:
             "valid entity. Check your environment variables/config.env file.")
         quit(1)
 
+# Userbot ver/tag/codename
+OUBnew_VER = "4.0"
+CODENAME = "Meltdown"
+
 # Global Variables
 COUNT_MSG = 0
 USERS = {}

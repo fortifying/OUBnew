@@ -108,6 +108,7 @@ def register(**args):
                     ftext += "\nwe respect your privacy,"
                     ftext += "\nyou may not report this error if you've"
                     ftext += "\nany confidential data here, no one will see your data\n"
+                    ftext += "\nSUPPORT CHAT PM: @heinzdf"
                     ftext += "================================\n\n"
                     ftext += "--------BEGIN USERBOT TRACEBACK LOG--------\n"
                     ftext += "\nDate: " + date
@@ -131,29 +132,24 @@ def register(**args):
                     stdout, stderr = await process.communicate()
                     result = str(stdout.decode().strip()) \
                         + str(stderr.decode().strip())
-
+ 
                     ftext += result
-
-                    file = open("error.log", "w+")
+ 
+                    file = open("crash.txt", "w+")
                     file.write(ftext)
                     file.close()
-
-                    if LOGSPAMMER:
-                        await check.client.respond(
-                            "`Sorry, my userbot has crashed."
-                            "\nThe error logs are stored in the userbot's log chat.`"
-                        )
-
-                        await check.client.send_file(send_to,
-                                                     "crash.txt",
-                                                     caption=text)
-                        remove("crash.txt")
+ 
+                    await check.client.send_file(BOTLOG_CHATID
+                                                if BOTLOG
+                                                else check.chat_id, "crash.txt", caption=text)
+                    remove("crash.txt")
+ 
             else:
                 pass
-
+ 
         if not disable_edited:
             bot.add_event_handler(wrapper, events.MessageEdited(**args))
         bot.add_event_handler(wrapper, events.NewMessage(**args))
         return wrapper
-
+ 
     return decorator

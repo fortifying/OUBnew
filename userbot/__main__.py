@@ -9,9 +9,10 @@ from importlib import import_module
 from sys import argv
 
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
-from userbot import LOGS, bot
+from userbot import LOGS, bot, OUBnew_VER, CODENAME
 from userbot.modules import ALL_MODULES
 
+VER = str(OUBnew_VER)
 
 INVALID_PH = '\nERROR: The Phone No. entered is INVALID' \
              '\n Tip: Use Country Code along with number.' \
@@ -26,7 +27,7 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-LOGS.info("You are running OUBnew-ftzr v4.0\n")
+LOGS.info(f"You are running OUBnew-ftzr {CODENAME} v{VER}.\n")
 
 LOGS.info(
     "Congrats, your bot have successfully running\n"
