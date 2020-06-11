@@ -96,7 +96,7 @@
       "value": ""
     },
     "BOTLOG_CHATID": {
-      "description": "ChatID of the Log group. Set it to '0' if BOTLOG = False and/or if LOGSPAMMER = False. Checkout https://telegra.ph/OUBnew-06-11 to know how to get BOTLOG https://telegra.ph/OUBnew-06-11.",
+      "description": "ChatID of the Log group. Set it to '0' if BOTLOG = False and/or if LOGSPAMMER = False. Checkout https://telegra.ph/OUBnew-06-11 to know how to get BOTLOG.",
       "required": true,
       "value": ""
     },
