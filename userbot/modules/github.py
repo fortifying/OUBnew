@@ -3,7 +3,7 @@ from userbot.events import register
 from userbot import CMD_HELP
 
 
-@register(pattern=r".git (.*)", outgoing=True)
+@register(outgoing=True, disable_errors=True, pattern="^.git(?: |$)(.*)")
 async def github(event):
     #Prevent Channel Bug to control commiy
     if event.is_channel and not event.is_group:
