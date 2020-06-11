@@ -96,8 +96,9 @@
       "value": ""
     },
     "BOTLOG_CHATID": {
-      "description": "ChatID of the Log group. Set it to '0' if BOTLOG = False and/or if LOGSPAMMER = False.",
-      "value": "0"
+      "description": "ChatID of the Log group. Set it to '0' if BOTLOG = False and/or if LOGSPAMMER = False. Checkout https://telegra.ph/OUBnew-06-11 to know how to get BOTLOG https://telegra.ph/OUBnew-06-11.",
+      "required": true,
+      "value": ""
     },
     "CONSOLE_LOGGER_VERBOSE": {
       "description": "If you need verbosity on the console logging",
@@ -200,11 +201,6 @@
       "description": "set alias name for term cmd",
       "required": false
     },  	
-    "IMG_LIMIT": {
-      "description": "Set limit for .img module",
-      "value": "3",
-      "required": true
-    },
     "BITLY_TOKEN": {
       "description": "Your Bit.ly API key, get it from 'https://bitly.com/a/sign_up'",
       "value": "YOUR TOKEN",
