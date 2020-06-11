@@ -90,6 +90,11 @@
       "description": "Enhance ur text to sticker. Get your own API token from http://antiddos.systems.",
       "required": false
     },
+    "DEEZER_ARL_TOKEN": {
+      "description": "Put your Deezer ARL token here.",
+      "required": false,
+      "value": ""
+    },
     "BOTLOG_CHATID": {
       "description": "ChatID of the Log group. Set it to '0' if BOTLOG = False and/or if LOGSPAMMER = False.",
       "value": "0"
