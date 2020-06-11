@@ -132,24 +132,29 @@ def register(**args):
                     stdout, stderr = await process.communicate()
                     result = str(stdout.decode().strip()) \
                         + str(stderr.decode().strip())
- 
+
                     ftext += result
- 
-                    file = open("crash.txt", "w+")
+
+                    file = open("error.log", "w+")
                     file.write(ftext)
                     file.close()
- 
-                    await check.client.send_file(BOTLOG_CHATID
-                                                if BOTLOG
-                                                else check.chat_id, "crash.txt", caption=text)
-                    remove("crash.txt")
- 
+
+                    if LOGSPAMMER:
+                        await check.client.respond(
+                            "`Sorry, my userbot has crashed."
+                            "\nThe error logs are stored in the userbot's log chat.`"
+                        )
+
+                        await check.client.send_file(send_to,
+                                                     "error.log",
+                                                     caption=text)
+                        remove("error.log")
             else:
                 pass
- 
+
         if not disable_edited:
             bot.add_event_handler(wrapper, events.MessageEdited(**args))
         bot.add_event_handler(wrapper, events.NewMessage(**args))
         return wrapper
- 
+
     return decorator
