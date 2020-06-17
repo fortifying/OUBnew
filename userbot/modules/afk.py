@@ -167,7 +167,7 @@ async def mention_afk(mention):
     f"\n\nI'm AFK right now since {afk_since}"
     f"\nReason: `{AFKREASON}`")
                 else:
-                    await mention.reply(str(choice(AFKSTR)))
+                    await mention.reply(f"Sorry, but [{user.full_name}](tg://user?id={user.id}) is AFK!")
                 USERS.update({mention.sender_id: 1})
                 COUNT_MSG = COUNT_MSG + 1
             elif mention.sender_id in USERS:
