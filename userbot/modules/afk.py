@@ -18,7 +18,7 @@ from userbot.events import register
 
 # ========================= CONSTANTS ============================
 
-user = await bot.get_me()
+    user = await bot.get_me()
     if not user.username:
         user.username = user.first_name
 
