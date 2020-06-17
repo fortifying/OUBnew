@@ -11,12 +11,17 @@ from random import choice, randint
 from asyncio import sleep
 
 from telethon.events import StopPropagation
-
+from telethon.tl.types import (MessageEntityMentionName)
 from userbot import (AFKREASON, COUNT_MSG, CMD_HELP, ISAFK, BOTLOG,
-                     BOTLOG_CHATID, USERS, PM_AUTO_BAN)
+                     BOTLOG_CHATID, USERS, PM_AUTO_BAN, bot)
 from userbot.events import register
 
 # ========================= CONSTANTS ============================
+
+user = await bot.get_me()
+    if not user.username:
+        user.username = user.first_name
+
 AFKSTR = [
     "I'm busy right now. Please talk in a bag and when I come back you can just give me the bag!",
     "I'm away right now. If you need anything, leave a message after the beep:\n`beeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeep`!",
@@ -167,7 +172,7 @@ async def mention_afk(mention):
     f"\n\nI'm AFK right now since {afk_since}"
     f"\nReason: `{AFKREASON}`")
                 else:
-                    await mention.reply(f"Sorry, but [{user.full_name}](tg://user?id={user.id}) is AFK!")
+                    await mention.reply(f"Sorry, but [{user.first_name}](tg://user?id={user.id}) is AFK!")
                 USERS.update({mention.sender_id: 1})
                 COUNT_MSG = COUNT_MSG + 1
             elif mention.sender_id in USERS:

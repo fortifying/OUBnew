@@ -108,7 +108,7 @@ def register(**args):
                     ftext += "\nwe respect your privacy,"
                     ftext += "\nyou may not report this error if you've"
                     ftext += "\nany confidential data here, no one will see your data\n"
-                    ftext += "\nSUPPORT CHAT PM: @heinzdf"
+                    ftext += "\nSUPPORT CHAT PM: @heinzdf\n"
                     ftext += "================================\n\n"
                     ftext += "--------BEGIN USERBOT TRACEBACK LOG--------\n"
                     ftext += "\nDate: " + date
