@@ -17,11 +17,6 @@ from userbot import (AFKREASON, COUNT_MSG, CMD_HELP, ISAFK, BOTLOG,
 from userbot.events import register
 
 # ========================= CONSTANTS ============================
-
-    user = await bot.get_me()
-    if not user.username:
-        user.username = user.first_name
-
 AFKSTR = [
     "I'm busy right now. Please talk in a bag and when I come back you can just give me the bag!",
     "I'm away right now. If you need anything, leave a message after the beep:\n`beeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeep`!",
@@ -90,6 +85,8 @@ async def set_afk(afk_e):
 @register(outgoing=True)
 async def type_afk_is_not_true(notafk):
     """ This sets your status as not afk automatically when you write something while being afk """
+    user = await bot.get_me()
+    user.username = user.first_name
     global ISAFK
     global COUNT_MSG
     global USERS
