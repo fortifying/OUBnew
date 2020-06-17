@@ -19,7 +19,7 @@ from telethon.tl.types import InputStickerSetID
 from telethon.tl.types import DocumentAttributeSticker
 
 KANGING_STR = [
-    "packing this sticker..",
+    "`Packing this sticker..`",
 ]
 
 
@@ -71,7 +71,7 @@ async def kang(args):
     if photo:
         splat = args.text.split()
         if not emojibypass:
-            emoji = "🤔"
+            emoji = "◾"
         pack = 1
         if len(splat) == 3:
             pack = splat[2]  # User sent both
@@ -87,7 +87,7 @@ async def kang(args):
                 emoji = splat[1]
 
         packname = f"{user.username}{pack}"
-        packnick = f"@{user.username} dankpack {pack}"
+        packnick = f"{user.first_name} #{pack}"
         cmd = '/newpack'
         file = io.BytesIO()
 
@@ -115,7 +115,7 @@ async def kang(args):
                 while "120" in x.text:
                     pack += 1
                     packname = f"{user.username}{pack}"
-                    packnick = f"@{user.username} dankpack {pack}"
+                    packnick = f"{user.first_name} Animated #{pack}"
                     await args.edit("`Switching to Pack " + str(pack) +
                                     " due to insufficient space`")
                     await conv.send_message(packname)
@@ -227,7 +227,7 @@ async def kang(args):
                 # Ensure user doesn't get spamming notifications
                 await bot.send_read_acknowledge(conv.chat_id)
 
-        await args.edit(f"[Done!](t.me/addstickers/{packname})",
+        await args.edit(f"**Successfully added!**.\nYour sticker are saved in [this pack](t.me/addstickers/{packname})",
                         parse_mode='md')
 
 
@@ -326,7 +326,7 @@ CMD_HELP.update({
 \n\n.get/.kang [emoji('s)]\
 \nUsage: Works just like .get but uses the emoji('s) you picked.\
 \n\n.get/.kang [number]\
-\nUsage: Kang's the sticker/image to the specified pack but uses 🤔 as emoji.\
+\nUsage: Kang's the sticker/image to the specified pack but uses ◾ as emoji.\
 \n\n.get/.kang [emoji('s)] [number]\
 \nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
 \n\n.stkrinfo\
