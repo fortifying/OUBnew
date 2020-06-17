@@ -85,8 +85,6 @@ async def set_afk(afk_e):
 @register(outgoing=True)
 async def type_afk_is_not_true(notafk):
     """ This sets your status as not afk automatically when you write something while being afk """
-    user = await bot.get_me()
-    user.username = user.first_name
     global ISAFK
     global COUNT_MSG
     global USERS
@@ -131,6 +129,8 @@ async def mention_afk(mention):
     global afk_time  # pylint:disable=E0602
     global afk_start
     global afk_end
+    user = await bot.get_me()
+    user.username = user.first_name
     back_alivee = datetime.now()
     afk_end = back_alivee.replace(microsecond=0)
     afk_since = "a while ago"
