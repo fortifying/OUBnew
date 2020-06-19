@@ -1,4 +1,4 @@
-# Copyright (C) 2020 GengKapak and AbggaR96s.
+# Copyright (C) 2020 GengKapak and AnggaR96s.
 # All rights reserved.
 
 import requests
@@ -34,7 +34,7 @@ async def gengkapak(e):
     fd = codecs.open(tsfileloc,'r',encoding='utf-8')
     data = fd.read()
     key = requests.post('https://nekobin.com/api/documents', json={"content": data}).json().get('result').get('key')
-    url = f'https://nekobin.com/{key}'
+    url = f'https://nekobin.com/raw/{key}'
     caption = f"Here are the results for the query: {query}\nNekofied to : {url}"
     await e.client.send_file(
         e.chat_id,
