@@ -11,7 +11,7 @@ from userbot.events import register
 @register(outgoing=True, pattern="^\.ts (.*)")
 async def gengkapak(e):
     await e.edit("`Please wait, fetching results...`")
-    query = e.text.split(" ", 1)[1]
+    query = e.pattern_match.group(1)
     response = requests.get(f"https://sjprojectsapi.herokuapp.com/torrent/?query={query}")
     ts = json.loads(response.text)
     if not ts == response.json():
@@ -28,7 +28,7 @@ async def gengkapak(e):
         except:
             break
 
-    tsfileloc = f"{TEMP_DOWNLOAD_DIRECTORY}/torrent_search.txt"
+    tsfileloc = f"{TEMP_DOWNLOAD_DIRECTORY}/{query}.txt"
     with open(tsfileloc, "w+", encoding="utf8") as out_file:
         out_file.write(str(listdata))
     fd = codecs.open(tsfileloc,'r',encoding='utf-8')
