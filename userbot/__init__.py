@@ -250,8 +250,8 @@ with bot:
         quit(1)
  
 # Userbot ver/tag/codename
-OUBnew_VER = "4.0"
-CODENAME = "Meltdown"
+OUBnew_VER = "4.5"
+CODENAME = "Sicherheit"
  
 # Global Variables
 COUNT_MSG = 0
