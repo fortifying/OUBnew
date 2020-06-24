@@ -61,8 +61,8 @@ async def variable(var):
                 return True
         else:
             configvars = heroku_var.to_dict()
-            msg = ''
             if BOTLOG:
+                msg = ''
                 for item in configvars:
                     msg += f"`{item}` = `{configvars[item]}`\n"
                 await var.client.send_message(
@@ -130,19 +130,19 @@ async def dyno_usage(dyno):
         Get your account Dyno Usage
     """
     await dyno.edit("`Getting Information...`")
-    useragent = (
-        'Mozilla/5.0 (Linux; Android 10; SM-G975F) '
-        'AppleWebKit/537.36 (KHTML, like Gecko) '
-        'Chrome/81.0.4044.117 Mobile Safari/537.36'
-    )
     user_id = Heroku.account().id
-    headers = {
-     'User-Agent': useragent,
-     'Authorization': f'Bearer {HEROKU_API_KEY}',
-     'Accept': 'application/vnd.heroku+json; version=3.account-quotas',
-    }
     path = "/accounts/" + user_id + "/actions/get-quota"
     async with aiohttp.ClientSession() as session:
+        useragent = (
+            'Mozilla/5.0 (Linux; Android 10; SM-G975F) '
+            'AppleWebKit/537.36 (KHTML, like Gecko) '
+            'Chrome/81.0.4044.117 Mobile Safari/537.36'
+        )
+        headers = {
+         'User-Agent': useragent,
+         'Authorization': f'Bearer {HEROKU_API_KEY}',
+         'Accept': 'application/vnd.heroku+json; version=3.account-quotas',
+        }
         async with session.get(heroku_api + path, headers=headers) as r:
             if r.status != 200:
                 await dyno.client.send_message(
@@ -155,14 +155,14 @@ async def dyno_usage(dyno):
             result = await r.json()
             quota = result['account_quota']
             quota_used = result['quota_used']
- 
+
             """ - User Quota Limit and Used - """
             remaining_quota = quota - quota_used
             percentage = math.floor(remaining_quota / quota * 100)
             minutes_remaining = remaining_quota / 60
             hours = math.floor(minutes_remaining / 60)
             minutes = math.floor(minutes_remaining % 60)
- 
+
             """ - User App Used Quota - """
             Apps = result['apps']
             for apps in Apps:
@@ -174,10 +174,10 @@ async def dyno_usage(dyno):
             else:
                 AppQuotaUsed = 0
                 AppPercentage = 0
- 
+
             AppHours = math.floor(AppQuotaUsed / 60)
             AppMinutes = math.floor(AppQuotaUsed % 60)
- 
+
             await dyno.edit(
                  "**Dyno Usage**:\n\n"
                  f"-> `Dyno usage for`  **{app.name}**:\n"

@@ -28,7 +28,7 @@ async def magnet_download(event):
 	if event.fwd_from:
 		return
 	var = event.text[5:]
-	print(var)	
+	print(var)
 	uris = [var]
 
 	#Add URL Into Queue 
@@ -49,8 +49,6 @@ async def magnet_download(event):
 			await asyncio.sleep(10)
 		except Exception as e:
 			print(str(e))
-			pass	
-			
 	await event.edit("**File Downloaded Successfully:** `{}`".format(file.name))
 
 CMD_HELP.update({

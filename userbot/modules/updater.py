@@ -173,7 +173,7 @@ async def upstream(event):
         repo.create_head('sql-extended', origin.refs.sql-extended)
         repo.heads.sql-extended.set_tracking_branch(origin.refs.sql-extended)
         repo.heads.sql-extended.checkout(True)
- 
+
     ac_br = repo.active_branch.name
     if ac_br != UPSTREAM_REPO_BRANCH:
         await event.edit(
@@ -187,29 +187,29 @@ async def upstream(event):
         repo.create_remote('upstream', off_repo)
     except BaseException:
         pass
- 
+
     ups_rem = repo.remote('upstream')
     ups_rem.fetch(ac_br)
- 
+
     changelog = await gen_chlog(repo, f'HEAD..upstream/{ac_br}')
     """ - Special case for deploy - """
     if conf == "deploy":
         await event.edit('`Deploying userbot, please wait....`')
         await deploy(event, repo, ups_rem, ac_br, txt)
         return
- 
-    if changelog == '' and force_update is False:
+
+    if changelog == '' and not force_update:
         await event.edit(
             '\n`Your USERBOT is`  **up-to-date**  `with`  '
             f'**{UPSTREAM_REPO_BRANCH}**\n')
         return repo.__del__()
- 
-    if conf == '' and force_update is False:
+
+    if conf == '' and not force_update:
         await print_changelogs(event, ac_br, changelog)
         await event.delete()
         return await event.respond(
             '`do ".update now or .update deploy" to update.`')
- 
+
     if force_update:
         await event.edit(
             '`Force-Syncing to latest stable userbot code, please wait...`')

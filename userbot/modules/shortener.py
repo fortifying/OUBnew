@@ -28,9 +28,7 @@ async def shortener(short):
             await short.edit("`Error! No URL given!`")
             return
         link_match = match(r'\bhttps?://.*\.\S+', message)
-        if link_match:
-            pass
-        else:
+        if not link_match:
             await short.edit("`Error! Please provide valid url!`\nexample: https://google.com")
             return
         urls = [f'{message}']

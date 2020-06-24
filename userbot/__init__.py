@@ -222,16 +222,16 @@ async def check_botlog_chatid():
             "You must set up the BOTLOG_CHATID variable in the config.env or environment variables, for the private error log storage to work."
         )
         quit(1)
- 
+
     elif not BOTLOG_CHATID and BOTLOG:
         LOGS.info(
             "You must set up the BOTLOG_CHATID variable in the config.env or environment variables, for the userbot logging feature to work."
         )
         quit(1)
- 
-    elif not BOTLOG or not LOGSPAMMER:
+
+    elif not (BOTLOG and LOGSPAMMER):
         return
- 
+
     entity = await bot.get_entity(BOTLOG_CHATID)
     if entity.default_banned_rights.send_messages:
         LOGS.info(

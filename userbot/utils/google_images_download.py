@@ -572,17 +572,17 @@ class googleimagesdownload:
                 response = urlopen(req, None, timeout)
                 data = response.read()
                 response.close()
- 
+
                 extensions = [".jpg", ".jpeg", ".gif", ".png", ".bmp", ".svg", ".webp", ".ico"]
                 # keep everything after the last '/'
                 image_name = str(image_url[(image_url.rfind('/')) + 1:])
-                if format and (not image_format or image_format != format):
+                if format and not (image_format and image_format == format):
                     download_status = 'fail'
                     download_message = "Wrong image format returned. Skipping..."
                     return_image_name = ''
                     absolute_path = ''
                     return download_status, download_message, return_image_name, absolute_path
- 
+
                 if image_format == "" or not image_format or "." + image_format not in extensions:
                     download_status = 'fail'
                     download_message = "Invalid or missing image format. Skipping..."
@@ -593,14 +593,14 @@ class googleimagesdownload:
                     image_name = image_name + "." + image_format
                 else:
                     image_name = image_name[:image_name.lower().find("." + image_format) + (len(image_format) + 1)]
- 
+
                 # prefix name in image
                 prefix = prefix + " " if prefix else ''
                 if no_numbering:
                     path = main_directory + "/" + dir_name + "/" + prefix + image_name
                 else:
                     path = main_directory + "/" + dir_name + "/" + prefix + str(count) + "." + image_name
- 
+
                 try:
                     output_file = open(path, 'wb')
                     output_file.write(data)
@@ -616,58 +616,58 @@ class googleimagesdownload:
                     download_message = "OSError on an image...trying next one..." + " Error: " + str(e)
                     return_image_name = ''
                     absolute_path = ''
- 
+
                 #return image name back to calling method to use it for thumbnail downloads
                 download_status = 'success'
                 download_message = "Completed Image ====> " + prefix + str(count) + "." + image_name
                 return_image_name = prefix + str(count) + "." + image_name
- 
+
                 # image size parameter
                 if not silent_mode and print_size:
                     print("Image Size: " + str(self.file_size(path)))
- 
+
             except UnicodeEncodeError as e:
                 download_status = 'fail'
                 download_message = "UnicodeEncodeError on an image...trying next one..." + " Error: " + str(e)
                 return_image_name = ''
                 absolute_path = ''
- 
+
             except URLError as e:
                 download_status = 'fail'
                 download_message = "URLError on an image...trying next one..." + " Error: " + str(e)
                 return_image_name = ''
                 absolute_path = ''
- 
+
             except BadStatusLine as e:
                 download_status = 'fail'
                 download_message = "BadStatusLine on an image...trying next one..." + " Error: " + str(e)
                 return_image_name = ''
                 absolute_path = ''
- 
+
         except HTTPError as e:  # If there is any HTTPError
             download_status = 'fail'
             download_message = "HTTPError on an image...trying next one..." + " Error: " + str(e)
             return_image_name = ''
             absolute_path = ''
- 
+
         except URLError as e:
             download_status = 'fail'
             download_message = "URLError on an image...trying next one..." + " Error: " + str(e)
             return_image_name = ''
             absolute_path = ''
- 
+
         except ssl.CertificateError as e:
             download_status = 'fail'
             download_message = "CertificateError on an image...trying next one..." + " Error: " + str(e)
             return_image_name = ''
             absolute_path = ''
- 
+
         except IOError as e:  # If there is any IOError
             download_status = 'fail'
             download_message = "IOError on an image...trying next one..." + " Error: " + str(e)
             return_image_name = ''
             absolute_path = ''
- 
+
         return download_status,download_message,return_image_name,absolute_path
  
  
