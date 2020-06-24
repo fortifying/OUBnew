@@ -25,8 +25,6 @@ def bruh(name):
 async def _(event):
     if event.fwd_from:
         return
-    DELAY_BETWEEN_EDITS = 0.3
-    PROCESS_RUN_TIME = 100
     cmd = event.pattern_match.group(1)
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
