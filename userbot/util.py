@@ -49,7 +49,6 @@ def admin_cmd(**args):
     if black_list_chats:
         args["chats"] = black_list_chats
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
-        allow_edited_updates = args["allow_edited_updates"]
         del args["allow_edited_updates"]
 
     return events.NewMessage(**args)
