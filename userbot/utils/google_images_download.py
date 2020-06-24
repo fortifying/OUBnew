@@ -6,7 +6,6 @@
  
 # Import Libraries
 import sys
-import ast
 version = (3, 0)
 cur_version = sys.version_info
 if cur_version >= version:  # If the Current Version of Python is 3.0 or above
@@ -15,7 +14,7 @@ if cur_version >= version:  # If the Current Version of Python is 3.0 or above
     from urllib.request import URLError, HTTPError
     from urllib.parse import quote
     import http.client
-    from http.client import IncompleteRead, BadStatusLine
+    from http.client import BadStatusLine
     http.client._MAXHEADERS = 1000
 else:  # If the Current Version of Python is 2.x
     import urllib2
@@ -33,7 +32,6 @@ import datetime
 import json
 import re
 import codecs
-import socket
  
 args_list = ["keywords", "keywords_from_file", "prefix_keywords", "suffix_keywords",
              "limit", "format", "color", "color_type", "usage_rights", "size",

@@ -3,8 +3,6 @@
 #
 #
 import os
-import datetime
-import asyncio
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from userbot.events import register
 from userbot import bot, TEMP_DOWNLOAD_DIRECTORY, CMD_HELP
