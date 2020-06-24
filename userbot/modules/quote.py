@@ -5,12 +5,9 @@
 #
 # Port to UserBot by @MoveAngel
 """    Credits to ftg and One4uBot plugins, cmd is .pch    """
-
-import logging
 import requests
 import base64
 import json
-import os
 import telethon
 
 from PIL import Image

@@ -8,10 +8,8 @@
 from datetime import datetime
 import time
 from random import choice, randint
-from asyncio import sleep
 
 from telethon.events import StopPropagation
-from telethon.tl.types import (MessageEntityMentionName)
 from userbot import (AFKREASON, COUNT_MSG, CMD_HELP, ISAFK, BOTLOG,
                      BOTLOG_CHATID, USERS, PM_AUTO_BAN, bot)
 from userbot.events import register

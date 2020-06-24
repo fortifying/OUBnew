@@ -1,19 +1,13 @@
 # AnggaR96s
  
 from telethon import events
-import subprocess, instantmusic
-from telethon.errors import MessageEmptyError, MessageTooLongError, MessageNotModifiedError
+import subprocess
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
- 
-import io
 import asyncio
-import time
 from userbot.events import register
 from userbot import bot, CMD_HELP
 import glob
 import os
-import datetime
  
 os.system("rm -rf *.mp3")
  

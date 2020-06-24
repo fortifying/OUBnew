@@ -7,7 +7,7 @@
 
 from bitlyshortener import Shortener
 from re import match
-from userbot import bot, CMD_HELP, BITLY_TOKEN, BOTLOG, BOTLOG_CHATID
+from userbot import CMD_HELP, BITLY_TOKEN, BOTLOG, BOTLOG_CHATID
 from userbot.events import register
 
 

@@ -5,16 +5,8 @@
 #
 # You can find misc modules, which dont fit in anything xD
 """ Userbot module for other small commands. """
-
-from random import randint
-from asyncio import sleep
-from os import execl
 import sys
-import os
-import io
-import sys
-import json
-from userbot import BOTLOG, BOTLOG_CHATID, CMD_HELP, bot
+from userbot import CMD_HELP
 from userbot.events import register
 
 @register(outgoing=True, pattern="^.oub$")
