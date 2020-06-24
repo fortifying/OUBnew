@@ -17,7 +17,7 @@ class GMute(BASE):
 GMute.__table__.create(checkfirst=True)
 
 
-def is_gmuted(sender_id):
+def is_gmuted(_sender_id):
     try:
         return SESSION.query(GMute).all()
     except BaseException:
