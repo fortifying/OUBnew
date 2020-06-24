@@ -216,7 +216,7 @@ async def afk_on_pm(sender):
             datime_since_afk = now - afk_time  # pylint:disable=E0602
             time = float(datime_since_afk.seconds)
             days = time // (24 * 3600)
-            time = time % (24 * 3600)
+            time %= 24 * 3600
             hours = time // 3600
             time %= 3600
             minutes = time // 60
@@ -240,15 +240,15 @@ async def afk_on_pm(sender):
             else:
                 afk_since = f"`{int(seconds)}s` ago"
             if sender.sender_id not in USERS:
-                if AFKREASON:
-                    await sender.reply(f"{str(choice(AFKSTR))}\n"
-    f"\n\nI'm AFK right now since {afk_since}"
-    f"\nReason: `{AFKREASON}`")
-                else:
-                    await sender.reply(f"Sorry, but [{user.first_name}](tg://user?id={user.id}) is AFK!")
-                USERS.update({sender.sender_id: 1})
-                COUNT_MSG = COUNT_MSG + 1
-            elif apprv and sender.sender_id in USERS:
+                            if AFKREASON:
+                                await sender.reply(f"{str(choice(AFKSTR))}\n"
+                f"\n\nI'm AFK right now since {afk_since}"
+                f"\nReason: `{AFKREASON}`")
+                            else:
+                                await sender.reply(f"Sorry, but [{user.first_name}](tg://user?id={user.id}) is AFK!")
+                            USERS.update({sender.sender_id: 1})
+                            COUNT_MSG = COUNT_MSG + 1
+            elif apprv:
                 if USERS[sender.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
                         await sender.reply(f"**As I said, my Mastor is not online since** {afk_since}.\
@@ -256,11 +256,8 @@ async def afk_on_pm(sender):
                             \nAFK Reason: `{AFKREASON}`")
                     else:
                         await sender.reply(f"Sorry, but [{user.first_name}](tg://user?id={user.id}) is AFK!")
-                    USERS[sender.sender_id] = USERS[sender.sender_id] + 1
-                    COUNT_MSG = COUNT_MSG + 1
-                else:
-                    USERS[sender.sender_id] = USERS[sender.sender_id] + 1
-                    COUNT_MSG = COUNT_MSG + 1
+                USERS[sender.sender_id] = USERS[sender.sender_id] + 1
+                COUNT_MSG = COUNT_MSG + 1
 
 
 CMD_HELP.update({
