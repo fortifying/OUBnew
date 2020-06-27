@@ -12,7 +12,7 @@ async def _(event):
     link = event.pattern_match.group(1)
     await event.edit("```Processing```")
     async with bot.conversation("@XiaomiGeeksBot") as conv:
-        firmware = f"firmware"
+        firmware = "firmware"
         try:
             response = conv.wait_event(events.NewMessage(incoming=True,from_users=774181428))
             await conv.send_message(f'/{firmware} {link}')
@@ -32,7 +32,7 @@ async def _(event):
     link = event.pattern_match.group(1)
     await event.edit("```Processing```")
     async with bot.conversation("@XiaomiGeeksBot") as conv:
-        mieu = f"eu"
+        mieu = "eu"
         try:
             response = conv.wait_event(events.NewMessage(incoming=True,from_users=774181428))
             await conv.send_message(f'/{mieu} {link}')
@@ -52,7 +52,7 @@ async def _(event):
     link = event.pattern_match.group(1)
     await event.edit("```Processing```")
     async with bot.conversation("@XiaomiGeeksBot") as conv:
-        fboot = f"fastboot"
+        fboot = "fastboot"
         try:
             response = conv.wait_event(events.NewMessage(incoming=True,from_users=774181428))
             await conv.send_message(f'/{fboot} {link}')
@@ -72,7 +72,7 @@ async def _(event):
     link = event.pattern_match.group(1)
     await event.edit("```Processing```")
     async with bot.conversation("@XiaomiGeeksBot") as conv:
-        recovery = f"recovery"
+        recovery = "recovery"
         try:
             response = conv.wait_event(events.NewMessage(incoming=True,from_users=774181428))
             await conv.send_message(f'/{recovery} {link}')
@@ -93,7 +93,7 @@ async def _(event):
     link = event.pattern_match.group(1)
     await event.edit("```Processing```")
     async with bot.conversation("@XiaomiGeeksBot") as conv:
-        spec = f"specs"
+        spec = "specs"
         try:
             response = conv.wait_event(events.NewMessage(incoming=True,from_users=774181428))
             await conv.send_message(f'/{spec} {link}')
@@ -113,7 +113,7 @@ async def _(event):
     link = event.pattern_match.group(1)
     await event.edit("```Processing```")
     async with bot.conversation("@XiaomiGeeksBot") as conv:
-        pitch = f"pb"
+        pitch = "pb"
         try:
             response = conv.wait_event(events.NewMessage(incoming=True,from_users=774181428))
             await conv.send_message(f'/{pitch} {link}')
@@ -133,7 +133,7 @@ async def _(event):
     link = event.pattern_match.group(1)
     await event.edit("```Processing```")
     async with bot.conversation("@XiaomiGeeksBot") as conv:
-        ofox = f"of"
+        ofox = "of"
         try:
             response = conv.wait_event(events.NewMessage(incoming=True,from_users=774181428))
             await conv.send_message(f'/{ofox} {link}')

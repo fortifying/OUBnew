@@ -40,7 +40,7 @@ async def shortener(short):
         if BOTLOG: 
            await short.client.send_message(BOTLOG_CHATID, f"`#SHORTLINK \nThis Your Link!`\n {output}")
     else:
-        await short.edit(f"Set bit.ly API token first\nGet from [here](https://bitly.com/a/sign_up)")
+        await short.edit("Set bit.ly API token first\nGet from [here](https://bitly.com/a/sign_up)")
 
 CMD_HELP.update({
     "bitly":
