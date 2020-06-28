@@ -782,7 +782,6 @@ async def kick(usr):
         await usr.edit(
             f"`Kicked` [{user.first_name}](tg://user?id={user.id})`!`")
         await sleep(3)
-        await usr.delete()
 
     if BOTLOG:
         await usr.client.send_message(
