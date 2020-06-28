@@ -12,7 +12,7 @@ from shutil import which
 from os import remove
 from telethon import version
 
-from userbot import CMD_HELP, ALIVE_NAME, LOGO, UPSTREAM_REPO_BRANCH, OUBnew_VER, CODENAME
+from userbot import CMD_HELP, ALIVE_NAME, LOGO, UPSTREAM_REPO_BRANCH, OUBnew_VER, CODENAME, bot
 from userbot.events import register
 
 # ================= CONSTANT =================
