@@ -176,6 +176,10 @@ async def pipcheck(pip):
 
 @register(outgoing=True, pattern=r"^\.(?:live|on)\s?(.)?")
 async def amireallyalive(alive):
+    #Prevent Channel Bug to run alive commad
+    if alive.is_channel and not alive.is_group:
+        await alive.edit("`alive Commad isn't permitted on channels`")
+        return
     """ For .alive command, check if the bot is running.  """
     logo = LOGO
     output = (
@@ -185,11 +189,11 @@ async def amireallyalive(alive):
              f"`CODENAME : {CN} v{VER} `\n"
              f"`Telethon : v{version.__version__} `\n"
              f"`Python   : v{python_version()} `\n"
-             "----------------------------------------\n"
+              "----------------------------------------\n"
              f"`User : `{DEFAULTUSER} \n\n"
              f"`All modules loaded with ({MODULESTR}) errors`"
-             )
-     await bot.send_file(alive.chat_id, logo, caption=output)
+              )
+    await bot.send_file(alive.chat_id, logo, caption=output)
 
 
 @register(outgoing=True, pattern="^.aliveu")
