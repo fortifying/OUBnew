@@ -194,6 +194,7 @@ async def amireallyalive(alive):
              f"`All modules loaded with ({MODULESTR}) errors`"
               )
     await bot.send_file(alive.chat_id, logo, caption=output)
+    await alive.delete()
 
 
 @register(outgoing=True, pattern="^.aliveu")
