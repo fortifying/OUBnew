@@ -1,6 +1,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e35faa6a680f4d66abdffddaad76e418)](http://app.codacy.com/manual/fortifying/OUBnew/dashboard) ![Last Commit](https://img.shields.io/github/last-commit/fortifying/OUBnew/sql-extended) ![Contributors](https://img.shields.io/github/contributors/fortifying/OUBnew?color=LightSlateGrey)
 # Project OUBnew-Fortizer
 
+![our](https://telegra.ph/file/02abf5720f639072ce258.png)
+
 `
  A modular Telegram userbot running on Python 3.8+ with an sqlalchemy database.
 `
@@ -23,16 +25,16 @@
 
 <p align="center">&nbsp;</p>
 
-## NOT THE BEST ONE, BUT HERE YOU GO
+## The world is that easy, Make your own!
 
-## Easy way to deploy
-[![Deploy](https://telegra.ph/file/008d8a88e29bd8ed9ece9.png)](https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended)
+# Easy way to deploy
+[![Deploy](https://telegra.ph/file/b9eb59a4d5fe8a10a8bf4.png)](https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended)
 
 
 <p align="center">&nbsp;</p>
 
-## How to setup Google Drive
-[![SetGD](https://telegra.ph/file/fde15d05e4bde3448b01a.png)](https://telegra.ph/How-To-Setup-Google-Drive-04-03)
+## Google Drive Tutorial
+[![SetGD](https://telegra.ph/file/57c193bbddab43b1e8a18.png)](https://telegra.ph/How-To-Setup-Google-Drive-04-03)
 
 
 # Updates and Support
@@ -57,4 +59,4 @@ Also join <a href="https://t.me/userbotindo">Userbot INDO🇮🇩</a> Telegram G
 
 <p align="center">&nbsp;</p>
 <h2 align="center">License</h2>
-<p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Fortizer@HeinzDF Public License</a> - Version 1.d, June 2020</p>
+<p align="center"><a href="https://github.com/fortifying/OUBnew/blob/sql-extended/LICENSE">Raphielscape Public License</a> - Version 1.d, July 2020</p>
