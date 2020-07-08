@@ -578,7 +578,13 @@ async def change_permission(service, Id):
  
     service.permissions().create(fileId=Id, body=permission,
                                  supportsTeamDrives=True).execute()
-    return
+        service.permissions().create(fileId=Id, body=permission).execute()
+    except HttpError as e:
+        """ it's not possible to change permission per file for teamdrive """
+        if '"File not found: {Id}."' in e or (
+          '"Sharing folders that are inside a shared drive is not supported."'
+          in e):
+            return
 
 
 async def get_information(service, Id):
