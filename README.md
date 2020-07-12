@@ -25,16 +25,14 @@
 
 <p align="center">&nbsp;</p>
 
-## The world is that easy, Make your own!
-
 # Easy way to deploy
-[![Deploy](https://telegra.ph/file/b9eb59a4d5fe8a10a8bf4.png)](https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended)
+<p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 
 <p align="center">&nbsp;</p>
 
-## Google Drive Tutorial
-[![SetGD](https://telegra.ph/file/57c193bbddab43b1e8a18.png)](https://telegra.ph/How-To-Setup-Google-Drive-04-03)
+# Google Drive Tutorial
+[![SetGD](https://raw.githubusercontent.com/fortifying/OUBnew/sql-extended/gd.png)](https://telegra.ph/How-To-Setup-Google-Drive-04-03)
 
 
 # Updates and Support
