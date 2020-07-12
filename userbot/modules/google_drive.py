@@ -202,13 +202,10 @@ async def reset_credentials(gdrive):
     helper.clear_credentials(str(gdrive.from_id))
     await gdrive.edit("`Done...`")
     await asyncio.sleep(1)
-    return await gdrive.delete()
- 
- 
     await gdrive.delete()
     return
-
-
+ 
+ 
 async def get_raw_name(file_path):
     """ - Get file_name from file_path - """
     return file_path.split("/")[-1]
@@ -567,15 +564,6 @@ async def change_permission(service, Id):
         "type": "anyone"
     }
     try:
-        service.permissions().create(fileId=Id, body=permission
-                                     ).execute()
-    except Exception:
-        pass
-    return True
- 
- 
-    service.permissions().create(fileId=Id, body=permission,
-                                 supportsTeamDrives=True).execute()
         service.permissions().create(fileId=Id, body=permission).execute()
     except HttpError as e:
         """ it's not possible to change permission per file for teamdrive """
@@ -585,10 +573,9 @@ async def change_permission(service, Id):
             return
         else:
             raise e
-                                 supportsAllDrives=True).execute()
     return
-
-
+ 
+ 
 async def get_information(service, Id):
     r = service.files().get(fileId=Id, fields="name, id, size, mimeType, "
                             "webViewLink, webContentLink,"
