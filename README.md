@@ -26,7 +26,7 @@
 <p align="center">&nbsp;</p>
 
 # Easy way to deploy
-<p><a href="https://heroku.com/deploy"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/fortifying/tree/sql-extended"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 
 <p align="center">&nbsp;</p>
