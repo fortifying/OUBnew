@@ -1,8 +1,8 @@
 from userbot import CMD_HELP
 
-CMD_HELP.update({
-    "carbon":
-    "`.carbon` <text> [or reply]\
+CMD_HELP.update(
+    {
+        "carbon": "`.carbon` <text> [or reply]\
 \nUsage: Beautify your text\
 \n(Grey background)\
 \n\n`.carbon2` <text> [or reply]\
@@ -18,5 +18,5 @@ CMD_HELP.update({
 \nUsage: Beautify your text.\
 \n(Light Panel, Blue Background)\
 "
-})
- 
+    }
+)

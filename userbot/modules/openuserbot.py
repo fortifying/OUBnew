@@ -9,6 +9,7 @@ import sys
 from userbot import CMD_HELP
 from userbot.events import register
 
+
 @register(outgoing=True, pattern="^.oub$")
 async def shalom(e):
     await e.edit(
@@ -136,15 +137,12 @@ async def shalom(e):
         "\n💰❄️❄️❄️❄️❄️❄️❄️💰"
         "\n💰💰💰💰💰💰💰❄️💰"
         "\n💰💰💰💰💰💰💰❄️💰"
-        "\n💰💰💰💰💰💰💰💰💰")
-        
-    
-    CMD_HELP.update({
-    'oub':
-    '.oub\
-\nUsage: gives a nice OPENUSERBOT as output.'
-})
+        "\n💰💰💰💰💰💰💰💰💰"
+    )
 
-
-
-
+    CMD_HELP.update(
+        {
+            "oub": ".oub\
+\nUsage: gives a nice OPENUSERBOT as output."
+        }
+    )

@@ -17,9 +17,9 @@ async def on_file_to_photo(pics):
         image = target.media.document
     except AttributeError:
         return
-    if not image.mime_type.startswith('image/'):
+    if not image.mime_type.startswith("image/"):
         return  # This isn't an image
-    if image.mime_type == 'image/webp':
+    if image.mime_type == "image/webp":
         return  # Telegram doesn't let you directly send stickers as photos
     if image.size > 10 * 2560 * 1440:
         return  # We'd get PhotoSaveFileInvalidError otherwise
@@ -27,19 +27,24 @@ async def on_file_to_photo(pics):
     file = await pics.client.download_media(target, file=BytesIO())
     file.seek(0)
     img = await pics.client.upload_file(file)
-    img.name = 'image.png'
+    img.name = "image.png"
 
     try:
-        await pics.client(SendMediaRequest(
-            peer=await pics.get_input_chat(),
-            media=types.InputMediaUploadedPhoto(img),
-            message=target.message,
-            entities=target.entities,
-            reply_to_msg_id=target.id
-        ))
+        await pics.client(
+            SendMediaRequest(
+                peer=await pics.get_input_chat(),
+                media=types.InputMediaUploadedPhoto(img),
+                message=target.message,
+                entities=target.entities,
+                reply_to_msg_id=target.id,
+            )
+        )
     except PhotoInvalidDimensionsError:
         return
-        
-CMD_HELP.update({
-    "pics": ".pic reply any document image\nUsage : Convert any Document Image to Full Size Image"
-})
+
+
+CMD_HELP.update(
+    {
+        "pics": ".pic reply any document image\nUsage : Convert any Document Image to Full Size Image"
+    }
+)
