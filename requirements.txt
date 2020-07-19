@@ -42,7 +42,7 @@ pySmartDL
 python-barcode
 python-dotenv
 PyGithub
-youtube-dl>=2019.9.28
+youtube-dl
 regex
 pytz
 qrcode
@@ -68,3 +68,4 @@ wget
 python-dateutil
 bitlyshortener
 justwatch
+youtube_search
