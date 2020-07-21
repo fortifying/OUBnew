@@ -16,7 +16,7 @@ from userbot.events import register
 
 @register(outgoing=True, pattern="^.speed$")
 async def speedtst(spd):
-    #Prevent Channel Bug to use speed
+    # Prevent Channel Bug to use speed
     if spd.is_channel and not spd.is_group:
         await spd.edit("`update Commad isn't permitted on channels`")
         return
@@ -30,27 +30,29 @@ async def speedtst(spd):
     test.results.share()
     result = test.results.dict()
 
-    await spd.edit("`"
-                   "Started at "
-                   f"{result['timestamp']} \n\n"
-                   "Download "
-                   f"{speed_convert(result['download'])} \n"
-                   "Upload "
-                   f"{speed_convert(result['upload'])} \n"
-                   "Ping "
-                   f"{result['ping']} \n"
-                   "ISP "
-                   f"{result['client']['isp']}"
-                   "`")
+    await spd.edit(
+        "`"
+        "Started at "
+        f"{result['timestamp']} \n\n"
+        "Download "
+        f"{speed_convert(result['download'])} \n"
+        "Upload "
+        f"{speed_convert(result['upload'])} \n"
+        "Ping "
+        f"{result['ping']} \n"
+        "ISP "
+        f"{result['client']['isp']}"
+        "`"
+    )
 
 
 def speed_convert(size):
     """
     Hi human, you can't read bytes?
     """
-    power = 2**10
+    power = 2 ** 10
     zero = 0
-    units = {0: '', 1: 'Kb/s', 2: 'Mb/s', 3: 'Gb/s', 4: 'Tb/s'}
+    units = {0: "", 1: "Kb/s", 2: "Mb/s", 3: "Gb/s", 4: "Tb/s"}
     while size > power:
         size /= power
         zero += 1
@@ -59,20 +61,22 @@ def speed_convert(size):
 
 @register(outgoing=True, pattern="^.dc$")
 async def neardc(event):
-    #Prevent Channel Bug to use dc
+    # Prevent Channel Bug to use dc
     if event.is_channel and not event.is_group:
         await event.edit("`dc Commad isn't permitted on channels`")
         return
     """ For .dc command, get the nearest datacenter information. """
     result = await event.client(functions.help.GetNearestDcRequest())
-    await event.edit(f"Country : `{result.country}`\n"
-                     f"Nearest Datacenter : `{result.nearest_dc}`\n"
-                     f"This Datacenter : `{result.this_dc}`")
+    await event.edit(
+        f"Country : `{result.country}`\n"
+        f"Nearest Datacenter : `{result.nearest_dc}`\n"
+        f"This Datacenter : `{result.this_dc}`"
+    )
 
 
 @register(outgoing=True, pattern="^.ping$")
 async def pingme(pong):
-    #Prevent Channel Bug to use ping
+    # Prevent Channel Bug to use ping
     if pong.is_channel and not pong.is_group:
         await pong.edit("`Ping Commad isn't permitted on channels`")
         return
@@ -85,11 +89,20 @@ async def pingme(pong):
 
 
 CMD_HELP.update(
-    {"speed": ".speed\
-    \nUsage: Does a speedtest and shows the results."})
+    {
+        "speed": ".speed\
+    \nUsage: Does a speedtest and shows the results."
+    }
+)
 CMD_HELP.update(
-    {"dc": ".dc\
-    \nUsage: Finds the nearest datacenter from your server."})
+    {
+        "dc": ".dc\
+    \nUsage: Finds the nearest datacenter from your server."
+    }
+)
 CMD_HELP.update(
-    {"ping": ".ping\
-    \nUsage: Shows how long it takes to ping your bot."})
+    {
+        "ping": ".ping\
+    \nUsage: Shows how long it takes to ping your bot."
+    }
+)

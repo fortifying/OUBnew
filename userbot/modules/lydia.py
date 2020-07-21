@@ -29,9 +29,10 @@ if LYDIA_API_KEY:
     api_client = API(api_key)
     lydia = LydiaAI(api_client)
 
+
 @register(outgoing=True, pattern="^.repcf$")
 async def repcf(event):
-    #Prevent Channel Bug to use repc
+    # Prevent Channel Bug to use repc
     if event.is_channel and not event.is_group:
         await event.edit("`repc Commad isn't permitted on channels`")
         return
@@ -48,9 +49,10 @@ async def repcf(event):
     except Exception as e:
         await event.edit(str(e))
 
+
 @register(outgoing=True, pattern="^.addcf$")
 async def addcf(event):
-     #Prevent Channel Bug to use addcf
+    # Prevent Channel Bug to use addcf
     if event.is_channel and not event.is_group:
         await event.edit("`addcf Commad isn't permitted on channels`")
         return
@@ -66,13 +68,18 @@ async def addcf(event):
         if reply_msg.from_id is None:
             return await event.edit("Invalid user type.")
         ACC_LYDIA.update({(event.chat_id & reply_msg.from_id): session})
-        await event.edit("Lydia successfully enabled for user: {} in chat: {}".format(str(reply_msg.from_id), str(event.chat_id)))
+        await event.edit(
+            "Lydia successfully enabled for user: {} in chat: {}".format(
+                str(reply_msg.from_id), str(event.chat_id)
+            )
+        )
     else:
         await event.edit("Reply to a user to activate Lydia AI on them")
 
+
 @register(outgoing=True, pattern="^.remcf$")
 async def remcf(event):
-         #Prevent Channel Bug to use remcf
+    # Prevent Channel Bug to use remcf
     if event.is_channel and not event.is_group:
         await event.edit("`remcf Commad isn't permitted on channels`")
         return
@@ -84,9 +91,14 @@ async def remcf(event):
     reply_msg = await event.get_reply_message()
     try:
         del ACC_LYDIA[event.chat_id & reply_msg.from_id]
-        await event.edit("Lydia successfully disabled for user: {} in chat: {}".format(str(reply_msg.from_id), str(event.chat_id)))
+        await event.edit(
+            "Lydia successfully disabled for user: {} in chat: {}".format(
+                str(reply_msg.from_id), str(event.chat_id)
+            )
+        )
     except Exception:
         await event.edit("This person does not have Lydia activated on him/her.")
+
 
 @register(incoming=True, disable_edited=True)
 async def user(event):
@@ -104,14 +116,14 @@ async def user(event):
     except (KeyError, TypeError):
         return
 
-    
-CMD_HELP.update({
-    "lydia":
-    ".addcf <username/reply>\
+
+CMD_HELP.update(
+    {
+        "lydia": ".addcf <username/reply>\
 \nUsage: add's lydia auto chat request in the chat.\
 \n\n.remcf <username/reply>\
 \nUsage: remove's lydia auto chat request in the chat.\
 \n\n.repcf <username/reply>\
 \nUsage: starts lydia repling to perticular person in the chat."
-})
-
+    }
+)

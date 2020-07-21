@@ -14,9 +14,11 @@ from userbot.modules import ALL_MODULES
 
 VER = str(OUBnew_VER)
 
-INVALID_PH = '\nERROR: The Phone No. entered is INVALID' \
-             '\n Tip: Use Country Code along with number.' \
-             '\n or check your phone number and try again !'
+INVALID_PH = (
+    "\nERROR: The Phone No. entered is INVALID"
+    "\n Tip: Use Country Code along with number."
+    "\n or check your phone number and try again !"
+)
 
 try:
     bot.start()
@@ -32,7 +34,8 @@ LOGS.info(f"You are running OUBnew-ftzr {CODENAME} v{VER}.\n")
 LOGS.info(
     "Congrats, your bot have successfully running\n"
     "To test your bot type .on or .live\n"
-    "Don't forget to check update by typing .update! Have fun!")
+    "Don't forget to check update by typing .update! Have fun!"
+)
 
 if len(argv) not in (1, 3, 4):
     bot.disconnect()

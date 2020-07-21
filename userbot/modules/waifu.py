@@ -19,11 +19,12 @@ EMOJI_PATTERN = re.compile(
     "\U0001FA00-\U0001FA6F"  # Chess Symbols
     "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
     "\U00002702-\U000027B0"  # Dingbats
-    "]+")
+    "]+"
+)
 
 
 def deEmojify(inputString: str) -> str:
-    return re.sub(EMOJI_PATTERN, '', inputString)
+    return re.sub(EMOJI_PATTERN, "", inputString)
 
 
 @register(outgoing=True, pattern="^.waifu(?: |$)(.*)")
@@ -37,16 +38,20 @@ async def waifu(animu):
             return
     animus = [20, 32, 33, 40, 41, 42, 58]
     sticcers = await bot.inline_query(
-        "stickerizerbot", f"#{random.choice(animus)}{(deEmojify(text))}")
-    await sticcers[0].click(animu.chat_id,
-                            reply_to=animu.reply_to_msg_id,
-                            silent=True if animu.is_reply else False,
-                            hide_via=True)
+        "stickerizerbot", f"#{random.choice(animus)}{(deEmojify(text))}"
+    )
+    await sticcers[0].click(
+        animu.chat_id,
+        reply_to=animu.reply_to_msg_id,
+        silent=True if animu.is_reply else False,
+        hide_via=True,
+    )
     await animu.delete()
 
 
-CMD_HELP.update({
-    "waifu":
-    ">`.waifu`"
-    "\nUsage: To stickerize your text with beautiful anime girl templates."
-})
+CMD_HELP.update(
+    {
+        "waifu": ">`.waifu`"
+        "\nUsage: To stickerize your text with beautiful anime girl templates."
+    }
+)

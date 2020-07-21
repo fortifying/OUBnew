@@ -43,7 +43,9 @@ async def on_add_black_list(addbl):
 
     for trigger in to_blacklist:
         sql.add_to_blacklist(addbl.chat_id, trigger.lower())
-    await addbl.edit("`Added` **{}** `to the blacklist in the current chat`".format(text))
+    await addbl.edit(
+        "`Added` **{}** `to the blacklist in the current chat`".format(text)
+    )
 
 
 @register(outgoing=True, pattern="^.listbl(?: |$)(.*)")
@@ -64,7 +66,7 @@ async def on_view_blacklist(listbl):
                 force_document=True,
                 allow_cache=False,
                 caption="BlackLists in the Current Chat",
-                reply_to=listbl
+                reply_to=listbl,
             )
             await listbl.delete()
     else:
@@ -86,14 +88,16 @@ async def on_delete_blacklist(rmbl):
         await rmbl.edit("`Blacklist` **{}** `doesn't exist.`".format(text))
     else:
         await rmbl.edit("`Blacklist` **{}** `was deleted successfully`".format(text))
-    
-CMD_HELP.update({
-    "blacklist":
-    ".listbl\
+
+
+CMD_HELP.update(
+    {
+        "blacklist": ".listbl\
     \nUsage: Lists all active userbot blacklist in a chat.\
     \n\n.addbl <keyword>\
     \nUsage: Saves the message to the 'blacklist keyword'.\
     \nThe bot will delete to the message whenever 'blacklist keyword' is mentioned.\
     \n\n.rmbl <keyword>\
     \nUsage: Stops the specified blacklist."
-})
+    }
+)

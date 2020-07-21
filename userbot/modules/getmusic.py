@@ -1,5 +1,5 @@
 # AnggaR96s
- 
+
 from telethon import events
 import subprocess
 from telethon.errors.rpcerrorlist import YouBlockedUserError
@@ -8,13 +8,14 @@ from userbot.events import register
 from userbot import bot, CMD_HELP
 import glob
 import os
- 
+
 os.system("rm -rf *.mp3")
- 
- 
+
+
 def bruh(name):
-    os.system("instantmusic -q -s "+name)
- 
+    os.system("instantmusic -q -s " + name)
+
+
 @register(outgoing=True, pattern=r"^.song (.*)")
 async def _(event):
     if event.fwd_from:
@@ -29,18 +30,18 @@ async def _(event):
     loa = l[0]
     await event.edit("`Sending song..`")
     await event.client.send_file(
-                event.chat_id,
-                loa,
-                force_document=True,
-                allow_cache=False,
-                caption=cmd,
-                reply_to=reply_to_id
-            )
+        event.chat_id,
+        loa,
+        force_document=True,
+        allow_cache=False,
+        caption=cmd,
+        reply_to=reply_to_id,
+    )
     os.system("rm -rf *.mp3")
-    subprocess.check_output("rm -rf *.mp3",shell=True)
+    subprocess.check_output("rm -rf *.mp3", shell=True)
     await event.delete()
- 
- 
+
+
 @register(outgoing=True, pattern="^.smd(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
@@ -49,26 +50,30 @@ async def _(event):
     chat = "@SpotifyMusicDownloaderBot"
     await event.edit("```Getting Your Music```")
     async with bot.conversation(chat) as conv:
-          await asyncio.sleep(2)
-          await event.edit("`Downloading music taking some times,  Stay Tuned.....`")
-          try:
-              response = conv.wait_event(events.NewMessage(incoming=True,from_users=752979930))
-              await bot.send_message(chat, link)
-              respond = await response
-              await bot.send_read_acknowledge(conv.chat_id)
-          except YouBlockedUserError:
-              await event.reply("```Please unblock @SpotifyMusicDownloaderBot and try again```")
-              return
-          await event.delete()
-          await bot.forward_messages(event.chat_id, respond.message)
-          await bot.send_read_acknowledge(event.chat_id)
- 
- 
-CMD_HELP.update({
-    "song":
-        ">`.song` **atrist title**"
+        await asyncio.sleep(2)
+        await event.edit("`Downloading music taking some times,  Stay Tuned.....`")
+        try:
+            response = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=752979930)
+            )
+            await bot.send_message(chat, link)
+            respond = await response
+            await bot.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            await event.reply(
+                "```Please unblock @SpotifyMusicDownloaderBot and try again```"
+            )
+            return
+        await event.delete()
+        await bot.forward_messages(event.chat_id, respond.message)
+        await bot.send_read_acknowledge(event.chat_id)
+
+
+CMD_HELP.update(
+    {
+        "song": ">`.song` **atrist title**"
         "\nUsage: Finding and uploading song.\n"
         ">`.smd` **<song tittle>**"
         "\nUsage: **Download music from spotify**"
-})
- 
+    }
+)

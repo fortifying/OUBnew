@@ -8,7 +8,7 @@ import os
 import lyricsgenius
 
 from userbot.events import register
-from userbot import (CMD_HELP, GENIUS, lastfm, LASTFM_USERNAME)
+from userbot import CMD_HELP, GENIUS, lastfm, LASTFM_USERNAME
 from pylast import User
 
 if GENIUS is not None:
@@ -19,15 +19,12 @@ if GENIUS is not None:
 async def lyrics(lyric):
     await lyric.edit("`Getting information...`")
     if GENIUS is None:
-        await lyric.edit(
-            "`Provide genius access token to Heroku ConfigVars...`")
+        await lyric.edit("`Provide genius access token to Heroku ConfigVars...`")
         return False
     if lyric.pattern_match.group(1) == "now":
         playing = User(LASTFM_USERNAME, lastfm).get_now_playing()
         if playing is None:
-            await lyric.edit(
-                "`No information current lastfm scrobbling...`"
-            )
+            await lyric.edit("`No information current lastfm scrobbling...`")
             return False
         artist = playing.get_artist()
         song = playing.get_title()
@@ -44,24 +41,22 @@ async def lyrics(lyric):
         with open("lyrics.txt", "w+") as f:
             f.write(f"Search query: \n{artist} - {song}\n\n{songs.lyrics}")
         await lyric.client.send_file(
-            lyric.chat_id,
-            "lyrics.txt",
-            reply_to=lyric.id,
+            lyric.chat_id, "lyrics.txt", reply_to=lyric.id,
         )
         os.remove("lyrics.txt")
     else:
         await lyric.edit(
-            f"**Search query**:\n`{artist}` - `{song}`"
-            f"\n\n```{songs.lyrics}```"
+            f"**Search query**:\n`{artist}` - `{song}`" f"\n\n```{songs.lyrics}```"
         )
 
     return True
 
 
-CMD_HELP.update({
-    "lyrics":
-    ">`.lrc` **<artist name> - <song name>**"
-    "\nUsage: Get lyrics matched artist and song."
-    "\n\n>`.lrc now`"
-    "\nUsage: Get lyrics artist and song from current lastfm scrobbling."
-})
+CMD_HELP.update(
+    {
+        "lyrics": ">`.lrc` **<artist name> - <song name>**"
+        "\nUsage: Get lyrics matched artist and song."
+        "\n\n>`.lrc now`"
+        "\nUsage: Get lyrics artist and song from current lastfm scrobbling."
+    }
+)

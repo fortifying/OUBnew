@@ -117,8 +117,6 @@ async def lst(event):
         await event.edit(msg)
 
 
-CMD_HELP.update({
-    "file": 
-    "`.ls` <directory>" 
-    "\nUsage: Get list file inside directory."
-})
+CMD_HELP.update(
+    {"file": "`.ls` <directory>" "\nUsage: Get list file inside directory."}
+)
