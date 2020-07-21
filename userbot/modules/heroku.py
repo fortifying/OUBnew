@@ -7,6 +7,7 @@
 import heroku3
 import aiohttp
 import math
+import os
 
 from userbot import CMD_HELP, HEROKU_APP_NAME, HEROKU_API_KEY, BOTLOG, BOTLOG_CHATID
 
@@ -178,18 +179,35 @@ async def dyno_usage(dyno):
             return True
 
 
-CMD_HELP.update(
-    {
-        "heroku": ">.`usage`"
-        "\nUsage: Check your heroku dyno hours remaining"
-        "\n\n>`.set var <NEW VAR> <VALUE>`"
-        "\nUsage: add new variable or update existing value variable"
-        "\n!!! WARNING !!!, after setting a variable the bot will restarted"
-        "\n\n>`.get var or .get var <VAR>`"
-        "\nUsage: get your existing varibles, use it only on your private group!"
-        "\nThis returns all of your private information, please be caution..."
-        "\n\n>`.del var <VAR>`"
-        "\nUsage: delete existing variable"
-        "\n!!! WARNING !!!, after deleting variable the bot will restarted"
-    }
-)
+@register(outgoing=True, pattern=r"^\.logs")
+async def _(dyno):
+    if app is None:
+        return await dyno.edit(
+            "**Please setup your** `HEROKU_APP_NAME` **and** `HEROKU_API_KEY`**.**"
+        )
+    await dyno.edit("**Processing...**")
+    with open("logs.txt", "w") as log:
+        log.write(app.get_log())
+    await dyno.client.send_file(entity=dyno.chat_id,
+                                file="logs.txt",
+                                caption="**Heroku dyno logs**")
+    await dyno.delete()
+    return os.remove("logs.txt")
+
+
+CMD_HELP.update({
+    "heroku":
+    ">.`usage`"
+    "\nUsage: Shows Heroku dyno hour stats."
+    "\n\n>`.set var <configvar> <value>`"
+    "\nUsage: Adds new ConfigVar or updates existing ConfigVar."
+    "\nBot will restart after using this command."
+    "\n\n>`.get var <configvar>[optional]`"
+    "\nUsage: Shows current values for specified or all ConfigVars."
+    "\nMake sure to run the command on a private group if you don't have Botlog set up."
+    "\n\n>`.del var <configvar>`"
+    "\nUsage: Removes specified ConfigVar."
+    "\nBot will restart after using this command."
+    "\n\n>`.logs`"
+    "\nUsage: Retrieves Heroku dyno logs."
+})
