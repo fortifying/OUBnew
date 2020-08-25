@@ -190,6 +190,10 @@ TERM_ALIAS = os.environ.get("TERM_ALIAS", "OUBnew")
 # JustWatch Country
 WATCH_COUNTRY = os.environ.get("WATCH_COUNTRY", None)
 
+# Uptobox
+USR_TOKEN = os.environ.get("USR_TOKEN_UPTOBOX", None)
+
+
 # Setting Up CloudMail.ru and MEGA.nz extractor binaries,
 # and giving them correct perms to work properly.
 if not os.path.exists("bin"):
