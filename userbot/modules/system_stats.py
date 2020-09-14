@@ -13,6 +13,7 @@ from datetime import datetime
 from os import remove
 from platform import python_version, uname
 from shutil import which
+from git import Repo
 
 import psutil
 from telethon import __version__, version
@@ -32,6 +33,8 @@ from userbot.events import register
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else uname().node
 VER = str(OUBnew_VER)
 CN = str(CODENAME)
+repo = Repo()
+modules = CMD_HELP
 # ============================================
 
 MODULESTR = 0
@@ -232,11 +235,12 @@ async def amireallyalive(alive):
         f"running on __{UPSTREAM_REPO_BRANCH}__ \n"
         "----------------------------------------\n"
         "`Bot Version Info` \n"
-        f"`CODENAME : {CN} v{VER} `\n"
-        f"`Telethon : v{version.__version__} `\n"
-        f"`Python   : v{python_version()} `\n"
+        f"`CODENAME       : {CN} v{VER} `\n"
+        f"`Telethon       : v{version.__version__} `\n"
+        f"`Python         : v{python_version()} `\n"
         "----------------------------------------\n"
-        f"`User : `{DEFAULTUSER} \n\n"
+        f"`User           : `{DEFAULTUSER} \n"
+        f"`Module loaded  : `{len(modules)} \n\n"
         f"`All modules loaded with ({MODULESTR}) errors`"
     )
     await bot.send_file(alive.chat_id, logo, caption=output)
