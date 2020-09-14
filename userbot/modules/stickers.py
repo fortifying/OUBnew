@@ -23,7 +23,7 @@ KANGING_STR = [
 ]
 
 
-@register(outgoing=True, pattern=r"^\.(?:get|kang)\s?(.)?")
+@register(outgoing=True, disable_errors=True, pattern="^.kang(?: |$)(.*)")
 async def kang(args):
     """ For .get or .kang command, kangs stickers or creates new ones. """
     user = await bot.get_me()
@@ -342,11 +342,11 @@ CMD_HELP.update(
     {
         "stickers": ".get\
 \nUsage: Reply .get or .kang to a sticker or an image to kang it to your userbot pack.\
-\n\n.get/.kang [emoji('s)]\
+\n\n.kang [emoji('s)]\
 \nUsage: Works just like .get but uses the emoji('s) you picked.\
-\n\n.get/.kang [number]\
+\n\n.kang [number]\
 \nUsage: Kang's the sticker/image to the specified pack but uses ◾ as emoji.\
-\n\n.get/.kang [emoji('s)] [number]\
+\n\n.kang [emoji('s)] [number]\
 \nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
 \n\n.stkrinfo\
 \nUsage: Gets info about the sticker pack.\
