@@ -68,4 +68,5 @@ wget
 python-dateutil
 bitlyshortener
 justwatch
+vcsi
 youtube_search
