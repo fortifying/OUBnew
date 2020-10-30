@@ -9,6 +9,9 @@ import io
 import math
 import urllib.request
 from os import remove
+
+import requests
+from bs4 import BeautifulSoup as bs
 from PIL import Image
 import random
 from telethon.tl.types import DocumentAttributeFilename, MessageMediaPhoto
@@ -17,6 +20,8 @@ from userbot.events import register
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetID
 from telethon.tl.types import DocumentAttributeSticker
+
+combot_stickers_url = "https://combot.org/telegram/stickers?q="
 
 KANGING_STR = [
     "Packing this sticker..",
@@ -338,19 +343,40 @@ async def sticker_to_png(sticker):
     return
 
 
+@register(outgoing=True, pattern=r"^\.stickers ?(.*)")
+async def cb_sticker(event):
+    split = event.pattern_match.group(1)
+    if not split:
+        await event.edit("`Provide some name to search for pack.`")
+        return
+    await event.edit("`Searching sticker packs`")
+    text = requests.get(combot_stickers_url + split).text
+    soup = bs(text, "lxml")
+    results = soup.find_all("div", {'class': "sticker-pack__header"})
+    if not results:
+        await event.edit("`No results found :(.`")
+        return
+    reply = f"**Sticker packs found for {split} are :**"
+    for pack in results:
+        if pack.button:
+            packtitle = (pack.find("div", "sticker-pack__title")).get_text()
+            packlink = (pack.a).get('href')
+            packid = (pack.button).get('data-popup')
+            reply += f"\n **• ID: **`{packid}`\n [{packtitle}]({packlink})"
+    await event.edit(reply)
+
+
 CMD_HELP.update(
     {
-        "stickers": ".get\
-\nUsage: Reply .get or .kang to a sticker or an image to kang it to your userbot pack.\
-\n\n.kang [emoji('s)]\
-\nUsage: Works just like .get but uses the emoji('s) you picked.\
-\n\n.kang [number]\
-\nUsage: Kang's the sticker/image to the specified pack but uses ◾ as emoji.\
-\n\n.kang [emoji('s)] [number]\
-\nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
-\n\n.stkrinfo\
-\nUsage: Gets info about the sticker pack.\
-\n\n.getsticker\
-\nUsage: Convert sticker to PNG."
-    }
-)
+        "stickers": ">`.kang [emoji('s)]?`"
+        "\nUsage: Reply .kang to a sticker or an image to kang it to your userbot pack "
+        "\nor specify the emoji you want to."
+        "\n\n>`.kang (emoji['s]]?` [number]?"
+        "\nUsage: Kang's the sticker/image to the specified pack but uses ◾ as emoji "
+        "or choose the emoji you want to."
+        "\n\n>`.stkrinfo`"
+        "\nUsage: Gets info about the sticker pack."
+        "\n\n>`.getsticker`"
+        "\nUsage: reply to a sticker to get 'PNG' file of sticker."
+        "\n\n>`.stickers` <name of user or pack>"
+        "\nUsage: Fetch sticker Packs according to your query."})
