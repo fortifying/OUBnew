@@ -24,7 +24,7 @@ async def who(event):
         await event.edit("`whois Commad isn't permitted on channels`")
         return
     await event.edit(
-        "`Sit tight while I steal some data from *Global Network Zone*...`"
+        "`Sabar Lagi Ngambil Data dari *Mbah Tele*...`"
     )
 
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
