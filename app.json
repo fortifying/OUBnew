@@ -1,7 +1,7 @@
 {
-  "name": "Project OUBnew-Fortizer bot Telegram",
-  "description": "OUB fortizer running on Python 3.8+ with an sqlalchemy database.",
-  "logo": "https://telegra.ph/file/60e950dde25f7de86bcec.jpg",
+  "name": "Project Akeno bot Telegram",
+  "description": "Akeno running on Python 3.8+ with an sqlalchemy database.",
+  "logo": "https://telegra.ph/file/fc6c777ad0a1d9ce48f5d.jpg",
   "keywords": [
     "telegram",
     "userbot",
@@ -9,7 +9,7 @@
     "modular",
     "productivity"
   ],
-  "repository": "https://github.com/fortifying/OUBnew",
+  "repository": "https://github.com/rizgustiadi/Akeno",
   "website": "https://telegra.ph/How-to-host-a-Telegram-Userbot-11-02",
   "success_url": "https://t.me/PPE_Support",
   "stack": "container",
