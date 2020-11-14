@@ -89,7 +89,7 @@ HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
 
 # Custom (forked) repo URL for updater.
 UPSTREAM_REPO_URL = os.environ.get(
-    "UPSTREAM_REPO_URL", "https://github.com/fortifying/OUBnew.git"
+    "UPSTREAM_REPO_URL", "https://github.com/rizgustiadi/Akeno.git"
 )
 UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "sql-extended")
 
@@ -100,7 +100,7 @@ CONSOLE_LOGGER_VERBOSE = sb(os.environ.get("CONSOLE_LOGGER_VERBOSE", "False"))
 ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
 
 # Logo
-LOGO = os.environ.get("LOGO", "https://telegra.ph/file/fc6c777ad0a1d9ce48f5d.jpg")
+LOGO = os.environ.get("LOGO", "https://telegra.ph/file/c1808cef32f01abe8dd02.mp4")
 
 # Google Drive Module
 G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
@@ -255,7 +255,7 @@ with bot:
 
 # Userbot ver/tag/codename
 OUBnew_VER = "4.5"
-CODENAME = "Sicherheit"
+CODENAME = "Devil"
 
 # Global Variables
 COUNT_MSG = 0
