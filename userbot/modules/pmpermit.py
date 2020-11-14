@@ -23,12 +23,21 @@ from userbot.events import register
  
 # ========================= CONSTANTS ============================
 DEF_UNAPPROVED_MSG = (
-    "Hey! Sorry, I haven't approved you to PM yet.\n"
-    "Please wait for me to look in.\n"
-    "Until then, please don't spam my PM...\n"
-    "Thank you for being patient.\n\n"
-    "*This is an automated message."
-)
+    "████████████████████████\n"
+    "    SELAMAT DATANG DI\n"
+    f"   `{DEFAULTUSER}` CHAT\n"
+    "████████████████████████\n\n"
+    " JANGAN SPAM NANTI DI BLOCK\n"
+    "          SAMA AKENO \n"
+    f" `{DEFAULTUSER}` Menerima Pesanmu\n"
+    "████████████████████████\n\n"
+
+    "████████████████████████\n"
+    "    💗💗 SANKYUUU 💗💗\n"
+    "████████████████████████n"
+    f"- AKENO Assisten `{DEFAULTUSER}`\n"
+    "- Protected By AKENO 💗")
+
 # =================================================================
  
  
