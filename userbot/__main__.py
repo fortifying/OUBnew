@@ -9,10 +9,10 @@ from importlib import import_module
 from sys import argv
 
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
-from userbot import LOGS, bot, Akeno_VER, CODENAME
+from userbot import LOGS, bot, OUBnew_VER, CODENAME
 from userbot.modules import ALL_MODULES
 
-VER = str(Akeno_VER)
+VER = str(OUBnew_VER)
 
 INVALID_PH = (
     "\nERROR: The Phone No. entered is INVALID"
