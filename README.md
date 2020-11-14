@@ -1,4 +1,4 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e35faa6a680f4d66abdffddaad76e418)](http://app.codacy.com/manual/fortifying/OUBnew/dashboard) ![Last Commit](https://img.shields.io/github/last-commit/fortifying/OUBnew/sql-extended) ![Contributors](https://img.shields.io/github/contributors/fortifying/OUBnew?color=LightSlateGrey)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e35faa6a680f4d66abdffddaad76e418)](http://app.codacy.com/manual/rizgustiadi/Akeno/dashboard) ![Last Commit](https://img.shields.io/github/last-commit/rizgustiadi/Akeno/sql-extended) ![Contributors](https://img.shields.io/github/contributors/rizgustiadi/Akeno?color=LightSlateGrey)
 # Project Akeno
 
 ![our](https://telegra.ph/file/fc6c777ad0a1d9ce48f5d.jpg)
@@ -26,7 +26,7 @@
 <p align="center">&nbsp;</p>
 
 # Easy way to deploy
-<p><a href="https://heroku.com/deploy?template=https://github.com/fortifying/OUBnew/tree/sql-extended"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/rizgustiadi/Akeno/tree/sql-extended"> <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" /></a></p>
 
 
 <p align="center">&nbsp;</p>
