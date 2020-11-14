@@ -57,14 +57,10 @@ async def permitpm(event):
             return
         apprv = is_approved(event.chat_id)
         notifsoff = gvarstatus("NOTIF_OFF")
- 
+
         # Use user custom unapproved message
         getmsg = gvarstatus("unapproved_msg")
-        if getmsg is not None:
-            UNAPPROVED_MSG = getmsg
-        else:
-            UNAPPROVED_MSG = DEF_UNAPPROVED_MSG
- 
+        UNAPPROVED_MSG = getmsg if getmsg is not None else DEF_UNAPPROVED_MSG
         # This part basically is a sanity check
         # If the message that sent before is Unapproved Message
         # then stop sending it again to prevent FloodHit
@@ -89,14 +85,14 @@ async def permitpm(event):
                 COUNT_PM.update({event.chat_id: 1})
             else:
                 COUNT_PM[event.chat_id] = COUNT_PM[event.chat_id] + 1
- 
+
             if COUNT_PM[event.chat_id] > 4:
                 await event.respond(
                     "`You were spamming my PM, which I didn't like.`\n"
                     "`I Wouldn't let you to chat me again until further notice`\n"
                     "`Bye`"
                 )
- 
+
                 try:
                     del COUNT_PM[event.chat_id]
                     del LASTMSG[event.chat_id]
@@ -108,10 +104,10 @@ async def permitpm(event):
                         )
                     LOGS.info("CountPM wen't rarted boi")
                     return
- 
+
                 await event.client(BlockRequest(event.chat_id))
                 await event.client(ReportSpamRequest(peer=event.chat_id))
- 
+
                 if BOTLOG:
                     name = await event.client.get_entity(event.chat_id)
                     name0 = str(name.first_name)
@@ -137,14 +133,10 @@ async def auto_accept(event):
             from userbot.modules.sql_helper.globals import gvarstatus
         except AttributeError:
             return
- 
+
         # Use user custom unapproved message
         get_message = gvarstatus("unapproved_msg")
-        if get_message is not None:
-            UNAPPROVED_MSG = get_message
-        else:
-            UNAPPROVED_MSG = DEF_UNAPPROVED_MSG
- 
+        UNAPPROVED_MSG = get_message if get_message is not None else DEF_UNAPPROVED_MSG
         chat = await event.get_chat()
         if isinstance(chat, User):
             if is_approved(event.chat_id) or chat.bot:
@@ -157,7 +149,7 @@ async def auto_accept(event):
                         approve(event.chat_id)
                     except IntegrityError:
                         return
- 
+
                 if is_approved(event.chat_id) and BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
@@ -199,39 +191,35 @@ async def approvepm(apprvpm):
     except AttributeError:
         await apprvpm.edit("`Running on Non-SQL mode!`")
         return
- 
+
     if apprvpm.reply_to_msg_id:
         reply = await apprvpm.get_reply_message()
         replied_user = await apprvpm.client.get_entity(reply.from_id)
         aname = replied_user.id
         name0 = str(replied_user.first_name)
         uid = replied_user.id
- 
+
     else:
         aname = await apprvpm.client.get_entity(apprvpm.chat_id)
         name0 = str(aname.first_name)
         uid = apprvpm.chat_id
- 
+
     # Get user custom msg
     getmsg = gvarstatus("unapproved_msg")
-    if getmsg is not None:
-        UNAPPROVED_MSG = getmsg
-    else:
-        UNAPPROVED_MSG = DEF_UNAPPROVED_MSG
- 
+    UNAPPROVED_MSG = getmsg if getmsg is not None else DEF_UNAPPROVED_MSG
     async for message in apprvpm.client.iter_messages(apprvpm.chat_id,
                                                       from_user='me',
                                                       search=UNAPPROVED_MSG):
         await message.delete()
- 
+
     try:
         approve(uid)
     except IntegrityError:
         await apprvpm.edit("`User may already be approved.`")
         return
- 
+
     await apprvpm.edit(f"[{name0}](tg://user?id={uid}) `approved to PM!`")
- 
+
     if BOTLOG:
         await apprvpm.client.send_message(
             BOTLOG_CHATID,
@@ -328,45 +316,44 @@ async def add_pmsg(cust_msg):
     except AttributeError:
         await cust_msg.edit("`Running on Non-SQL mode!`")
         return
- 
+
     await cust_msg.edit("Processing...")
     conf = cust_msg.pattern_match.group(1)
- 
+
     custom_message = sql.gvarstatus("unapproved_msg")
- 
+
     if conf.lower() == "set":
         message = await cust_msg.get_reply_message()
         status = "Saved"
- 
+
         # check and clear user unapproved message first
         if custom_message is not None:
             sql.delgvar("unapproved_msg")
             status = "Updated"
- 
-        if message:
-            # TODO: allow user to have a custom text formatting
-            # eg: bold, underline, striketrough, link
-            # for now all text are in monoscape
-            msg = message.message  # get the plain text
-            sql.addgvar("unapproved_msg", msg)
-        else:
+
+        if not message:
             return await cust_msg.edit("`Reply to a message`")
- 
+
+        # TODO: allow user to have a custom text formatting
+        # eg: bold, underline, striketrough, link
+        # for now all text are in monoscape
+        msg = message.message  # get the plain text
+        sql.addgvar("unapproved_msg", msg)
         await cust_msg.edit("`Message saved as unapproved message`")
- 
+
         if BOTLOG:
             await cust_msg.client.send_message(
                 BOTLOG_CHATID,
                 f"***{status} Unapproved message :*** \n\n{msg}"
             )
- 
+
     if conf.lower() == "reset":
-        if custom_message is not None:
+        if custom_message is None:
+            await cust_msg.edit("`You haven't set a custom message yet`")
+
+        else:
             sql.delgvar("unapproved_msg")
             await cust_msg.edit("`Unapproved message reset to default`")
-        else:
-            await cust_msg.edit("`You haven't set a custom message yet`")
- 
     if conf.lower() == "get":
         if custom_message is not None:
             await cust_msg.edit("***This is your current unapproved message:***"
