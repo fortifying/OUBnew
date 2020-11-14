@@ -9,10 +9,10 @@ from importlib import import_module
 from sys import argv
 
 from telethon.errors.rpcerrorlist import PhoneNumberInvalidError
-from userbot import LOGS, bot, OUBnew_VER, CODENAME
+from userbot import LOGS, bot, Akeno_VER, CODENAME
 from userbot.modules import ALL_MODULES
 
-VER = str(OUBnew_VER)
+VER = str(Akeno_VER)
 
 INVALID_PH = (
     "\nERROR: The Phone No. entered is INVALID"
@@ -29,7 +29,7 @@ except PhoneNumberInvalidError:
 for module_name in ALL_MODULES:
     imported_module = import_module("userbot.modules." + module_name)
 
-LOGS.info(f"You are running OUBnew-ftzr {CODENAME} v{VER}.\n")
+LOGS.info(f"sedang berjalan Akeno {CODENAME} v{VER}.\n")
 
 LOGS.info(
     "Congrats, your bot have successfully running\n"
