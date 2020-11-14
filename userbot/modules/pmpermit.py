@@ -20,6 +20,13 @@ from userbot import (
     PM_AUTO_BAN,
 )
 from userbot.events import register
+
+PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
+TELEPIC = (
+    PMPERMIT_PIC
+    if PMPERMIT_PIC
+    else "https://telegra.ph/file/c1808cef32f01abe8dd02.mp4"
+)
  
 # ========================= CONSTANTS ============================
 DEF_UNAPPROVED_MSG = (
