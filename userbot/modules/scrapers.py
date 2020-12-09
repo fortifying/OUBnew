@@ -20,7 +20,7 @@ from wikipedia.exceptions import DisambiguationError, PageError
 from urbandict import define
 from requests import get
 from search_engine_parser import GoogleSearch
-from googletrans import LANGUAGES, google_translator
+from google_trans_new import LANGUAGES, google_translator
 from gtts import gTTS
 from gtts.lang import tts_langs
 from emoji import get_emoji_regexp
