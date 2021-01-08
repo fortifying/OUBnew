@@ -13,15 +13,14 @@ emoji
 gitpython
 google-api-python-client
 google-auth-oauthlib
-googletrans
 google_images_download
 heroku3
+google_trans_new
 gTTS
 gTTS-token
 hachoir
 google-auth-httplib2
 instantmusic
-googletrans
 google_images_download
 hachoir
 heroku3
@@ -69,4 +68,6 @@ wget
 python-dateutil
 bitlyshortener
 justwatch
+vcsi
 youtube_search
+colour
