@@ -18,7 +18,7 @@
 import asyncio
 import hashlib
 import re
-from typing import Union
+from typing import List
 
 
 async def md5(fname: str) -> str:
@@ -72,7 +72,7 @@ def human_to_bytes(size: str) -> int:
     return int(float(number) * units[unit])
 
 
-async def run_cmd(cmd: list) -> tuple[bytes, bytes]:
+async def run_cmd(cmd: List) -> (str, str):
     process = await asyncio.create_subprocess_exec(
         *cmd,
         stdout=asyncio.subprocess.PIPE,
