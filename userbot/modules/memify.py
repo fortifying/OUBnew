@@ -1,157 +1,176 @@
-# Ported by MVaL
+# Ported from Userge and refactored by @KenHV
+# Copyright (C) UsergeTeam 2020
+# Licensed under GPLv3
 
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon import events
-from io import BytesIO
-from PIL import Image
 import asyncio
-import time
-from datetime import datetime
-from hachoir.metadata import extractMetadata
-from hachoir.parser import createParser
-from pySmartDL import SmartDL
-from telethon.tl.types import DocumentAttributeVideo
-from userbot import TEMP_DOWNLOAD_DIRECTORY, CMD_HELP, bot
-from userbot.events import register
-import datetime
-from collections import defaultdict
-import math
 import os
-import requests
-import zipfile
-from telethon.errors.rpcerrorlist import StickersetInvalidError
-from telethon.errors import MessageNotModifiedError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from telethon.tl.functions.messages import GetStickerSetRequest
-from telethon.tl.types import (
-    DocumentAttributeFilename,
-    DocumentAttributeSticker,
-    InputMediaUploadedDocument,
-    InputPeerNotifySettings,
-    InputStickerSetID,
-    InputStickerSetShortName,
-    MessageMediaPhoto,
-)
+import shlex
+import textwrap
+from typing import Optional, Tuple
+
+from PIL import Image, ImageDraw, ImageFont
+from userbot import CMD_HELP, LOGS, TEMP_DOWNLOAD_DIRECTORY
+from userbot.events import register
 
 
-THUMB_IMAGE_PATH = "./thumb_image.jpg"
+@register(outgoing=True, pattern=r"^\.mmf (.*)")
+async def memify(event):
+    reply_msg = await event.get_reply_message()
+    input_str = event.pattern_match.group(1)
+    await event.edit("**Processing...**")
+
+    if not reply_msg:
+        return await event.edit("**Reply to a message containing media!**")
+
+    if not reply_msg.media:
+        return await event.edit("**Reply to an image/sticker/gif/video!**")
+
+    if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
+        os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
+
+    dls = await event.client.download_media(reply_msg, TEMP_DOWNLOAD_DIRECTORY)
+    dls_path = os.path.join(TEMP_DOWNLOAD_DIRECTORY, os.path.basename(dls))
+
+    if dls_path.endswith(".tgs"):
+        await event.edit("**Extracting first frame..**")
+        png_file = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "meme.png")
+        cmd = f"lottie_convert.py --frame 0 -if lottie -of png {dls_path} {png_file}"
+        stdout, stderr = (await runcmd(cmd))[:2]
+        os.remove(dls_path)
+        if not os.path.lexists(png_file):
+            return await event.edit("**Couldn't parse this image.**")
+        dls_path = png_file
+
+    elif dls_path.endswith(".mp4"):
+        await event.edit("**Extracting first frame..**")
+        jpg_file = os.path.join(TEMP_DOWNLOAD_DIRECTORY, "meme.jpg")
+        await take_screen_shot(dls_path, 0, jpg_file)
+        os.remove(dls_path)
+        if not os.path.lexists(jpg_file):
+            return await event.edit("**Couldn't parse this video.**")
+        dls_path = jpg_file
+
+    await event.edit("**Adding text...**")
+    webp_file = await draw_meme_text(dls_path, input_str)
+    await event.client.send_file(entity=event.chat.id,
+                                 file=webp_file,
+                                 force_document=False,
+                                 reply_to=reply_msg)
+    await event.delete()
+    os.remove(webp_file)
 
 
-@register(outgoing=True, pattern="^.mmf(?: |$)(.*)")
-async def mim(event):
-    if event.fwd_from:
-        return
-    if not event.reply_to_msg_id:
-        await event.edit(
-            "`Syntax: reply to an image with .mms` 'text on top' ; 'text on bottom' "
-        )
-        return
-    reply_message = await event.get_reply_message()
-    if not reply_message.media:
-        await event.edit("```reply to a image/sticker/gif```")
-        return
-    sender = reply_message.sender
-    file_ext_ns_ion = "@memetime.png"
-    file = await bot.download_file(reply_message.media)
-    uploaded_gif = None
-    if reply_message.sender.bot:
-        await event.edit("```Reply to actual users message.```")
-        return
+async def draw_meme_text(image_path, text):
+    img = Image.open(image_path).convert("RGB")
+    os.remove(image_path)
+    i_width, i_height = img.size
+    m_font = ImageFont.truetype("bin/impact.ttf", int((70 / 640) * i_width))
+    if ";" in text:
+        upper_text, lower_text = text.split(";")
     else:
-        await event.edit("`Memeifying this image.. This would take sometime`")
-        await asyncio.sleep(5)
+        upper_text = text
+        lower_text = ''
+    draw = ImageDraw.Draw(img)
+    current_h, pad = 10, 5
 
-    async with bot.conversation("@MemeAutobot") as bot_conv:
-        chat = "@MemeAutobot"
-        try:
-            memeVar = event.pattern_match.group(1)
-            await silently_send_message(bot_conv, "/start")
-            await asyncio.sleep(1)
-            await silently_send_message(bot_conv, memeVar)
-            await bot.send_file(chat, reply_message.media)
-            response = await bot_conv.get_response()
-        except YouBlockedUserError:
-            await event.reply("```Please unblock @MemeAutobot and try again```")
-            return
-        if response.text.startswith("Forward"):
-            await event.edit(
-                "```can you kindly disable your forward privacy settings for good, Nibba?```"
-            )
-        if "Okay..." in response.text:
-            await event.edit("`This is not an image! \nConverting to image...`")
-            thumb = None
-            if os.path.exists(THUMB_IMAGE_PATH):
-                thumb = THUMB_IMAGE_PATH
-            input_str = event.pattern_match.group(1)
-            if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
-                os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
-            if event.reply_to_msg_id:
-                file_name = "meme.png"
-                reply_message = await event.get_reply_message()
-                to_download_directory = TEMP_DOWNLOAD_DIRECTORY
-                downloaded_file_name = os.path.join(to_download_directory, file_name)
-                downloaded_file_name = await bot.download_media(
-                    reply_message, downloaded_file_name,
-                )
-                if os.path.exists(downloaded_file_name):
-                    await bot.send_file(
-                        chat,
-                        downloaded_file_name,
-                        force_document=False,
-                        supports_streaming=False,
-                        allow_cache=False,
-                        thumb=thumb,
-                    )
-                    os.remove(downloaded_file_name)
-                else:
-                    await event.edit("File Not Found {}".format(input_str))
-            response = await bot_conv.get_response()
-            the_download_directory = TEMP_DOWNLOAD_DIRECTORY
-            files_name = "memes.webp"
-            download_file_name = os.path.join(the_download_directory, files_name)
-            await bot.download_media(
-                response.media, download_file_name,
-            )
-            requires_file_name = TEMP_DOWNLOAD_DIRECTORY + "memes.webp"
-            await bot.send_file(  # pylint:disable=E0602
-                event.chat_id,
-                requires_file_name,
-                supports_streaming=False,
-                caption="Memifyed",
-            )
-            await event.delete()
-            # await bot.send_message(event.chat_id, "`☠️☠️Ah Shit... Here we go Again!🔥🔥`")
-        elif not is_message_image(reply_message):
-            await event.edit(
-                "Invalid message type. Plz choose right message type u NIBBA."
-            )
-            return
-        else:
-            await bot.send_file(event.chat_id, response.media)
+    if upper_text:
+        for u_text in textwrap.wrap(upper_text, width=15):
+            u_width, u_height = draw.textsize(u_text, font=m_font)
 
+            draw.text(xy=(((i_width - u_width) / 2) - 1,
+                          int((current_h / 640) * i_width)),
+                      text=u_text,
+                      font=m_font,
+                      fill=(0, 0, 0))
+            draw.text(xy=(((i_width - u_width) / 2) + 1,
+                          int((current_h / 640) * i_width)),
+                      text=u_text,
+                      font=m_font,
+                      fill=(0, 0, 0))
+            draw.text(xy=((i_width - u_width) / 2,
+                          int(((current_h / 640) * i_width)) - 1),
+                      text=u_text,
+                      font=m_font,
+                      fill=(0, 0, 0))
+            draw.text(xy=(((i_width - u_width) / 2),
+                          int(((current_h / 640) * i_width)) + 1),
+                      text=u_text,
+                      font=m_font,
+                      fill=(0, 0, 0))
 
-def is_message_image(message):
-    if message.media:
-        if isinstance(message.media, MessageMediaPhoto):
-            return True
-        return bool(
-            message.media.document
-            and message.media.document.mime_type.split("/")[0] == "image"
-        )
+            draw.text(xy=((i_width - u_width) / 2,
+                          int((current_h / 640) * i_width)),
+                      text=u_text,
+                      font=m_font,
+                      fill=(255, 255, 255))
+            current_h += u_height + pad
 
-    return False
+    if lower_text:
+        for l_text in textwrap.wrap(lower_text, width=15):
+            u_width, u_height = draw.textsize(l_text, font=m_font)
+
+            draw.text(xy=(((i_width - u_width) / 2) - 1,
+                          i_height - u_height - int((20 / 640) * i_width)),
+                      text=l_text,
+                      font=m_font,
+                      fill=(0, 0, 0))
+            draw.text(xy=(((i_width - u_width) / 2) + 1,
+                          i_height - u_height - int((20 / 640) * i_width)),
+                      text=l_text,
+                      font=m_font,
+                      fill=(0, 0, 0))
+            draw.text(xy=((i_width - u_width) / 2, (i_height - u_height - int(
+                (20 / 640) * i_width)) - 1),
+                      text=l_text,
+                      font=m_font,
+                      fill=(0, 0, 0))
+            draw.text(xy=((i_width - u_width) / 2, (i_height - u_height - int(
+                (20 / 640) * i_width)) + 1),
+                      text=l_text,
+                      font=m_font,
+                      fill=(0, 0, 0))
+
+            draw.text(xy=((i_width - u_width) / 2, i_height - u_height - int(
+                (20 / 640) * i_width)),
+                      text=l_text,
+                      font=m_font,
+                      fill=(255, 255, 255))
+            current_h += u_height + pad
+
+    image_name = "memify.webp"
+    webp_file = os.path.join(TEMP_DOWNLOAD_DIRECTORY, image_name)
+    img.save(webp_file, "webp")
+    return webp_file
 
 
-async def silently_send_message(conv, text):
-    await conv.send_message(text)
-    response = await conv.get_response()
-    await conv.mark_read(message=response)
-    return response
+async def runcmd(cmd: str) -> Tuple[str, str, int, int]:
+    """ run command in terminal """
+    args = shlex.split(cmd)
+    process = await asyncio.create_subprocess_exec(
+        *args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
+    stdout, stderr = await process.communicate()
+    return (stdout.decode('utf-8', 'replace').strip(),
+            stderr.decode('utf-8',
+                          'replace').strip(), process.returncode, process.pid)
 
 
-CMD_HELP.update(
-    {
-        "memify": ".mmf texttop ; textbottom\
-        \nUsage: Reply a sticker/image/gif and send with cmd."
-    }
-)
+async def take_screen_shot(video_file: str,
+                           duration: int,
+                           path: str = '') -> Optional[str]:
+    """ take a screenshot """
+    ttl = duration // 2
+    thumb_image_path = path or os.path.join(
+        TEMP_DOWNLOAD_DIRECTORY, f"{os.path.basename(video_file)}.jpg")
+    command = f'''ffmpeg -ss {ttl} -i "{video_file}" -vframes 1 "{thumb_image_path}"'''
+    err = (await runcmd(command))[1]
+    if err:
+        LOGS.info(err)
+    return thumb_image_path if os.path.exists(thumb_image_path) else None
+
+
+CMD_HELP.update({
+    "memify":
+    ">`.mmf <top text>;<bottom text>`"
+    "\nUsage: Reply to an image/sticker/gif/video to add text to it."
+    "\nIf it's a video, text will be added to the first frame."
+})

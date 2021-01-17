@@ -29,6 +29,7 @@ httplib2
 instalooter
 humanize
 jikanpy
+lottie
 lxml
 oauth2client
 pendulum==2.0.5
