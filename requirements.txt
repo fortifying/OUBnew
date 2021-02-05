@@ -49,6 +49,7 @@ regex
 pytz
 qrcode
 requests
+rarfile
 search-engine-parser
 selenium
 speedtest-cli
