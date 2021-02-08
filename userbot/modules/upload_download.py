@@ -17,6 +17,7 @@ from datetime import datetime
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
+from natsort import os_sorted
 from pySmartDL import SmartDL
 from telethon.tl.types import (
     DocumentAttributeAudio,
@@ -93,10 +94,15 @@ async def download(target_file):
             media = replied.media
             if hasattr(media, "document"):
                 file = media.document
+                mime_type = file.mime_type
                 attribs = file.attributes
                 for attr in attribs:
                     if isinstance(attr, DocumentAttributeFilename):
                         filename = attr.file_name
+                    elif "audio" in mime_type:
+                        filename = "audio-" + str(datetime.now()) + ".ogg"
+                    elif "video" in mime_type:
+                        filename = "video-" + str(datetime.now()) + ".mp4"
                 outdir = TEMP_DOWNLOAD_DIRECTORY + filename
                 c_time = time.time()
                 start_time = datetime.now()
@@ -226,7 +232,7 @@ async def upload(event):
             if len(lst_files) == 0:
                 return await event.edit(f"`{input_str}` is empty.")
             await event.edit(f"Found `{len(lst_files)}` files. Now uploading...")
-            for files in sorted(lst_files):
+            for files in os_sorted(lst_files):
                 file_name = os.path.basename(files)
                 thumb = None
                 attributes = []
