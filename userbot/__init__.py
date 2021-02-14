@@ -16,6 +16,7 @@ from pySmartDL import SmartDL
 from dotenv import load_dotenv
 from requests import get
 from telethon import TelegramClient
+from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 from telethon.sessions import StringSession
 
 load_dotenv("config.env")
@@ -202,6 +203,7 @@ if STRING_SESSION:
         session=StringSession(STRING_SESSION),
         api_id=API_KEY,
         api_hash=API_HASH,
+        connection=ConnectionTcpAbridged,
         auto_reconnect=True,
     )
 else:
