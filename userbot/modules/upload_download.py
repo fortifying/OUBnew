@@ -18,6 +18,7 @@ from urllib.parse import unquote_plus
 
 from hachoir.metadata import extractMetadata
 from hachoir.parser import createParser
+from natsort import os_sorted
 from pySmartDL import SmartDL
 from requests import get
 from telethon.tl.types import DocumentAttributeAudio, DocumentAttributeVideo
@@ -241,10 +242,10 @@ async def upload(event):
             for root, _, files in os.walk(input_str):
                 for file in files:
                     lst_files.append(os.path.join(root, file))
-            if not lst_files:
-                return await event.edit(f"`{input_str}` **is empty.**")
-            await event.edit(f"**Found** `{len(lst_files)}` **files. Uploading...**")
-            for files in sorted(lst_files):
+            if len(lst_files) == 0:
+                return await event.edit(f"`{input_str}` is empty.")
+            await event.edit(f"Found `{len(lst_files)}` files. Now uploading...")
+            for files in os_sorted(lst_files):
                 file_name = os.path.basename(files)
                 thumb = None
                 attributes = []
