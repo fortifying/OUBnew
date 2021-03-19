@@ -6,7 +6,7 @@ import asyncio
 import os
 import shlex
 import textwrap
-from typing import Optional, Tuple
+from typing import Optional
 
 from PIL import Image, ImageDraw, ImageFont
 from userbot import CMD_HELP, LOGS, TEMP_DOWNLOAD_DIRECTORY
@@ -143,7 +143,7 @@ async def draw_meme_text(image_path, text):
     return webp_file
 
 
-async def runcmd(cmd: str) -> Tuple[str, str, int, int]:
+async def runcmd(cmd: str) -> tuple[str, str, int, int]:
     """ run command in terminal """
     args = shlex.split(cmd)
     process = await asyncio.create_subprocess_exec(
