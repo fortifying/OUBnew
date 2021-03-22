@@ -55,8 +55,8 @@ sqlalchemy
 telethon==1.15.0
 telethon-session-sqlalchemy
 urbandict
+telethon-tgcrypto
 wikipedia
-TgCrypto
 coffeehouse
 telegraph
 pyfiglet
