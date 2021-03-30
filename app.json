@@ -169,12 +169,12 @@
       "description": "Your client_secret.json.",
       "required": false
     },
-    "LYDIA_API_KEY": {
-      "description": "This Module Needs CoffeeHouse API to work. so Join https://telegram.dog/IntellivoidDev and send #activateapi and follow instructions.",
+    "G_DRIVE_INDEX_URL": {
+      "description": "Your Cloudflare Google Drive Index URL",
       "required": false
     },
     "GENIUS_ACCESS_TOKEN": {
-      "description": "Client Access Token from https://genius.com/api-clients.",
+      "description": "Client Access Token from https://genius.com/api-clients, needed for lyrics modules.",
       "required": false
     },
     "WEATHER_DEFCITY": {
