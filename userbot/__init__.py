@@ -198,7 +198,12 @@ USR_TOKEN = os.environ.get("USR_TOKEN_UPTOBOX", None)
 # 'bot' variable
 if STRING_SESSION:
     # pylint: disable=invalid-name
-    bot = TelegramClient(StringSession(STRING_SESSION), API_KEY, API_HASH)
+    bot = TelegramClient(
+        session=StringSession(STRING_SESSION),
+        api_id=API_KEY,
+        api_hash=API_HASH,
+        auto_reconnect=True,
+    )
 else:
     # pylint: disable=invalid-name
     bot = TelegramClient("userbot", API_KEY, API_HASH)
