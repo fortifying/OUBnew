@@ -12,51 +12,40 @@ from speedtest import Speedtest
 from telethon import functions
 from userbot import CMD_HELP
 from userbot.events import register
+from userbot.utils import humanbytes
 
 
-@register(outgoing=True, pattern="^.speed$")
-async def speedtst(spd):
-    # Prevent Channel Bug to use speed
-    if spd.is_channel and not spd.is_group:
-        await spd.edit("`update Commad isn't permitted on channels`")
-        return
+@register(outgoing=True, pattern=r"^\.speedtest$")
+async def speedtst(event):
     """ For .speed command, use SpeedTest to check server speeds. """
-    await spd.edit("`Running speed test . . .`")
-    test = Speedtest()
+    await event.edit("**Running speed test...**")
 
+    test = Speedtest()
     test.get_best_server()
     test.download()
     test.upload()
     test.results.share()
     result = test.results.dict()
 
-    await spd.edit(
-        "`"
-        "Started at "
-        f"{result['timestamp']} \n\n"
-        "Download "
-        f"{speed_convert(result['download'])} \n"
-        "Upload "
-        f"{speed_convert(result['upload'])} \n"
-        "Ping "
-        f"{result['ping']} \n"
-        "ISP "
-        f"{result['client']['isp']}"
-        "`"
+    msg = (
+        f"**Ping:** `{result['ping']}`\n"
+        f"**Upload:** `{humanbytes(result['upload'])}/s`\n"
+        f"**Download:** `{humanbytes(result['download'])}/s`\n\n"
+        "**Client**\n"
+        f"**ISP:** `{result['client']['isp']}`\n"
+        f"**Country:** `{result['client']['country']}`\n\n"
+        "**Server**\n"
+        f"**Name:** `{result['server']['name']}`\n"
+        f"**Country:** `{result['server']['country']}`\n"
+        f"**Sponsor:** `{result['server']['sponsor']}`\n\n"
     )
 
-
-def speed_convert(size):
-    """
-    Hi human, you can't read bytes?
-    """
-    power = 2 ** 10
-    zero = 0
-    units = {0: "", 1: "Kb/s", 2: "Mb/s", 3: "Gb/s", 4: "Tb/s"}
-    while size > power:
-        size /= power
-        zero += 1
-    return f"{round(size, 2)} {units[zero]}"
+    await event.client.send_file(
+        event.chat_id,
+        result["share"],
+        caption=msg,
+    )
+    await event.delete()
 
 
 @register(outgoing=True, pattern="^.dc$")
@@ -68,9 +57,9 @@ async def neardc(event):
     """ For .dc command, get the nearest datacenter information. """
     result = await event.client(functions.help.GetNearestDcRequest())
     await event.edit(
-        f"Country : `{result.country}`\n"
-        f"Nearest Datacenter : `{result.nearest_dc}`\n"
-        f"This Datacenter : `{result.this_dc}`"
+        f"**Country:** `{result.country}`\n"
+        f"**Nearest datacenter:** `{result.nearest_dc}`\n"
+        f"**This datacenter:** `{result.this_dc}`"
     )
 
 
@@ -90,19 +79,8 @@ async def pingme(pong):
 
 CMD_HELP.update(
     {
-        "speed": ".speed\
-    \nUsage: Does a speedtest and shows the results."
-    }
-)
-CMD_HELP.update(
-    {
-        "dc": ".dc\
-    \nUsage: Finds the nearest datacenter from your server."
-    }
-)
-CMD_HELP.update(
-    {
-        "ping": ".ping\
-    \nUsage: Shows how long it takes to ping your bot."
+        "speedtest": ">`.speedtest`" "\nUsage: Does a speedtest and shows the results.",
+        "dc": ">`.dc`" "\nUsage: Finds the nearest datacenter from your server.",
+        "ping": ">`.ping`" "\nUsage: Shows how long it takes to ping your bot.",
     }
 )
