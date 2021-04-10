@@ -29,6 +29,7 @@ httplib2
 instalooter
 humanize
 jikanpy
+js2py
 lottie
 lxml
 oauth2client
