@@ -1,5 +1,4 @@
-# We're using Alpine Latest
-FROM heinzdf/oubnew:latest
+FROM heinzdf/oubnew:buster
  
 # Clone repo and prepare working directory
 RUN git clone -b sql-extended https://github.com/fortifying/OUBnew /OUBnew
