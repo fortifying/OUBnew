@@ -1,4 +1,4 @@
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e35faa6a680f4d66abdffddaad76e418)](http://app.codacy.com/manual/fortifying/OUBnew/dashboard) ![Last Commit](https://img.shields.io/github/last-commit/fortifying/OUBnew/sql-extended) ![Contributors](https://img.shields.io/github/contributors/fortifying/OUBnew?color=LightSlateGrey)
+![Last Commit](https://img.shields.io/github/last-commit/fortifying/OUBnew/sql-extended) ![Contributors](https://img.shields.io/github/contributors/fortifying/OUBnew?color=LightSlateGrey)
 # Project OUBnew-Fortizer
 
 ![our](https://telegra.ph/file/02abf5720f639072ce258.png)
