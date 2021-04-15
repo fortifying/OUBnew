@@ -15,7 +15,7 @@ google-api-python-client
 google-auth-oauthlib
 google_images_download
 heroku3
-google_trans_new
+googletrans==3.1.0a0
 gTTS
 gTTS-token
 hachoir
