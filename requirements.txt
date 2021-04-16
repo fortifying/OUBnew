@@ -52,7 +52,7 @@ requests
 search-engine-parser
 selenium
 speedtest-cli
-sqlalchemy
+sqlalchemy==1.3.23
 telethon==1.15.0
 telethon-session-sqlalchemy
 urbandict
