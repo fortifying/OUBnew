@@ -55,7 +55,7 @@ git+https://github.com/Ncode2014/search-engine-parser
 selenium
 speedtest-cli
 sqlalchemy==1.3.23
-telethon==1.15.0
+telethon
 telethon-session-sqlalchemy
 urbandict
 telethon-tgcrypto
